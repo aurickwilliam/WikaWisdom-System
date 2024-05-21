@@ -28,7 +28,7 @@ public class LoginRegisterFrame extends JFrame {
         setLocationRelativeTo(null);
         setIconImage(WikaLogo.getImage());
         setResizable(false);
-        setVisible(true);
+
 
         JPanel mainBackground = new JPanel();
         mainBackground.setLayout(new CardLayout());
@@ -38,6 +38,7 @@ public class LoginRegisterFrame extends JFrame {
         mainBackground.add(registerPanel, "REGISTER");
 
         this.add(mainBackground);
+        setVisible(true);
     }
 
     public JPanel Register(){
@@ -100,23 +101,120 @@ public class LoginRegisterFrame extends JFrame {
         RoundedPanel FormPanel = new RoundedPanel(20, 20, 20, 20);
         FormPanel.setBackground(mainColorWhithy);
         FormPanel.setLayout(new BoxLayout(FormPanel, BoxLayout.Y_AXIS));
-        FormPanel.setBorder(new EmptyBorder(20, 20, 20, 20));
+        FormPanel.setBorder(BorderFactory.createEmptyBorder(0, 20, 0, 20));
         regPanel.add(FormPanel);
+
+        JPanel signUpTitlePanel = new JPanel();
+        signUpTitlePanel.setBackground(null);
+        signUpTitlePanel.setLayout(new BorderLayout());
+        FormPanel.add(signUpTitlePanel);
 
         JLabel SignUpTitle = new JLabel("Sign Up");
         SignUpTitle.setForeground(mainColorBlackTxt);
+        SignUpTitle.setBackground(null);
         SignUpTitle.setFont(ArialBold);
-        SignUpTitle.setAlignmentX(LEFT_ALIGNMENT);
-        FormPanel.add(SignUpTitle);
+        SignUpTitle.setBorder(new EmptyBorder(20, 0, 0, 0));
+        SignUpTitle.setOpaque(true);
+        SignUpTitle.setVerticalTextPosition(JLabel.CENTER);
+        signUpTitlePanel.add(SignUpTitle, BorderLayout.WEST);
+
+        JPanel emailTitlePanel = new JPanel();
+        emailTitlePanel.setBackground(null);
+        emailTitlePanel.setLayout(new BorderLayout());
+        FormPanel.add(emailTitlePanel);
 
         JLabel emailLabel = new JLabel("Email:");
         emailLabel.setForeground(mainColorBlackTxt);
         emailLabel.setFont(Arial);
-        emailLabel.setAlignmentX(LEFT_ALIGNMENT);
         emailLabel.setBorder(new EmptyBorder(20, 0, 0, 0));
-        FormPanel.add(emailLabel);
+        emailTitlePanel.add(emailLabel, BorderLayout.WEST);
 
+        JTextField emailTextField = new JTextField();
+        emailTextField.setFont(Arial);
+        emailTextField.setBorder(BorderFactory.createLineBorder(mainColorDarkGreen, 2));
+        emailTextField.setPreferredSize(new Dimension(getWidth(), 40));
+        emailTextField.setForeground(mainColorBlackTxt);
+        emailTextField.setMaximumSize(emailTextField.getPreferredSize());
+        FormPanel.add(emailTextField);
 
+        JPanel nameTitlePanel = new JPanel();
+        nameTitlePanel.setBackground(null);
+        nameTitlePanel.setLayout(new BorderLayout());
+        FormPanel.add(nameTitlePanel);
+
+        JLabel nameLabel = new JLabel("Name:");
+        nameLabel.setForeground(mainColorBlackTxt);
+        nameLabel.setFont(Arial);
+        nameLabel.setBorder(new EmptyBorder(20, 0, 0, 0));
+        nameTitlePanel.add(nameLabel, BorderLayout.WEST);
+
+        JTextField nameTextField = new JTextField();
+        nameTextField.setFont(Arial);
+        nameTextField.setBorder(BorderFactory.createLineBorder(mainColorDarkGreen, 2));
+        nameTextField.setPreferredSize(new Dimension(getWidth(), 40));
+        nameTextField.setMaximumSize(emailTextField.getPreferredSize());
+        nameTextField.setForeground(mainColorBlackTxt);
+        FormPanel.add(nameTextField);
+
+        JPanel passTitlePanel = new JPanel();
+        passTitlePanel.setBackground(null);
+        passTitlePanel.setLayout(new BorderLayout());
+        FormPanel.add(passTitlePanel);
+
+        JLabel passwordLabel = new JLabel("Password:");
+        passwordLabel.setForeground(mainColorBlackTxt);
+        passwordLabel.setFont(Arial);
+        passwordLabel.setBorder(new EmptyBorder(20, 0, 0, 0));
+        passTitlePanel.add(passwordLabel);
+
+        JPasswordField passwordTextField = new JPasswordField();
+        passwordTextField.setFont(Arial);
+        passwordTextField.setBorder(BorderFactory.createLineBorder(mainColorDarkGreen, 2));
+        passwordTextField.setPreferredSize(new Dimension(getWidth(), 40));
+        passwordTextField.setMaximumSize(emailTextField.getPreferredSize());
+        passwordTextField.setForeground(mainColorBlackTxt);
+        FormPanel.add(passwordTextField);
+
+        JPanel conPassTitlePanel = new JPanel();
+        conPassTitlePanel.setBackground(null);
+        conPassTitlePanel.setLayout(new BorderLayout());
+        FormPanel.add(conPassTitlePanel);
+
+        JLabel confirmPasswordLabel = new JLabel("Confirm Password:");
+        confirmPasswordLabel.setForeground(mainColorBlackTxt);
+        confirmPasswordLabel.setFont(Arial);
+        confirmPasswordLabel.setBorder(new EmptyBorder(20, 0, 0, 0));
+        conPassTitlePanel.add(confirmPasswordLabel);
+
+        JPasswordField confirmPasswordTextField = new JPasswordField();
+        confirmPasswordTextField.setFont(Arial);
+        confirmPasswordTextField.setBorder(BorderFactory.createLineBorder(mainColorDarkGreen, 2));
+        confirmPasswordTextField.setPreferredSize(new Dimension(getWidth(), 40));
+        confirmPasswordTextField.setForeground(mainColorBlackTxt);
+        confirmPasswordTextField.setMaximumSize(emailTextField.getPreferredSize());
+        FormPanel.add(confirmPasswordTextField);
+
+        JPanel signupButtonPanel = new JPanel();
+        signupButtonPanel.setLayout(new BorderLayout());
+        signupButtonPanel.setBackground(null);
+        signupButtonPanel.setBorder(BorderFactory.createEmptyBorder(10, 0, 20, 0));
+        FormPanel.add(signupButtonPanel);
+
+        RoundedButton btn_submitSignUp = new RoundedButton();
+        btn_submitSignUp.setText("Sign Up");
+        btn_submitSignUp.setPreferredSize(new Dimension(150, 50));
+        btn_submitSignUp.setAlignmentX(Component.CENTER_ALIGNMENT);
+        btn_submitSignUp.setMaximumSize(btn_submitSignUp.getPreferredSize());
+        btn_submitSignUp.setColor(mainColorYellowBG);
+        btn_submitSignUp.setRadius(20);
+        btn_submitSignUp.setColorClick(YellowColorClick);
+        btn_submitSignUp.setBorderColor(mainColorWhiteBG);
+        btn_submitSignUp.setColorOver(YellowColorOver);
+        btn_submitSignUp.setForeground(mainColorWhiteBG);
+        btn_submitSignUp.setBorder(null);
+        btn_submitSignUp.setFocusable(false);
+        btn_submitSignUp.setFont(ArialBold);
+        signupButtonPanel.add(btn_submitSignUp, BorderLayout.SOUTH);
         
         return registerPanel;
     }
