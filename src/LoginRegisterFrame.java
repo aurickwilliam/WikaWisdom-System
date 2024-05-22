@@ -3,6 +3,9 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class LoginRegisterFrame extends JFrame implements ActionListener {
     // Images
@@ -26,11 +29,189 @@ public class LoginRegisterFrame extends JFrame implements ActionListener {
     // Buttons
     private RoundedButton btn_ToLogin, btn_ToRegister, btn_submitSignUp, btn_submitSignIn;
 
+    // JTextField
+    private JTextField reg_emailTextField, nameTextField, log_emailTextField;
+
+    // JPasswordField
+    private JPasswordField reg_passwordTextField, confirmPasswordTextField, log_passwordTextField;
+
     // Layout
     private CardLayout cardLayoutLoginRegister;
 
     // Panel
     private JPanel mainBackground;
+
+    // Regex for email
+    private final Pattern emailPattern = Pattern.compile("^[a-z0-9._+-]+@[a-z0-9.-]+\\.[a-z]{2,6}$");
+
+    // Regex for password
+    private final Pattern passwordPattern = Pattern.compile("^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[~@#$^*()_+=\\[\\]{}|,.?/!%&:-]).{8,}$");
+
+    // File Path for Users File
+    private final String usersFilePath = "src/textfiles/users.txt";
+
+    @Override
+    public void actionPerformed(ActionEvent actionEvent) {
+        // Switch to Log in and to Register
+        if (actionEvent.getSource() == btn_ToLogin){
+            System.out.println("TO LOGIN");
+            cardLayoutLoginRegister.show(mainBackground, "LOGIN");
+        }
+
+        if (actionEvent.getSource() == btn_ToRegister){
+            System.out.println("TO REGISTER");
+            cardLayoutLoginRegister.show(mainBackground, "REGISTER");
+        }
+
+        // Get the values for Register
+        String reg_emailValue = reg_emailTextField.getText();
+        String reg_nameValue = nameTextField.getText();
+        String reg_passwordValue = new String(reg_passwordTextField.getPassword());
+        String reg_conPasswordValue = new String(confirmPasswordTextField.getPassword());
+
+        // Submit Sign Up
+        if (actionEvent.getSource() == btn_submitSignUp){
+            boolean isEmpty = false;
+            boolean isInfoValid = true;
+            if (reg_emailValue.isEmpty() || reg_nameValue.isEmpty() || reg_passwordValue.isEmpty() || reg_conPasswordValue.isEmpty()){
+                JOptionPane.showMessageDialog(this,
+                        "Please fill up each text field!",
+                        "Empty Input",
+                        JOptionPane.ERROR_MESSAGE);
+                isEmpty = true;
+                isInfoValid = false;
+            }
+
+            if (!isEmpty){
+                // Check Email
+                if (!checkEmailValue(reg_emailValue)){
+                    JOptionPane.showMessageDialog(this,
+                            "Invalid Email!",
+                            "Incorrect Email",
+                            JOptionPane.ERROR_MESSAGE);
+                    isInfoValid = false;
+                }
+
+                // Check password validity
+                if (!checkPasswordValue(reg_passwordValue)){
+                    JOptionPane.showMessageDialog(this,
+                            "Password is Weak!\n- 8 minimum characters\n- Has Uppercase and Lowercase\n- Has Special Char\n- Has numerical digit",
+                            "Incorrect Password",
+                            JOptionPane.ERROR_MESSAGE);
+                    isInfoValid = false;
+                }
+
+                // Check password if equals
+                if (!reg_passwordValue.equals(reg_conPasswordValue)){
+                    JOptionPane.showMessageDialog(this,
+                            "Passwords does not match!",
+                            "Incorrect Password",
+                            JOptionPane.ERROR_MESSAGE);
+                    isInfoValid = false;
+                }
+            }
+
+            if (isInfoValid){
+                insertUser(reg_emailValue, reg_nameValue, reg_passwordValue);
+                this.dispose();
+                DashboardFrame dashboardFrame = new DashboardFrame();
+            }
+
+            System.out.println();
+            System.out.println(reg_emailValue);
+            System.out.println(reg_nameValue);
+            System.out.println(reg_passwordValue);
+            System.out.println(reg_conPasswordValue);
+        }
+
+        // Get Values for Log In
+        String log_emailValue = log_emailTextField.getText();
+        String log_passValue = new String(log_passwordTextField.getPassword());
+
+        // Submit Sign In
+        if (actionEvent.getSource() == btn_submitSignIn){
+            String[] userData = getUserInfo(log_emailValue);
+            System.out.println(userData[0]);
+            System.out.println(userData[1]);
+            System.out.println(userData[2]);
+
+            if (userData[1].equals(log_passValue)){
+                this.dispose();
+                DashboardFrame dashboardFrame = new DashboardFrame();
+            }else {
+                JOptionPane.showMessageDialog(this,
+                        "Incorrect Password",
+                        "Sign In",
+                        JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }
+
+    // Get the email and password for checking
+    public String[] getUserInfo(String email){
+        String[] info = new String[3];
+        boolean isUserExist = true;
+        try {
+            FileReader filePath = new FileReader(usersFilePath);
+            BufferedReader reader = new BufferedReader(filePath);
+            String line;
+            String[] record = null;
+            while ((line = reader.readLine()) != null) {
+                record = line.split(",");
+                if (record[0].equals(email)){
+                    isUserExist = true;
+                    break;
+                }else {
+                    isUserExist = false;
+                }
+            }
+            reader.close();
+
+            if (isUserExist){
+                info = record;
+            }else {
+                JOptionPane.showMessageDialog(this,
+                        "User Doesn't Exist!",
+                        "Reading Records",
+                        JOptionPane.ERROR_MESSAGE);
+            }
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(this,
+                    "Error Reading Data!",
+                    "Reading Records Error",
+                    JOptionPane.ERROR_MESSAGE);
+        }
+        return info;
+    }
+
+    // Method for adding account to the text file
+    public void insertUser(String email, String name, String password){
+        try{
+            FileWriter path = new FileWriter(usersFilePath);
+            BufferedWriter writer = new BufferedWriter(path);
+
+            String combineData = email + "," + password + "," + name;
+            writer.write(combineData);
+
+            writer.close();
+            System.out.println("ADDED!");
+        }catch (IOException e) {
+            JOptionPane.showMessageDialog(this,
+                    "Error Adding Data!",
+                    "Insert User Error",
+                    JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    public boolean checkPasswordValue(String password){
+        Matcher match = passwordPattern.matcher(password);
+        return match.find();
+    }
+
+    public boolean checkEmailValue(String email){
+        Matcher match = emailPattern.matcher(email);
+        return match.matches();
+    }
 
     public LoginRegisterFrame(){
         setSize(1000, 650);
@@ -148,13 +329,13 @@ public class LoginRegisterFrame extends JFrame implements ActionListener {
         emailLabel.setBorder(new EmptyBorder(20, 0, 0, 0));
         emailTitlePanel.add(emailLabel, BorderLayout.WEST);
 
-        JTextField emailTextField = new JTextField();
-        emailTextField.setFont(Arial);
-        emailTextField.setBorder(BorderFactory.createLineBorder(mainColorDarkGreen, 2));
-        emailTextField.setPreferredSize(new Dimension(getWidth(), 40));
-        emailTextField.setForeground(mainColorBlackTxt);
-        emailTextField.setMaximumSize(emailTextField.getPreferredSize());
-        FormPanel.add(emailTextField);
+        reg_emailTextField = new JTextField();
+        reg_emailTextField.setFont(Arial);
+        reg_emailTextField.setBorder(BorderFactory.createLineBorder(mainColorDarkGreen, 2));
+        reg_emailTextField.setPreferredSize(new Dimension(getWidth(), 40));
+        reg_emailTextField.setForeground(mainColorBlackTxt);
+        reg_emailTextField.setMaximumSize(reg_emailTextField.getPreferredSize());
+        FormPanel.add(reg_emailTextField);
 
         JPanel nameTitlePanel = new JPanel();
         nameTitlePanel.setBackground(null);
@@ -167,11 +348,11 @@ public class LoginRegisterFrame extends JFrame implements ActionListener {
         nameLabel.setBorder(new EmptyBorder(20, 0, 0, 0));
         nameTitlePanel.add(nameLabel, BorderLayout.WEST);
 
-        JTextField nameTextField = new JTextField();
+        nameTextField = new JTextField();
         nameTextField.setFont(Arial);
         nameTextField.setBorder(BorderFactory.createLineBorder(mainColorDarkGreen, 2));
         nameTextField.setPreferredSize(new Dimension(getWidth(), 40));
-        nameTextField.setMaximumSize(emailTextField.getPreferredSize());
+        nameTextField.setMaximumSize(reg_emailTextField.getPreferredSize());
         nameTextField.setForeground(mainColorBlackTxt);
         FormPanel.add(nameTextField);
 
@@ -186,13 +367,13 @@ public class LoginRegisterFrame extends JFrame implements ActionListener {
         passwordLabel.setBorder(new EmptyBorder(20, 0, 0, 0));
         passTitlePanel.add(passwordLabel);
 
-        JPasswordField passwordTextField = new JPasswordField();
-        passwordTextField.setFont(Arial);
-        passwordTextField.setBorder(BorderFactory.createLineBorder(mainColorDarkGreen, 2));
-        passwordTextField.setPreferredSize(new Dimension(getWidth(), 40));
-        passwordTextField.setMaximumSize(emailTextField.getPreferredSize());
-        passwordTextField.setForeground(mainColorBlackTxt);
-        FormPanel.add(passwordTextField);
+        reg_passwordTextField = new JPasswordField();
+        reg_passwordTextField.setFont(Arial);
+        reg_passwordTextField.setBorder(BorderFactory.createLineBorder(mainColorDarkGreen, 2));
+        reg_passwordTextField.setPreferredSize(new Dimension(getWidth(), 40));
+        reg_passwordTextField.setMaximumSize(reg_emailTextField.getPreferredSize());
+        reg_passwordTextField.setForeground(mainColorBlackTxt);
+        FormPanel.add(reg_passwordTextField);
 
         JPanel conPassTitlePanel = new JPanel();
         conPassTitlePanel.setBackground(null);
@@ -205,12 +386,12 @@ public class LoginRegisterFrame extends JFrame implements ActionListener {
         confirmPasswordLabel.setBorder(new EmptyBorder(20, 0, 0, 0));
         conPassTitlePanel.add(confirmPasswordLabel);
 
-        JPasswordField confirmPasswordTextField = new JPasswordField();
+        confirmPasswordTextField = new JPasswordField();
         confirmPasswordTextField.setFont(Arial);
         confirmPasswordTextField.setBorder(BorderFactory.createLineBorder(mainColorDarkGreen, 2));
         confirmPasswordTextField.setPreferredSize(new Dimension(getWidth(), 40));
         confirmPasswordTextField.setForeground(mainColorBlackTxt);
-        confirmPasswordTextField.setMaximumSize(emailTextField.getPreferredSize());
+        confirmPasswordTextField.setMaximumSize(reg_emailTextField.getPreferredSize());
         FormPanel.add(confirmPasswordTextField);
 
         JPanel signupButtonPanel = new JPanel();
@@ -280,13 +461,13 @@ public class LoginRegisterFrame extends JFrame implements ActionListener {
         emailLabel.setForeground(mainColorBlackTxt);
         emailTitlePanel.add(emailLabel, BorderLayout.WEST);
 
-        JTextField emailTextField = new JTextField();
-        emailTextField.setForeground(mainColorBlackTxt);
-        emailTextField.setFont(Arial);
-        emailTextField.setBorder(BorderFactory.createLineBorder(mainColorDarkGreen, 2));
-        emailTextField.setPreferredSize(new Dimension(getWidth(), 40));
-        emailTextField.setMaximumSize(emailTextField.getPreferredSize());
-        FormPanel.add(emailTextField);
+        log_emailTextField = new JTextField();
+        log_emailTextField.setForeground(mainColorBlackTxt);
+        log_emailTextField.setFont(Arial);
+        log_emailTextField.setBorder(BorderFactory.createLineBorder(mainColorDarkGreen, 2));
+        log_emailTextField.setPreferredSize(new Dimension(getWidth(), 40));
+        log_emailTextField.setMaximumSize(log_emailTextField.getPreferredSize());
+        FormPanel.add(log_emailTextField);
 
         JPanel passwordTitlePanel = new JPanel();
         passwordTitlePanel.setBackground(null);
@@ -299,13 +480,13 @@ public class LoginRegisterFrame extends JFrame implements ActionListener {
         passwordLabel.setForeground(mainColorBlackTxt);
         passwordTitlePanel.add(passwordLabel, BorderLayout.WEST);
 
-        JPasswordField passwordTextField = new JPasswordField();
-        passwordTextField.setForeground(mainColorBlackTxt);
-        passwordTextField.setFont(Arial);
-        passwordTextField.setBorder(BorderFactory.createLineBorder(mainColorDarkGreen, 2));
-        passwordTextField.setPreferredSize(new Dimension(getWidth(), 40));
-        passwordTextField.setMaximumSize(emailTextField.getPreferredSize());
-        FormPanel.add(passwordTextField);
+        log_passwordTextField = new JPasswordField();
+        log_passwordTextField.setForeground(mainColorBlackTxt);
+        log_passwordTextField.setFont(Arial);
+        log_passwordTextField.setBorder(BorderFactory.createLineBorder(mainColorDarkGreen, 2));
+        log_passwordTextField.setPreferredSize(new Dimension(getWidth(), 40));
+        log_passwordTextField.setMaximumSize(log_passwordTextField.getPreferredSize());
+        FormPanel.add(log_passwordTextField);
 
         JPanel signinButtonPanel = new JPanel();
         signinButtonPanel.setLayout(new BorderLayout());
@@ -386,16 +567,4 @@ public class LoginRegisterFrame extends JFrame implements ActionListener {
 
     }
 
-    @Override
-    public void actionPerformed(ActionEvent actionEvent) {
-        if (actionEvent.getSource() == btn_ToLogin){
-            System.out.println("TO LOGIN");
-            cardLayoutLoginRegister.show(mainBackground, "LOGIN");
-        }
-
-        if (actionEvent.getSource() == btn_ToRegister){
-            System.out.println("TO REGISTER");
-            cardLayoutLoginRegister.show(mainBackground, "REGISTER");
-        }
-    }
 }
