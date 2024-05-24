@@ -8,23 +8,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class LoginRegisterFrame extends JFrame implements ActionListener {
-    // Images
-    private final ImageIcon WikaLogo = new ImageIcon("src/img/WikaLogo.png");
-    private final ImageIcon WikaLogoTrans = new ImageIcon("src/img/WikaLogoTrans.png");
-
-    // Colors
-    private final Color mainColorDarkGreen = new Color(0x004e64);
-    private final Color mainColorWhiteBG = new Color(0xF3F3F3);
-    private final Color mainColorBlackTxt = new Color(0x3B3B3B);
-    private final Color mainColorYellowBG = new Color(0xF5C529);
-    private final Color YellowColorClick = new Color(0xD9BD64);
-    private final Color YellowColorOver = new Color(0xB68F10);
-    private final Color mainColorWhithy = new Color(0xFFFFFF);
-
-    // Fonts
-    private final Font ArialTitle = new Font("Arial Black", Font.PLAIN, 24);
-    private final Font ArialBold = new Font("Arial", Font.BOLD, 20);
-    private final Font Arial = new Font("Arial", Font.PLAIN, 16);
+    private Assets assets = new Assets();
 
     // Buttons
     private RoundedButton btn_ToLogin, btn_ToRegister, btn_submitSignUp, btn_submitSignIn;
@@ -46,9 +30,6 @@ public class LoginRegisterFrame extends JFrame implements ActionListener {
 
     // Regex for password
     private final Pattern passwordPattern = Pattern.compile("^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[~@#$^*()_+=\\[\\]{}|,.?/!%&:-]).{8,}$");
-
-    // File Path for Users File
-    private final String usersFilePath = "src/textfiles/users.txt";
 
     @Override
     public void actionPerformed(ActionEvent actionEvent) {
@@ -130,20 +111,38 @@ public class LoginRegisterFrame extends JFrame implements ActionListener {
 
         // Submit Sign In
         if (actionEvent.getSource() == btn_submitSignIn){
-            String[] userData = getUserInfo(log_emailValue);
-            System.out.println(userData[0]);
-            System.out.println(userData[1]);
-            System.out.println(userData[2]);
-
-            if (userData[1].equals(log_passValue)){
-                this.dispose();
-                DashboardFrame dashboardFrame = new DashboardFrame();
-            }else {
+            boolean isEmpty = checkIfUserFileIsEmpty(assets.getUsersFilePath());
+            if (isEmpty){
                 JOptionPane.showMessageDialog(this,
-                        "Incorrect Password",
+                        "No Available Accounts",
                         "Sign In",
                         JOptionPane.ERROR_MESSAGE);
+            }else {
+                String[] userData = getUserInfo(log_emailValue);
+                System.out.println(userData[0]);
+                System.out.println(userData[1]);
+                System.out.println(userData[2]);
+
+                if (userData[1].equals(log_passValue)){
+                    this.dispose();
+                    DashboardFrame dashboardFrame = new DashboardFrame();
+                }else {
+                    JOptionPane.showMessageDialog(this,
+                            "Incorrect Password",
+                            "Sign In",
+                            JOptionPane.ERROR_MESSAGE);
+                }
             }
+        }
+    }
+    // Check if the User File is Empty
+    public boolean checkIfUserFileIsEmpty(String filePath){
+        try{
+            FileReader file = new FileReader(filePath);
+            BufferedReader reader = new BufferedReader(file);
+            return reader.readLine() == null;
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
     }
 
@@ -152,7 +151,7 @@ public class LoginRegisterFrame extends JFrame implements ActionListener {
         String[] info = new String[3];
         boolean isUserExist = true;
         try {
-            FileReader filePath = new FileReader(usersFilePath);
+            FileReader filePath = new FileReader(assets.getUsersFilePath());
             BufferedReader reader = new BufferedReader(filePath);
             String line;
             String[] record = null;
@@ -187,7 +186,7 @@ public class LoginRegisterFrame extends JFrame implements ActionListener {
     // Method for adding account to the text file
     public void insertUser(String email, String name, String password){
         try{
-            FileWriter path = new FileWriter(usersFilePath);
+            FileWriter path = new FileWriter(assets.getUsersFilePath());
             BufferedWriter writer = new BufferedWriter(path);
 
             String combineData = email + "," + password + "," + name;
@@ -218,13 +217,13 @@ public class LoginRegisterFrame extends JFrame implements ActionListener {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setTitle("WikaWisdom");
         setLocationRelativeTo(null);
-        setIconImage(WikaLogo.getImage());
+        setIconImage(assets.getWikaLogo().getImage());
         setResizable(false);
 
         cardLayoutLoginRegister = new CardLayout();
         mainBackground = new JPanel();
         mainBackground.setLayout(cardLayoutLoginRegister);
-        mainBackground.setBackground(mainColorDarkGreen);
+        mainBackground.setBackground(assets.getMainColorDarkGreen());
 
         JPanel registerPanel = Register();
         mainBackground.add(registerPanel, "REGISTER");
@@ -242,7 +241,7 @@ public class LoginRegisterFrame extends JFrame implements ActionListener {
 
         // Panel with the Logo
         JPanel logoPanel = new JPanel();
-        logoPanel.setBackground(mainColorDarkGreen);
+        logoPanel.setBackground(assets.getMainColorDarkGreen());
         logoPanel.setLayout(new BoxLayout(logoPanel, BoxLayout.Y_AXIS));
         registerPanel.add(logoPanel);
 
@@ -252,14 +251,14 @@ public class LoginRegisterFrame extends JFrame implements ActionListener {
         logoPanel.add(TopPanel);
 
         JLabel logo = new JLabel();
-        logo.setIcon(WikaLogoTrans);
+        logo.setIcon(assets.getWikaLogoTrans());
         logo.setAlignmentX(CENTER_ALIGNMENT);
         TopPanel.add(logo);
 
         JLabel appName = new JLabel("Wika Wisdom");
-        appName.setFont(ArialTitle);
+        appName.setFont(assets.getArialTitle());
         appName.setAlignmentX(CENTER_ALIGNMENT);
-        appName.setForeground(mainColorWhiteBG);
+        appName.setForeground(assets.getMainColorWhiteBG());
         TopPanel.add(appName);
 
         JPanel BottomPanel = new JPanel();
@@ -275,13 +274,13 @@ public class LoginRegisterFrame extends JFrame implements ActionListener {
         btn_ToLogin = new RoundedButton();
         btn_ToLogin.setText("Sign In");
         btn_ToLogin.setFocusable(false);
-        btn_ToLogin.setFont(ArialBold);
-        btn_ToLogin.setForeground(mainColorWhiteBG);
-        btn_ToLogin.setColor(mainColorYellowBG);
+        btn_ToLogin.setFont(assets.getArialBold());
+        btn_ToLogin.setForeground(assets.getMainColorWhiteBG());
+        btn_ToLogin.setColor(assets.getMainColorYellowBG());
         btn_ToLogin.setRadius(20);
-        btn_ToLogin.setColorClick(YellowColorClick);
-        btn_ToLogin.setBorderColor(mainColorDarkGreen);
-        btn_ToLogin.setColorOver(YellowColorOver);
+        btn_ToLogin.setColorClick(assets.getYellowColorClick());
+        btn_ToLogin.setBorderColor(assets.getMainColorDarkGreen());
+        btn_ToLogin.setColorOver(assets.getYellowColorOver());
         btn_ToLogin.setBorder(null);
         btn_ToLogin.setPreferredSize(new Dimension(180, 50));
         btn_ToLogin.addActionListener(this);
@@ -294,13 +293,13 @@ public class LoginRegisterFrame extends JFrame implements ActionListener {
 
         // Panel with register form
         JPanel regPanel = new JPanel();
-        regPanel.setBackground(mainColorWhiteBG);
+        regPanel.setBackground(assets.getMainColorWhiteBG());
         regPanel.setLayout(new BorderLayout());
         regPanel.setBorder(BorderFactory.createEmptyBorder(50, 50, 50, 50));
         registerPanel.add(regPanel);
 
         RoundedPanel FormPanel = new RoundedPanel(20, 20, 20, 20);
-        FormPanel.setBackground(mainColorWhithy);
+        FormPanel.setBackground(assets.getMainColorWhithy());
         FormPanel.setLayout(new BoxLayout(FormPanel, BoxLayout.Y_AXIS));
         FormPanel.setBorder(BorderFactory.createEmptyBorder(0, 20, 0, 20));
         regPanel.add(FormPanel);
@@ -311,9 +310,9 @@ public class LoginRegisterFrame extends JFrame implements ActionListener {
         FormPanel.add(signUpTitlePanel);
 
         JLabel SignUpTitle = new JLabel("Sign Up");
-        SignUpTitle.setForeground(mainColorBlackTxt);
+        SignUpTitle.setForeground(assets.getMainColorBlackTxt());
         SignUpTitle.setBackground(null);
-        SignUpTitle.setFont(ArialBold);
+        SignUpTitle.setFont(assets.getArialBold());
         SignUpTitle.setBorder(new EmptyBorder(20, 0, 0, 0));
         SignUpTitle.setVerticalTextPosition(JLabel.CENTER);
         signUpTitlePanel.add(SignUpTitle, BorderLayout.WEST);
@@ -324,16 +323,16 @@ public class LoginRegisterFrame extends JFrame implements ActionListener {
         FormPanel.add(emailTitlePanel);
 
         JLabel emailLabel = new JLabel("Email:");
-        emailLabel.setForeground(mainColorBlackTxt);
-        emailLabel.setFont(Arial);
+        emailLabel.setForeground(assets.getMainColorBlackTxt());
+        emailLabel.setFont(assets.getArial());
         emailLabel.setBorder(new EmptyBorder(20, 0, 0, 0));
         emailTitlePanel.add(emailLabel, BorderLayout.WEST);
 
         reg_emailTextField = new JTextField();
-        reg_emailTextField.setFont(Arial);
-        reg_emailTextField.setBorder(BorderFactory.createLineBorder(mainColorDarkGreen, 2));
+        reg_emailTextField.setFont(assets.getArial());
+        reg_emailTextField.setBorder(BorderFactory.createLineBorder(assets.getMainColorDarkGreen(), 2));
         reg_emailTextField.setPreferredSize(new Dimension(getWidth(), 40));
-        reg_emailTextField.setForeground(mainColorBlackTxt);
+        reg_emailTextField.setForeground(assets.getMainColorBlackTxt());
         reg_emailTextField.setMaximumSize(reg_emailTextField.getPreferredSize());
         FormPanel.add(reg_emailTextField);
 
@@ -343,17 +342,17 @@ public class LoginRegisterFrame extends JFrame implements ActionListener {
         FormPanel.add(nameTitlePanel);
 
         JLabel nameLabel = new JLabel("Name:");
-        nameLabel.setForeground(mainColorBlackTxt);
-        nameLabel.setFont(Arial);
+        nameLabel.setForeground(assets.getMainColorBlackTxt());
+        nameLabel.setFont(assets.getArial());
         nameLabel.setBorder(new EmptyBorder(20, 0, 0, 0));
         nameTitlePanel.add(nameLabel, BorderLayout.WEST);
 
         nameTextField = new JTextField();
-        nameTextField.setFont(Arial);
-        nameTextField.setBorder(BorderFactory.createLineBorder(mainColorDarkGreen, 2));
+        nameTextField.setFont(assets.getArial());
+        nameTextField.setBorder(BorderFactory.createLineBorder(assets.getMainColorDarkGreen(), 2));
         nameTextField.setPreferredSize(new Dimension(getWidth(), 40));
         nameTextField.setMaximumSize(reg_emailTextField.getPreferredSize());
-        nameTextField.setForeground(mainColorBlackTxt);
+        nameTextField.setForeground(assets.getMainColorBlackTxt());
         FormPanel.add(nameTextField);
 
         JPanel passTitlePanel = new JPanel();
@@ -362,17 +361,17 @@ public class LoginRegisterFrame extends JFrame implements ActionListener {
         FormPanel.add(passTitlePanel);
 
         JLabel passwordLabel = new JLabel("Password:");
-        passwordLabel.setForeground(mainColorBlackTxt);
-        passwordLabel.setFont(Arial);
+        passwordLabel.setForeground(assets.getMainColorBlackTxt());
+        passwordLabel.setFont(assets.getArial());
         passwordLabel.setBorder(new EmptyBorder(20, 0, 0, 0));
         passTitlePanel.add(passwordLabel);
 
         reg_passwordTextField = new JPasswordField();
-        reg_passwordTextField.setFont(Arial);
-        reg_passwordTextField.setBorder(BorderFactory.createLineBorder(mainColorDarkGreen, 2));
+        reg_passwordTextField.setFont(assets.getArial());
+        reg_passwordTextField.setBorder(BorderFactory.createLineBorder(assets.getMainColorDarkGreen(), 2));
         reg_passwordTextField.setPreferredSize(new Dimension(getWidth(), 40));
         reg_passwordTextField.setMaximumSize(reg_emailTextField.getPreferredSize());
-        reg_passwordTextField.setForeground(mainColorBlackTxt);
+        reg_passwordTextField.setForeground(assets.getMainColorBlackTxt());
         FormPanel.add(reg_passwordTextField);
 
         JPanel conPassTitlePanel = new JPanel();
@@ -381,16 +380,16 @@ public class LoginRegisterFrame extends JFrame implements ActionListener {
         FormPanel.add(conPassTitlePanel);
 
         JLabel confirmPasswordLabel = new JLabel("Confirm Password:");
-        confirmPasswordLabel.setForeground(mainColorBlackTxt);
-        confirmPasswordLabel.setFont(Arial);
+        confirmPasswordLabel.setForeground(assets.getMainColorBlackTxt());
+        confirmPasswordLabel.setFont(assets.getArial());
         confirmPasswordLabel.setBorder(new EmptyBorder(20, 0, 0, 0));
         conPassTitlePanel.add(confirmPasswordLabel);
 
         confirmPasswordTextField = new JPasswordField();
-        confirmPasswordTextField.setFont(Arial);
-        confirmPasswordTextField.setBorder(BorderFactory.createLineBorder(mainColorDarkGreen, 2));
+        confirmPasswordTextField.setFont(assets.getArial());
+        confirmPasswordTextField.setBorder(BorderFactory.createLineBorder(assets.getMainColorDarkGreen(), 2));
         confirmPasswordTextField.setPreferredSize(new Dimension(getWidth(), 40));
-        confirmPasswordTextField.setForeground(mainColorBlackTxt);
+        confirmPasswordTextField.setForeground(assets.getMainColorBlackTxt());
         confirmPasswordTextField.setMaximumSize(reg_emailTextField.getPreferredSize());
         FormPanel.add(confirmPasswordTextField);
 
@@ -405,15 +404,15 @@ public class LoginRegisterFrame extends JFrame implements ActionListener {
         btn_submitSignUp.setPreferredSize(new Dimension(150, 50));
         btn_submitSignUp.setAlignmentX(Component.CENTER_ALIGNMENT);
         btn_submitSignUp.setMaximumSize(btn_submitSignUp.getPreferredSize());
-        btn_submitSignUp.setColor(mainColorYellowBG);
+        btn_submitSignUp.setColor(assets.getMainColorYellowBG());
         btn_submitSignUp.setRadius(20);
-        btn_submitSignUp.setColorClick(YellowColorClick);
-        btn_submitSignUp.setBorderColor(mainColorWhiteBG);
-        btn_submitSignUp.setColorOver(YellowColorOver);
-        btn_submitSignUp.setForeground(mainColorWhiteBG);
+        btn_submitSignUp.setColorClick(assets.getYellowColorClick());
+        btn_submitSignUp.setBorderColor(assets.getMainColorWhiteBG());
+        btn_submitSignUp.setColorOver(assets.getYellowColorOver());
+        btn_submitSignUp.setForeground(assets.getMainColorWhiteBG());
         btn_submitSignUp.setBorder(null);
         btn_submitSignUp.setFocusable(false);
-        btn_submitSignUp.setFont(ArialBold);
+        btn_submitSignUp.setFont(assets.getArialBold());
         btn_submitSignUp.addActionListener(this);
         signupButtonPanel.add(btn_submitSignUp, BorderLayout.SOUTH);
         
@@ -427,13 +426,13 @@ public class LoginRegisterFrame extends JFrame implements ActionListener {
 
         // SIGN IN PANEL
         JPanel signinPanel = new JPanel();
-        signinPanel.setBackground(mainColorWhiteBG);
+        signinPanel.setBackground(assets.getMainColorWhiteBG());
         signinPanel.setLayout(new BorderLayout());
         signinPanel.setBorder(new EmptyBorder(150, 50, 150, 50));
         loginPanel.add(signinPanel);
 
         RoundedPanel FormPanel = new RoundedPanel(20, 20, 20, 20);
-        FormPanel.setBackground(mainColorWhithy);
+        FormPanel.setBackground(assets.getMainColorWhithy());
         FormPanel.setLayout(new BoxLayout(FormPanel, BoxLayout.Y_AXIS));
         FormPanel.setBorder(new EmptyBorder(0, 20, 0, 20));
         signinPanel.add(FormPanel);
@@ -444,9 +443,9 @@ public class LoginRegisterFrame extends JFrame implements ActionListener {
         FormPanel.add(signinTitlePanel);
 
         JLabel signInTitle = new JLabel("Sign In");
-        signInTitle.setFont(ArialBold);
+        signInTitle.setFont(assets.getArialBold());
         signInTitle.setBorder(new EmptyBorder(20, 0, 0, 0));
-        signInTitle.setForeground(mainColorBlackTxt);
+        signInTitle.setForeground(assets.getMainColorBlackTxt());
         signInTitle.setHorizontalAlignment(JLabel.LEFT);
         signinTitlePanel.add(signInTitle, BorderLayout.WEST);
 
@@ -456,15 +455,15 @@ public class LoginRegisterFrame extends JFrame implements ActionListener {
         FormPanel.add(emailTitlePanel);
 
         JLabel emailLabel = new JLabel("Email:");
-        emailLabel.setFont(Arial);
+        emailLabel.setFont(assets.getArial());
         emailLabel.setBorder(new EmptyBorder(10, 0, 0, 0));
-        emailLabel.setForeground(mainColorBlackTxt);
+        emailLabel.setForeground(assets.getMainColorBlackTxt());
         emailTitlePanel.add(emailLabel, BorderLayout.WEST);
 
         log_emailTextField = new JTextField();
-        log_emailTextField.setForeground(mainColorBlackTxt);
-        log_emailTextField.setFont(Arial);
-        log_emailTextField.setBorder(BorderFactory.createLineBorder(mainColorDarkGreen, 2));
+        log_emailTextField.setForeground(assets.getMainColorBlackTxt());
+        log_emailTextField.setFont(assets.getArial());
+        log_emailTextField.setBorder(BorderFactory.createLineBorder(assets.getMainColorDarkGreen(), 2));
         log_emailTextField.setPreferredSize(new Dimension(getWidth(), 40));
         log_emailTextField.setMaximumSize(log_emailTextField.getPreferredSize());
         FormPanel.add(log_emailTextField);
@@ -475,15 +474,15 @@ public class LoginRegisterFrame extends JFrame implements ActionListener {
         FormPanel.add(passwordTitlePanel);
 
         JLabel passwordLabel = new JLabel("Password:");
-        passwordLabel.setFont(Arial);
+        passwordLabel.setFont(assets.getArial());
         passwordLabel.setBorder(new EmptyBorder(20, 0, 0, 0));
-        passwordLabel.setForeground(mainColorBlackTxt);
+        passwordLabel.setForeground(assets.getMainColorBlackTxt());
         passwordTitlePanel.add(passwordLabel, BorderLayout.WEST);
 
         log_passwordTextField = new JPasswordField();
-        log_passwordTextField.setForeground(mainColorBlackTxt);
-        log_passwordTextField.setFont(Arial);
-        log_passwordTextField.setBorder(BorderFactory.createLineBorder(mainColorDarkGreen, 2));
+        log_passwordTextField.setForeground(assets.getMainColorBlackTxt());
+        log_passwordTextField.setFont(assets.getArial());
+        log_passwordTextField.setBorder(BorderFactory.createLineBorder(assets.getMainColorDarkGreen(), 2));
         log_passwordTextField.setPreferredSize(new Dimension(getWidth(), 40));
         log_passwordTextField.setMaximumSize(log_passwordTextField.getPreferredSize());
         FormPanel.add(log_passwordTextField);
@@ -499,15 +498,15 @@ public class LoginRegisterFrame extends JFrame implements ActionListener {
         btn_submitSignIn.setPreferredSize(new Dimension(150, 50));
         btn_submitSignIn.setAlignmentX(Component.CENTER_ALIGNMENT);
         btn_submitSignIn.setMaximumSize(btn_submitSignIn.getPreferredSize());
-        btn_submitSignIn.setColor(mainColorYellowBG);
+        btn_submitSignIn.setColor(assets.getMainColorYellowBG());
         btn_submitSignIn.setRadius(20);
-        btn_submitSignIn.setColorClick(YellowColorClick);
-        btn_submitSignIn.setBorderColor(mainColorWhiteBG);
-        btn_submitSignIn.setColorOver(YellowColorOver);
-        btn_submitSignIn.setForeground(mainColorWhiteBG);
+        btn_submitSignIn.setColorClick(assets.getYellowColorClick());
+        btn_submitSignIn.setBorderColor(assets.getMainColorWhiteBG());
+        btn_submitSignIn.setColorOver(assets.getYellowColorOver());
+        btn_submitSignIn.setForeground(assets.getMainColorWhiteBG());
         btn_submitSignIn.setBorder(null);
         btn_submitSignIn.setFocusable(false);
-        btn_submitSignIn.setFont(ArialBold);
+        btn_submitSignIn.setFont(assets.getArialBold());
         btn_submitSignIn.addActionListener(this);
         signinButtonPanel.add(btn_submitSignIn, BorderLayout.SOUTH);
 
@@ -518,7 +517,7 @@ public class LoginRegisterFrame extends JFrame implements ActionListener {
 
         // LOGO PANEL
         JPanel logoPanel = new JPanel();
-        logoPanel.setBackground(mainColorDarkGreen);
+        logoPanel.setBackground(assets.getMainColorDarkGreen());
         logoPanel.setLayout(new BoxLayout(logoPanel, BoxLayout.Y_AXIS));
         loginPanel.add(logoPanel);
 
@@ -528,14 +527,14 @@ public class LoginRegisterFrame extends JFrame implements ActionListener {
         logoPanel.add(TopPanel);
 
         JLabel logo = new JLabel();
-        logo.setIcon(WikaLogoTrans);
+        logo.setIcon(assets.getWikaLogoTrans());
         logo.setAlignmentX(CENTER_ALIGNMENT);
         TopPanel.add(logo);
 
         JLabel appName = new JLabel("Wika Wisdom");
-        appName.setFont(ArialTitle);
+        appName.setFont(assets.getArialTitle());
         appName.setAlignmentX(CENTER_ALIGNMENT);
-        appName.setForeground(mainColorWhiteBG);
+        appName.setForeground(assets.getMainColorWhiteBG());
         TopPanel.add(appName);
 
         JPanel BottomPanel = new JPanel();
@@ -551,13 +550,12 @@ public class LoginRegisterFrame extends JFrame implements ActionListener {
         btn_ToRegister = new RoundedButton();
         btn_ToRegister.setText("Sign Up");
         btn_ToRegister.setFocusable(false);
-        btn_ToRegister.setFont(ArialBold);
-        btn_ToRegister.setForeground(mainColorWhiteBG);
-        btn_ToRegister.setColor(mainColorYellowBG);
+        btn_ToRegister.setFont(assets.getArialBold());
+        btn_ToRegister.setForeground(assets.getMainColorWhiteBG());
+        btn_ToRegister.setColor(assets.getMainColorYellowBG());
         btn_ToRegister.setRadius(20);
-        btn_ToRegister.setColorClick(YellowColorClick);
-        btn_ToRegister.setBorderColor(mainColorDarkGreen);
-        btn_ToRegister.setColorOver(YellowColorOver);
+        btn_ToRegister.setColorClick(assets.getYellowColorClick());
+        btn_ToRegister.setColorOver(assets.getYellowColorOver());
         btn_ToRegister.setBorder(null);
         btn_ToRegister.setPreferredSize(new Dimension(180, 50));
         btn_ToRegister.addActionListener(this);
