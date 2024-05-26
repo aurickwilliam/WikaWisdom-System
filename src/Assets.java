@@ -6,6 +6,10 @@ public class Assets {
     private final ImageIcon WikaLogo = new ImageIcon("src/img/WikaLogo.png");
     private final ImageIcon WikaLogoTrans = new ImageIcon("src/img/WikaLogoTrans.png");
     private final ImageIcon ProfileIcon = new ImageIcon("src/img/ProfileIcon.png");
+    private final ImageIcon WhiteProfileIcon = new ImageIcon("src/img/WhiteProfileIcon.png");
+    private final ImageIcon BookIcon = new ImageIcon("src/img/BookIcon.png");
+    private final ImageIcon FlashCardIcon = new ImageIcon("src/img/BrainIcon.png");
+    private final ImageIcon LevelIcon = new ImageIcon("src/img/ProgressIcon.png");
 
     // Colors
     private final Color mainColorDarkGreen = new Color(0x004e64);
@@ -15,11 +19,15 @@ public class Assets {
     private final Color YellowColorClick = new Color(0xD9BD64);
     private final Color YellowColorOver = new Color(0xB68F10);
     private final Color mainColorWhithy = new Color(0xFFFFFF);
+    private final Color DarkGreenColorOver = new Color(0x006783);
+    private final Color DarkGreenColorClick = new Color(0x2B5D6B);
 
     // Fonts
     private final Font ArialTitle = new Font("Arial Black", Font.PLAIN, 24);
     private final Font ArialBold = new Font("Arial", Font.BOLD, 20);
     private final Font Arial = new Font("Arial", Font.PLAIN, 16);
+    private final Font ArialBoldTitle = new Font("Arial", Font.BOLD, 30);
+    private final Font Arial_desc = new Font("Arial", Font.PLAIN, 14);
 
     // File Path for Users File
     private final String usersFilePath = "src/textfiles/users.txt";
@@ -79,5 +87,37 @@ public class Assets {
 
     public ImageIcon getProfileIcon() {
         return ProfileIcon;
+    }
+
+    public ImageIcon getWhiteProfileIcon() {
+        return WhiteProfileIcon;
+    }
+
+    public Color getDarkGreenColorOver() {
+        return DarkGreenColorOver;
+    }
+
+    public Color getDarkGreenColorClick() {
+        return DarkGreenColorClick;
+    }
+
+    public ImageIcon getBookIcon() {
+        return BookIcon;
+    }
+
+    public ImageIcon getFlashCardIcon() {
+        return FlashCardIcon;
+    }
+
+    public ImageIcon getLevelIcon() {
+        return LevelIcon;
+    }
+
+    public Font getArialBoldTitle() {
+        return ArialBoldTitle;
+    }
+
+    public Font getArial_desc() {
+        return Arial_desc;
     }
 }

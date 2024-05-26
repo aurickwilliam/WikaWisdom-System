@@ -8,7 +8,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class AccountsFrame extends JFrame implements ActionListener {
+public class AccountsFrame extends JFrame {
     Assets assets = new Assets();
 
     // Buttons
@@ -106,12 +106,5 @@ public class AccountsFrame extends JFrame implements ActionListener {
         }
         names = temp_names.toArray(new String[temp_names.size()]);
         return names;
-    }
-
-    @Override
-    public void actionPerformed(ActionEvent actionEvent) {
-        if (actionEvent.getSource() == account){
-            System.out.println("Click " + account.getText());
-        }
     }
 }

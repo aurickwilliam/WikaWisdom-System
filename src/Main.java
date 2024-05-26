@@ -17,7 +17,7 @@ public class Main {
 //            new AccountsFrame();
 //        }
 
-        new AccountsFrame();
+        new DashboardFrame();
     }
 
     // Check if the User File is Empty
