@@ -55,6 +55,7 @@ public class DashboardFrame extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent actionEvent) {
         if (actionEvent.getSource() == btn_dictionary){
             System.out.println("Click Dictionary");
+            DictionaryPanel.getDictionaryCardLayout().show(dictionary, DictionaryPanel.getMainOptionPanel().getName());
             mainPanelCardLayout.show(mainPanel, "DICTIONARY");
         }else if (actionEvent.getSource() == btn_flashCard){
             System.out.println("Click FlashCard");

@@ -10,6 +10,7 @@ public class Assets {
     private final ImageIcon BookIcon = new ImageIcon("src/img/BookIcon.png");
     private final ImageIcon FlashCardIcon = new ImageIcon("src/img/BrainIcon.png");
     private final ImageIcon LevelIcon = new ImageIcon("src/img/ProgressIcon.png");
+    private final ImageIcon backBtn = new ImageIcon("src/img/back_button.png");
 
     // Colors
     private final Color mainColorDarkGreen = new Color(0x004e64);
@@ -31,6 +32,8 @@ public class Assets {
 
     // File Path for Users File
     private final String usersFilePath = "src/textfiles/users.txt";
+    private final String alphabetFilePath = "src/textfiles/alphabet.txt";
+    private final String wpwFilePath = "src/textfiles/wordPerword.txt";
 
 
     public ImageIcon getWikaLogo() {
@@ -119,5 +122,17 @@ public class Assets {
 
     public Font getArial_desc() {
         return Arial_desc;
+    }
+
+    public ImageIcon getBackBtn() {
+        return backBtn;
+    }
+
+    public String getAlphabetFilePath() {
+        return alphabetFilePath;
+    }
+
+    public String getWpwFilePath() {
+        return wpwFilePath;
     }
 }

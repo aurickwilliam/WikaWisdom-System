@@ -1,0 +1,16 @@
+Ba,Be,Bi,Bo,Bu
+Ka,Ke,Ki,Ko,Ku
+Da,De,Di,Do,Du
+Ga,Ge,Gi,Go,Gu
+Ha,He,Hi,Ho,Hu
+La,Le,Li,Lo,Lu
+Ma,Me,Mi,Mo,Mu
+Na,Ne,Ni,No,Nu
+Ña,Ñe,Ñi,Ño,Ñu
+Nga,Nge,Ngi,Ngo,Ngu
+Pa,Pe,Pi,Po,Pu
+Ra,Re,Ri,Ro,Ru
+Sa,Se,Si,So,Su
+Ta,Te,Ti,To,Tu
+Wa,We,Wi,Wo,Wu
+Ya,Ye,Yi,Yo,Yu

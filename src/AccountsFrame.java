@@ -66,6 +66,7 @@ public class AccountsFrame extends JFrame {
 
         JScrollPane scrollPanel = new JScrollPane(listAccountsPanel, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         JScrollBar verticalScrollBar = scrollPanel.getVerticalScrollBar();
+        scrollPanel.getVerticalScrollBar().setUnitIncrement(16);
         listPanel.add(scrollPanel);
 
         for (String name : account_names){
