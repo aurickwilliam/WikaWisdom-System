@@ -1,0 +1,15 @@
+Magandang araw!|Good day!|A polite greeting to start the conversation.
+Pwede bang mag-order?|Can I place an order?|To politely ask if you can start ordering your food.
+Ano po ang menu ninyo?|What is your menu?|To request to see the menu.
+Meron ba kayong rekomendasyon?|Do you have any recommendations?|To ask the server for suggestions on what to order.
+Gusto ko ng isang [item], pakiusap.|I would like one [item], please.|To order a specific item from the menu.
+Mayroon ba kayong vegetarian options?|Do you have vegetarian options?|To inquire if there are vegetarian dishes available.
+Ano po ang nasa espesyal ngayong araw?|What is today's special?|To find out the special dish of the day.
+Pwedeng dagdagan ng [item]?|Can I add [item]?|To ask if you can add an additional item to your order.
+Pwede bang wala itong [ingredient]?|Can this be made without [ingredient]?|To request that a specific ingredient be omitted from the dish.
+Gaano katagal bago maihain?|How long will it take to be served?|To ask about the waiting time for your order.
+Magkano po lahat?|How much is it in total?|To ask for the total cost of your order.
+Paki balot po para sa take-out.|Please pack it for take-out.|To request that your order be packed for take-out.
+May service charge ba?|Is there a service charge?|To inquire if there is an additional service charge included in the bill.
+Paki-abot po ang bill.|Please give me the bill.|To request the bill for payment.
+Salamat po!|Thank you!|To express gratitude after your order has been taken or after service.

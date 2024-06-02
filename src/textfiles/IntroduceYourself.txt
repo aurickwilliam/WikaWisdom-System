@@ -1,0 +1,15 @@
+Magandang araw!|Good day!|A polite greeting used at any time of the day to start a conversation.
+Ako si [name].|I am [name].|A simple and straightforward way to introduce yourself by name.
+Ang pangalan ko ay [name].|My name is [name].|Another way to introduce yourself, emphasizing your name.
+Taga-[place] ako.|I am from [place].|To tell someone where you are from, useful in social and professional settings.
+Ipinanganak ako sa [place].|I was born in [place].|To provide information about your birthplace, often used in more detailed introductions.
+Nakatira ako sa [place].|I live in [place].|To inform others about your current residence, useful in both casual and formal settings.
+Ako ay [age] taong gulang.|I am [age] years old.|When asked about your age or when providing personal details.
+Nag-aaral ako sa [school].|I study at [school].|To indicate where you are currently studying, commonly used among students.
+Nagtatrabaho ako sa [company].|I work at [company].|To specify your place of employment, often used in professional introductions.
+Gusto kong makilala ka.|I would like to get to know you.|To express interest in getting to know someone better, appropriate in both social and networking contexts.
+Mahilig ako sa [hobbies/interests].|I enjoy [hobbies/interests].|To share your hobbies or interests, useful for building rapport and finding common ground.
+Kumusta ka?|How are you?|A common greeting to ask about someone's well-being, suitable in any situation.
+Anong pangalan mo?|What is your name?|To ask someone their name, appropriate in casual and formal introductions.
+Ano ang trabaho mo?|What is your job?|To inquire about someone's occupation, often used in professional and social settings.
+Saan ka nakatira?|Where do you live?|To ask about someone's place of residence, useful in casual and formal conversations.

@@ -1,0 +1,20 @@
+Magkano po ito?|How much is this?|Use this when you want to know the price of an item.
+Pwede po bang tumawad?|Can I haggle?|Use this when you want to negotiate for a lower price.
+Mahal naman po.|It's too expensive.|Use this to express that you find the price too high, often as a prelude to haggling.
+May mas mura po ba kayo?|Do you have anything cheaper?|Use this when looking for more affordable options.
+Pakibalot nga po.|Please wrap this up.|Use this when you want your purchased items to be wrapped or packed.
+Saan po ang timbang?|Where is the weighing scale?|Use this to ask for the location of the weighing scale, often for fruits, vegetables, or meats.
+Sariwa po ba ito?|Is this fresh?|Use this to inquire about the freshness of perishable items like fruits, vegetables, meat, or fish.
+Magkano po per kilo?|How much per kilo?|Use this to ask for the price per kilogram, usually for produce, meat, or seafood.
+May discount po ba?|Is there a discount?|Use this to ask if there is a discount available, often used during sales or bulk purchases.
+Puwede ko bang subukan?|Can I try it?|Use this when you want to taste or try an item, common with fruits or street food.
+Ano po ang pinakamura ninyo?|What is your cheapest item?|Use this to find out the most affordable item available.
+Ano po ang oras ng bukas?|What time do you open?|Use this to ask about the market or store opening hours.
+Pasensya na po, wala akong barya.|Sorry, I don't have change.|Use this when you don't have exact change and need the seller to provide change.
+Saan po ang bayad?|Where do I pay?|Use this to ask for the payment counter or cashier.
+Babalik po ako mamaya.|I will come back later.|Use this to indicate you will return, often to browse more or buy later.
+Ano pong rekomendasyon ninyo?|What do you recommend?|Use this when you need suggestions or recommendations from the seller.
+Pakipakita nga po.|Please show me.|Use this when you want the seller to show or display an item to you.
+Sige po, bibilhin ko na.|Alright, I will buy it.|Use this to confirm your decision to purchase an item.
+Pwede po bang papalitan ito?|Can I exchange this?|Use this when you need to exchange an item, often due to defects or size issues.
+Salamat po sa tulong.|Thank you for your help.|Use this to express gratitude for assistance received from the seller or staff.

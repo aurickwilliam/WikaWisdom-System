@@ -1,0 +1,15 @@
+Paano pumunta sa [lugar]?|How do you get to [place]?|When you want to know the steps or the route to reach a specific place.
+Saan ang daan papunta sa [lugar]?|Where is the way to [place]?|When you are asking for the direction or the road that leads to a particular place.
+Pwede mo bang sabihin kung saan ang [lugar]?|Can you tell me where [place] is?|When you are requesting information about the location of a place.
+Malapit ba dito ang [lugar]?|Is [place] near here?|When you want to know if a place is close to your current location.
+Gaano kalayo ang [lugar] mula dito?|How far is [place] from here?|When you need to know the distance from your current location to a specific place.
+Ano ang pinakamabilis na paraan papunta sa [lugar]?|What is the fastest way to get to [place]?|When you are looking for the quickest route or mode of transportation to a place.
+Kailangan ko bang sumakay ng [sasakyan] para makarating sa [lugar]?|Do I need to take [vehicle] to get to [place]?|When you need to know if using a specific type of vehicle (e.g., bus, jeep, taxi) is necessary to reach your destination.
+Aling direksyon ang papunta sa [lugar]?|Which direction is to [place]?|When you need to know the cardinal direction (e.g., north, south) or general direction to a place.
+Saan ang pinakamalapit na [istasyon/bus stop]?|Where is the nearest [station/bus stop]?|When you are looking for the closest public transportation stop or station.
+Pwede mo ba akong samahan papunta sa [lugar]?|Can you accompany me to [place]?|When you are asking someone to go with you to a place for assistance or company.
+Anong kalye ang papunta sa [lugar]?|Which street leads to [place]?|When you want to know the specific street you should take to get to a place.
+May malapit bang landmark sa [lugar]?|Is there a nearby landmark at [place]?|When you are trying to locate a place by asking for a well-known nearby landmark.
+Saan ako pwedeng magtanong ng direksyon?|Where can I ask for directions?|When you want to find a place or person where you can get directions.
+Saan ako pwedeng maghintay ng [jeep/bus] papunta sa [lugar]?|Where can I wait for the [jeep/bus] going to [place]?|When you are looking for the designated waiting area for public transportation to your destination.
+Pwede mo bang iguhit sa mapa kung paano pumunta sa [lugar]?|Can you draw on the map how to get to [place]?|When you are asking someone to visually mark the route on a map for easier understanding.

@@ -1,0 +1,20 @@
+Saan ang sakayan ng bus?|Where is the bus stop?|Asking for the location of the bus stop.
+Magkano ang pamasahe?|How much is the fare?|Inquiring about the cost of transportation fare.
+Anong oras ang alis ng tren?|What time does the train leave?|Asking for the departure time of the train.
+May bakante pa bang upuan?|Is there a vacant seat?|Checking if there are available seats.
+Paki para po.|Please stop (here).|Requesting the driver to stop at your destination.
+Saan ako pwedeng bumili ng tiket?|Where can I buy a ticket?|Asking for the place to purchase tickets.
+Saan ang terminal ng jeepney?|Where is the jeepney terminal?|Inquiring about the location of the jeepney terminal.
+Gaano katagal ang biyahe?|How long is the trip?|Asking about the duration of the journey.
+Pakiabante po.|Please move forward.|Requesting passengers to move forward to make space.
+Pakibaba po sa kanto.|Please let me off at the corner.|Asking the driver to stop at the corner.
+Anong ruta nito?|What is this route?|Inquiring about the route of the vehicle.
+May tricycle ba papunta sa bayan?|Is there a tricycle going to town?|Asking if there is a tricycle available for going to town.
+Mag-taxi na lang tayo.|Let's just take a taxi.|Suggesting to take a taxi instead of other means of transportation.
+Kailan ang susunod na biyahe?|When is the next trip?|Asking about the schedule of the next trip.
+Pwede bang makisabay?|Can I hitch a ride?|Requesting to ride along with someone.
+Saan ang papuntang airport?|Where is the way to the airport?|Asking for directions to the airport.
+Nasaang istasyon na tayo?|What station are we at?|Inquiring about the current station or stop.
+Mag-book ako ng Grab.|I will book a Grab (ride-sharing service).|Informing that you will use a ride-sharing service like Grab.
+Mag-iingat po kayo sa biyahe.|Have a safe trip.|Wishing someone a safe journey.
+Paano pumunta sa terminal?|How to get to the terminal?|Asking for directions to the terminal

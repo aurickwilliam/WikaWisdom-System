@@ -1,100 +1,100 @@
-Aklat,Book
-Araw,Day/Sun
-Asukal,Sugar
-Aso,Dog
-Bagong Taon,New Year
-Bagyo,Storm
-Bahay,House
-Baka,Maybe
-Bansa,Country
-Bata,Child
-Bato,Rock/Stone
-Basura,Trash
-Bayan,Town
-Bintana,Window
-Bolpen,Pen
-Buwan,Month/Moon
-Bulaklak,Flower
-Dagat,Sea
-Daigdig,World
-Damit,Clothes
-Edukasyon,Education
-Gatas,Milk
-Galit,Angry
-Gulay,Vegetable
-Guro,Teacher
-Gutom,Hungry
-Halaman,Plant
-Hapag,Dining table
-Hangin,Wind
-Hindi,No
-Ibon,Bird
-Ilog,River
-Inay,Mother
-Isda,Fish
-Itay,Father
-Kaibigan,Friend
-Kaligayahan,Happiness
-Kama,Bed
-Kamatis,Tomato
-Kamusta,Hello/How are you?
-Kape,Coffee
-Kapatid,Sibling
-Kasiyahan,Joy/Fun
-Kaunti,Few
-Kotse,Car
-Kotsilyo,Knife
-Kutsara,Spoon
-Kutsilyo,Knife
-Kuwaderno,Notebook
-Langit,Sky/Heaven
-Lakad,Walk
-Lapís,Pencil
-Lolo,Grandfather
-Lola,Grandmother
-Lungsod,City
-Lupa,Earth/Soil
-Mabuhay,Welcome/Long live
-Maganda,Beautiful
-Mahal,Love/Expensive
-Mahalaga,Important
-Malungkot,Sad
-Mangga,Mango
-Mansanas,Apple
-Mesa,Table
-Pag-ibig,Love (romantic)
-Pagkain,Food
-Palengke,Market
-Paliguan,Bathroom
-Pamilya,Family
-Paalam,Goodbye
-Pasko,Christmas
-Paaralan,School
-Patatas,Potato
-Pera,Money
-Pinto,Door
-Plato,Plate
-Prutas,Fruit
-Pula,Red
-Punong-kahoy,Tree
-Pusa,Cat
-Saging,Banana
-Salamat,Thank you
-Salamin,Mirror/Glasses
-Sapatos,Shoes
-Silya,Chair
-Silid,Room
-Takbo,Run
-Takot,Scared
-Tinapay,Bread
-Tinidor,Fork
-Trabaho,Work
-Tindahan,Store
-Tulog,Sleep
-Tubig,Water
-Tuwalya,Towel
-Ubas,Grape
-Uhaw,Thirsty
-Ulan,Rain
-Ulap,Cloud
-Oo,Yes
+Aklat,Book,/akˈlat/,Noun,A written or printed work consisting of pages glued or sewn together along one side and bound in covers.
+Araw,Day/Sun,/ˈaɾaw/,Noun,The period of time it takes for Earth to complete one rotation on its axis/ The star at the center of the solar system.
+Asukal,Sugar,/aˈsukal/,Noun,A sweet crystalline substance obtained from various plants, especially sugar cane and sugar beet.
+Aso,Dog,/ˈʔaso/,Noun,A domesticated carnivorous mammal that typically has a long snout and an acute sense of smell.
+Bagong Taon,New Year,/ˈbaɡoŋ ˈtaʔon/,Noun,The first day or few days of the calendar year.
+Bagyo,Storm,/ˈbaɡjo/,Noun,A violent disturbance of the atmosphere with strong winds and usually rain, thunder, lightning, or snow.
+Bahay,House,/ˈbaˌhaɪ/,Noun,A building for human habitation, especially one that is lived in by a family or small group of people.
+Baka,Maybe,/ˈbaka/,Adverb,Perhaps; possibly.
+Bansa,Country,/banˈsaʔ/,Noun,A nation with its own government, occupying a particular territory.
+Bata,Child,/ˈbataʔ/,Noun,A young human being below the age of puberty or below the legal age of majority.
+Bato,Rock/Stone,/ˈbatoʔ/,Noun,The solid mineral material forming part of the surface of the earth and other similar planets.
+Basura,Trash,/baˈsuɾa/,Noun,Waste material; refuse or litter.
+Bayan,Town,/ˈbajan/,Noun,A built-up area with a name, defined boundaries, and local government, that is larger than a village and generally smaller than a city.
+Bintana,Window,/binˈtanaʔ/,Noun,An opening in the wall or roof of a building or vehicle that is fitted with glass or other transparent material.
+Bolpen,Pen,/ˈbolpɛn/,Noun,An instrument for writing or drawing with ink.
+Buwan,Month/Moon,/ˈbuwan/,Noun,Each of the twelve named periods into which a year is divided/The natural satellite of the Earth.
+Bulaklak,Flower,/bulakˈlak/,Noun,The seed-bearing part of a plant, consisting of reproductive organs that are typically surrounded by a brightly colored corolla.
+Dagat,Sea,/ˈdaɡat/,Noun,The expanse of salt water that covers most of the Earth's surface and surrounds its landmasses.
+Daigdig,World,/daiɡˈdiɡ/,Noun,The earth, together with all of its countries, peoples, and natural features.
+Damit,Clothes,/daˈmit/,Noun,Items worn to cover the body.
+Edukasyon,Education,/ʔeduˈkasjɔn/,Noun,The process of receiving or giving systematic instruction, especially at a school or university.
+Gatas,Milk,/ˈɡatas/,Noun,An opaque white fluid rich in fat and protein, secreted by female mammals for the nourishment of their young.
+Galit,Angry,/ˈɡalit/,Adjective,Feeling or showing strong annoyance, displeasure, or hostility.
+Gulay,Vegetable,/ˈɡulaɪ/,Noun,A plant or part of a plant used as food, typically as accompaniment to meat or fish.
+Guro,Teacher,/ˈɡuɾoʔ/,Noun,A person who teaches, especially in a school.
+Gutom,Hungry,/ˈɡutom/,Adjective,Feeling or displaying the need for food.
+Halaman,Plant,/haˈlaman/,Noun,A living organism of the kind exemplified by trees, shrubs, herbs, grasses, ferns, and mosses, typically growing in a permanent site.
+Hapag,Dining table,/haˈpaɡ/,Noun,A table at which meals are eaten.
+Hangin,Wind,/ˈhaŋin/,Noun,The perceptible natural movement of the air, especially in the form of a current of air blowing from a particular direction.
+Hindi,No,/hinˈdiʔ/,Adverb,Used to give a negative response.
+Ibon,Bird,/ˈʔibon/,Noun,A warm-blooded egg-laying vertebrate animal distinguished by the possession of feathers, wings, and a beak.
+Ilog,River,/ˈʔiloɡ/,Noun,A large natural stream of water flowing in a channel to the sea, a lake, or another such stream.
+Inay,Mother,/ˈʔinaj/,Noun,A woman in relation to her child or children.
+Isda,Fish,/ʔisˈdaʔ/,Noun,A limbless cold-blooded vertebrate animal with gills and fins and living wholly in water.
+Itay,Father,/ˈʔitaj/,Noun,A man in relation to his child or children.
+Kaibigan,Friend,/kaʔiˈbiɡan/,Noun,A person whom one knows and with whom one has a bond of mutual affection.
+Kaligayahan,Happiness,/kaliɡaˈjahan/,Noun,The state of being happy.
+Kalendaryo,Calendar,/kalɛnˈdaɾjo/,Noun,A chart or series of pages showing the days, weeks, and months of a particular year, or giving particular seasonal information.
+Kama,Bed,/ˈkama/,Noun,A piece of furniture for sleep or rest.
+Kamatis,Tomato,/kaˈmatis/,Noun,A glossy red, or occasionally yellow, pulpy edible fruit that is typically eaten as a vegetable or in salad.
+Kamusta,Hello/How are you?,/kaˈmusta/,Interjection,Used as a greeting or inquiry.
+Kape,Coffee,/kaˈpɛ/,Noun,A drink made from the roasted and ground beanlike seeds of a tropical shrub.
+Kapatid,Sibling,/kaˈpatid/,Noun,Each of two or more children or offspring having one or both parents in common.
+Kasiyahan,Joy/Fun,/kasiˈjahan/,Noun,A feeling of great pleasure and happiness.
+Kaunti,Few,/kaʔunˈtiʔ/,Adjective,A small number of.
+Kotse,Car,/ˈkotse/,Noun,A road vehicle, typically with four wheels, powered by an internal combustion engine.
+Kutsilyo,Knife,/kotˈsilyo/,Noun,An instrument composed of a blade fixed into a handle, used for cutting or as a weapon.
+Kutsara,Spoon,/kutˈʃara/,Noun,An implement consisting of a small, shallow bowl on a long handle, used for eating, stirring, and serving food.
+Kuwaderno,Notebook,/kwadˈɛɾno/,Noun,A small book with blank or ruled pages for writing notes.
+Langit,Sky/Heaven,/ˈlaŋit/,Noun,The region of the atmosphere and outer space seen from the earth/ A place regarded in various religions as the abode of God (or the gods) and the angels.
+Lakad,Walk,/ˈlakad/,Verb,Move at a regular pace by lifting and setting down each foot in turn.
+Lapís,Pencil,/ˈlapiʔs/,Noun,An instrument for writing or drawing, typically consisting of a thin stick of graphite or a similar substance enclosed in a long thin piece of wood or fixed in a metal or plastic case.
+Lolo,Grandfather,/ˈlolo/,Noun,The father of one's father or mother.
+Lola,Grandmother,/ˈlola/,Noun,The mother of one's father or mother.
+Lungsod,City,/luŋˈsod/,Noun,A large town.
+Lupa,Earth/Soil,/ˈlupaʔ/,Noun,The planet on which we live/ The upper layer of earth in which plants grow.
+Mabuhay,Welcome/Long live,/maˈbuhaɪ/,Interjection,Used to express a greeting or wish for someone's long life.
+Maganda,Beautiful,/maˈɡandaʔ/,Adjective,Pleasing the senses or mind aesthetically.
+Mahal,Love/Expensive,/maˈhal/,Noun/Adjective,An intense feeling of deep affection/ Costing a lot of money.
+Mahalaga,Important,/mahaˈlaɡa/,Adjective,Of great significance or value.
+Malungkot,Sad,/maluŋˈkot/,Adjective,Feeling or showing sorrow; unhappy.
+Mangga,Mango,/ˈmaŋɡa/,Noun,A fleshy, oval, yellowish-red tropical fruit that is eaten ripe or used green for pickles or chutneys.
+Mansanas,Apple,/manˈsanas/,Noun,The round fruit of a tree of the rose family, which typically has thin green or red skin and crisp flesh.
+Mesa,Table,/ˈmesa/,Noun,A piece of furniture with a flat top and one or more legs, providing a level surface for eating, writing, or working at.
+Pag-ibig,Love,/paʔˈʔibiɡ/,Noun,An intense feeling of deep affection typically between partners.
+Pagkain,Food,/paɡˈʔaʔin/,Noun,Any nutritious substance that people or animals eat or drink or that plants absorb in order to maintain life and growth.
+Palengke,Market,/paˈlɛŋkɛ/,Noun,A regular gathering of people for the purchase and sale of provisions, livestock, and other commodities.
+Paliguan,Bathroom,/paliˈɡuan/,Noun,A room containing a bathtub or shower and usually also a washbasin and toilet.
+Pamilya,Family,/paˈmilja/,Noun,A group consisting of parents and children living together in a household.
+Paalam,Goodbye,/paˈʔalam/,Interjection,Used to express good wishes when parting.
+Pasko,Christmas,/ˈpasko/,Noun,The annual Christian festival celebrating Christ's birth, held on December 25.
+Paaralan,School,/paʔaraˈlan/,Noun,An institution for educating children.
+Patatas,Potato,/paˈtatas/,Noun,A starchy plant tuber that is one of the most important food crops, cooked and eaten as a vegetable.
+Pera,Money,/ˈpɛɾa/,Noun,A current medium of exchange in the form of coins and banknotes; coins and banknotes collectively.
+Pinto,Door,/pinˈtoʔ/,Noun,A hinged, sliding, or revolving barrier at the entrance to a building, room, or vehicle.
+Plato,Plate,/ˈplato/,Noun,A flat dish, typically circular and made of china, from which food is eaten or served.
+Prutas,Fruit,/ˈpɾutas/,Noun,The sweet and fleshy product of a tree or other plant that contains seed and can be eaten as food.
+Pula,Red,/ˈpula/,Adjective,Of a color at the end of the spectrum next to orange and opposite violet.
+Punong-kahoy,Tree,/ˈpunoŋ ˈkaʔhɔj/,Noun,A woody perennial plant, typically having a single stem or trunk growing to a considerable height and bearing lateral branches at some distance from the ground.
+Pusa,Cat,/ˈpusaʔ/,Noun,A small domesticated carnivorous mammal with soft fur, a short snout, and retractable claws.
+Saging,Banana,/ˈsaɡiŋ/,Noun,A long curved fruit that grows in clusters and has soft pulpy flesh and yellow skin when ripe.
+Salamat,Thank you,/saˈlamat/,Interjection,A polite expression used when acknowledging a gift, service, or compliment.
+Salamin,Mirror/Glasses,/saˈlamin/,Noun,A reflective surface, typically of glass coated with a metal amalgam/ Optical instruments consisting of a frame holding one or two pieces of ground or molded glass.
+Sapatos,Shoes,/saˈpatos/,Noun,A covering for the foot, typically made of leather, having a sturdy sole and not reaching above the ankle.
+Silya,Chair,/ˈsilja/,Noun,A separate seat for one person, typically with a back and four legs.
+Silid,Room,/ˈsilid/,Noun,A part or division of a building enclosed by walls, floor, and ceiling.
+Takbo,Run,/ˈtakboʔ/,Verb,Move at a speed faster than a walk, never having both or all the feet on the ground at the same time.
+Takot,Scared,/ˈtakot/,Adjective,Fearful; frightened.
+Tinapay,Bread,/tiˈnapaj/,Noun,Food made of flour, water, and yeast or another leavening agent, mixed together and baked.
+Tinidor,Fork,/tiˈnidoɾ/,Noun,An implement with two or more prongs used for lifting food to the mouth or holding it when cutting.
+Trabaho,Work,/tɾaˈbaho/,Noun,Activity involving mental or physical effort done in order to achieve a purpose or result.
+Tindahan,Store,/tinˈdahan/,Noun,A retail establishment selling items to the public.
+Tulog,Sleep,/ˈtuloɡ/,Verb,A condition of body and mind which typically recurs for several hours every night, in which the nervous system is relatively inactive, the eyes closed, the postural muscles relaxed, and consciousness practically suspended.
+Tubig,Water,/ˈtubiɡ/,Noun,A transparent, tasteless, odorless, and nearly colorless chemical substance that is the main constituent of Earth's streams, lakes, and oceans, and the fluids of most living organisms.
+Tuwalya,Towel,/tuˈwalja/,Noun,A piece of thick absorbent cloth or paper used for drying oneself or wiping things dry.
+Ubas,Grape,/ˈubas/,Noun,A berry, typically green (classified as white), purple, red, or black, growing in clusters on a grapevine, eaten as fruit, and used in making wine.
+Uhaw,Thirsty,/ˈuhao/,Adjective,Feeling a need to drink something.
+Ulan,Rain,/ˈulan/,Noun,Moisture condensed from the atmosphere that falls visibly in separate drops.
+Ulap,Cloud,/ˈulap/,Noun,A visible mass of condensed watery vapor floating in the atmosphere, typically high above the general level of the ground.
+Oo,Yes,/ˈʔoʔo/,Interjection,Used to give an affirmative response.

@@ -11,6 +11,16 @@ public class Assets {
     private final ImageIcon FlashCardIcon = new ImageIcon("src/img/BrainIcon.png");
     private final ImageIcon LevelIcon = new ImageIcon("src/img/ProgressIcon.png");
     private final ImageIcon backBtn = new ImageIcon("src/img/back_button.png");
+    private final ImageIcon OrderIcon = new ImageIcon("src/img/OrderIcon.png");
+    private final ImageIcon PeopleIcon = new ImageIcon("src/img/PeopleIcon.png");
+    private final ImageIcon SelfIcon = new ImageIcon("src/img/SelfIcon.png");
+    private final ImageIcon MapIcon = new ImageIcon("src/img/MapIcon.png");
+    private final ImageIcon BagIcon = new ImageIcon("src/img/BagIcon.png");
+    private final ImageIcon ShopIcon = new ImageIcon("src/img/ShopIcon.png");
+    private final ImageIcon DailyIcon = new ImageIcon("src/img/DailyIcon.png");
+    private final ImageIcon JeepIcon = new ImageIcon("src/img/JeepIcon.png");
+    private final ImageIcon WeatherIcon = new ImageIcon("src/img/WeatherIcon.png");
+    private final ImageIcon PartyIcon = new ImageIcon("src/img/PartyIcon.png");
 
     // Colors
     private final Color mainColorDarkGreen = new Color(0x004e64);
@@ -22,6 +32,7 @@ public class Assets {
     private final Color mainColorWhithy = new Color(0xFFFFFF);
     private final Color DarkGreenColorOver = new Color(0x006783);
     private final Color DarkGreenColorClick = new Color(0x2B5D6B);
+    private final Color mainColorWhiteDesc = new Color(0xF1F1F1);
 
     // Fonts
     private final Font ArialTitle = new Font("Arial Black", Font.PLAIN, 24);
@@ -34,6 +45,17 @@ public class Assets {
     private final String usersFilePath = "src/textfiles/users.txt";
     private final String alphabetFilePath = "src/textfiles/alphabet.txt";
     private final String wpwFilePath = "src/textfiles/wordPerword.txt";
+    private final String categoryNamesFilePath = "src/textfiles/CategoryNames.txt";
+    private final String OrderFoodFilePath = "src/textfiles/OrderFood.txt";
+    private final String DescribePeopleFilePath = "src/textfiles/DescribePeople.txt";
+    private final String IntroduceYourselfFilePath = "src/textfiles/IntroduceYourself.txt";
+    private final String AskForDirectionsFilePath = "src/textfiles/AskForDirections.txt";
+    private final String DescribeBelongingsFilePath = "src/textfiles/DescribeBelongings.txt";
+    private final String MarketShoppingFilePath = "src/textfiles/MarketShopping.txt";
+    private final String DailyActivitiesFilePath = "src/textfiles/DailyActivities.txt";
+    private final String TransportationFilePath = "src/textfiles/Transportation.txt";
+    private final String WeatherSeasonsFilePath = "src/textfiles/WeatherSeasons.txt";
+    private final String FestivalsCelebrationFilePath = "src/textfiles/FestivalsCelebrations.txt";
 
 
     public ImageIcon getWikaLogo() {
@@ -134,5 +156,93 @@ public class Assets {
 
     public String getWpwFilePath() {
         return wpwFilePath;
+    }
+
+    public String getCategoryNamesFilePath() {
+        return categoryNamesFilePath;
+    }
+
+    public ImageIcon getOrderIcon() {
+        return OrderIcon;
+    }
+
+    public ImageIcon getPeopleIcon() {
+        return PeopleIcon;
+    }
+
+    public ImageIcon getSelfIcon() {
+        return SelfIcon;
+    }
+
+    public ImageIcon getMapIcon() {
+        return MapIcon;
+    }
+
+    public ImageIcon getBagIcon() {
+        return BagIcon;
+    }
+
+    public ImageIcon getShopIcon() {
+        return ShopIcon;
+    }
+
+    public ImageIcon getDailyIcon() {
+        return DailyIcon;
+    }
+
+    public ImageIcon getJeepIcon() {
+        return JeepIcon;
+    }
+
+    public ImageIcon getWeatherIcon() {
+        return WeatherIcon;
+    }
+
+    public ImageIcon getPartyIcon() {
+        return PartyIcon;
+    }
+
+    public Color getMainColorWhiteDesc() {
+        return mainColorWhiteDesc;
+    }
+
+    public String getOrderFoodFilePath() {
+        return OrderFoodFilePath;
+    }
+
+    public String getDescribePeopleFilePath() {
+        return DescribePeopleFilePath;
+    }
+
+    public String getIntroduceYourselfFilePath() {
+        return IntroduceYourselfFilePath;
+    }
+
+    public String getAskForDirectionsFilePath() {
+        return AskForDirectionsFilePath;
+    }
+
+    public String getDescribeBelongingsFilePath() {
+        return DescribeBelongingsFilePath;
+    }
+
+    public String getMarketShoppingFilePath() {
+        return MarketShoppingFilePath;
+    }
+
+    public String getDailyActivitiesFilePath() {
+        return DailyActivitiesFilePath;
+    }
+
+    public String getTransportationFilePath() {
+        return TransportationFilePath;
+    }
+
+    public String getWeatherSeasonsFilePath() {
+        return WeatherSeasonsFilePath;
+    }
+
+    public String getFestivalsCelebrationFilePath() {
+        return FestivalsCelebrationFilePath;
     }
 }

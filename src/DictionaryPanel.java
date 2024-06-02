@@ -17,6 +17,7 @@ public class DictionaryPanel extends JPanel implements ActionListener, MouseList
     private String currentCard = "";
     private String previousCard = "";
     private String selectedAlphabet = "";
+    private String[] eachPhrase = new String[0];
 
 
     // Buttons
@@ -27,14 +28,19 @@ public class DictionaryPanel extends JPanel implements ActionListener, MouseList
     private JTable table;
 
     // Label
-    private JLabel alphabet;
+    private JLabel alphabet, engWord, filWord, pronunciation, type, description, titleCommonPhrase, engCommonPhrase, filCommonPhrase, usage;
 
     // Panels
     private static JPanel mainOptionPanel;
     private static JPanel mainAbakadaPanel;
     private static JPanel mainEachAlphabetPanel;
     private static JPanel mainWpwPanel;
+    private static JPanel mainEachWpWPanel;
     private static JPanel mainCommonPhraPanel;
+    private static JPanel mainListCommonPhrasesPanel;
+    private static JPanel PhrasecontentPanel;
+    private static JPanel mainEachCommonPhrasesPanel;
+
 
     @Override
     public void actionPerformed(ActionEvent actionEvent) {
@@ -89,6 +95,7 @@ public class DictionaryPanel extends JPanel implements ActionListener, MouseList
     public DictionaryPanel(){
         dictionaryCardLayout = new CardLayout();
         setLayout(dictionaryCardLayout);
+        setBackground(assets.getMainColorWhiteBG());
         setBorder(new EmptyBorder(20, 20, 20, 20));
 
         // MainOptionPanel
@@ -147,7 +154,17 @@ public class DictionaryPanel extends JPanel implements ActionListener, MouseList
         wpwPanel.setPreferredSize(new Dimension(700, 470));
         mainWpwPanel.add(wpwPanel);
 
-        // TODO: Add individual meaning to each word
+        // Each WPW Panel
+        mainEachWpWPanel = new JPanel();
+        mainEachWpWPanel.setName("EACH WPW");
+        mainEachWpWPanel.setBackground(null);
+        add(mainEachWpWPanel, mainEachWpWPanel.getName());
+
+        Header(mainEachWpWPanel, "Word Per Word", "Pronunciation and Meaning");
+
+        JPanel eachWpwPanel = eachWPWPanel();
+        eachWpwPanel.setPreferredSize(new Dimension(700, 300));
+        mainEachWpWPanel.add(eachWpwPanel);
 
         // Common Phrases
         mainCommonPhraPanel = new JPanel();
@@ -160,6 +177,30 @@ public class DictionaryPanel extends JPanel implements ActionListener, MouseList
         JPanel commonPhraCategory = commonPhraCategory();
         commonPhraCategory.setPreferredSize(new Dimension(700, 470));
         mainCommonPhraPanel.add(commonPhraCategory);
+
+        // List of Common Phrases per Category
+        mainListCommonPhrasesPanel = new JPanel();
+        mainListCommonPhrasesPanel.setName("LIST COMMPHRA");
+        mainListCommonPhrasesPanel.setBackground(null);
+        add(mainListCommonPhrasesPanel, mainListCommonPhrasesPanel.getName());
+
+        Header(mainListCommonPhrasesPanel, "Common Phrases", "List of Common Phrases");
+
+        JPanel listCommonPhrases = ListCommonPhrasesPanel();
+        listCommonPhrases.setPreferredSize(new Dimension(700, 470));
+        mainListCommonPhrasesPanel.add(listCommonPhrases);
+
+        // Each Common Phrases with Translation
+        mainEachCommonPhrasesPanel = new JPanel();
+        mainEachCommonPhrasesPanel.setName("EACH COMMPHRA");
+        mainEachCommonPhrasesPanel.setBackground(null);
+        add(mainEachCommonPhrasesPanel, mainEachCommonPhrasesPanel.getName());
+
+        Header(mainEachCommonPhrasesPanel, "Common Phrases", "Each Common Phrases");
+
+        JPanel eachCommonPhra = EachCommonPhrasesPanel();
+        eachCommonPhra.setPreferredSize(new Dimension(700, 300));
+        mainEachCommonPhrasesPanel.add(eachCommonPhra);
     }
 
     public void Header(JPanel parent, String titleString, String descString){
@@ -205,24 +246,27 @@ public class DictionaryPanel extends JPanel implements ActionListener, MouseList
             // For ABAKADA
             if(currentCard.equals("ABAKADA")){
                 previousCard = mainOptionPanel.getName();
-                currentCard = previousCard;
             }else if (currentCard.equals("EACH ALPHA")){
                 previousCard = mainAbakadaPanel.getName();
-                currentCard = previousCard;
             }
 
             // For WPW
             if (currentCard.equals("WPW")){
                 previousCard = mainOptionPanel.getName();
-                currentCard = previousCard;
+            }else if (currentCard.equals("EACH WPW")){
+                previousCard = mainWpwPanel.getName();
             }
 
             // For Common Phrases
             if (currentCard.equals("COMMON_PHRA")){
                 previousCard = mainOptionPanel.getName();
-                currentCard = previousCard;
+            }else if (currentCard.equals("LIST COMMPHRA")){
+                previousCard = mainCommonPhraPanel.getName();
+            }else if (currentCard.equals("EACH COMMPHRA")){
+                previousCard = mainListCommonPhrasesPanel.getName();
             }
 
+            currentCard = previousCard;
             dictionaryCardLayout.show(this, previousCard);
         });
         backBtnPanel.add(btn_back, BorderLayout.CENTER);
@@ -513,7 +557,7 @@ public class DictionaryPanel extends JPanel implements ActionListener, MouseList
         mainPanel.setBorder(new EmptyBorder(20, 20, 20, 20));
         mainPanel.setLayout(new BorderLayout());
 
-        String[] list = getEveryWord(assets.getWpwFilePath());
+        String[] list = getEachLine(assets.getWpwFilePath());
 
         JPanel scrollPanel = new JPanel();
         scrollPanel.setLayout(new GridLayout(list.length, 1, 20, 20));
@@ -528,10 +572,24 @@ public class DictionaryPanel extends JPanel implements ActionListener, MouseList
         for (int i = 0; i < list.length; i++) {
             String fil = list[i].split(",")[0];
             String eng = list[i].split(",")[1];
+            String pronun = list[i].split(",")[2];
+            String type_word = list[i].split(",")[3];
+            String desc = list[i].split(",")[4];
 
             RoundedButton btn_word = new wpwContainerPanel(fil, eng);
             btn_word.addActionListener(e -> {
                 System.out.println("Click " + fil + " = " + eng);
+
+                // Setting Text for Each WPW Panel
+                engWord.setText("English Word: " + eng);
+                filWord.setText(fil);
+                pronunciation.setText(pronun);
+                type.setText(type_word);
+                description.setText("<html>• " + desc + "</html>");
+
+                // Showing the wpw card
+                currentCard = mainEachWpWPanel.getName();
+                dictionaryCardLayout.show(this, currentCard);
             });
             scrollPanel.add(btn_word);
         }
@@ -539,11 +597,76 @@ public class DictionaryPanel extends JPanel implements ActionListener, MouseList
         return mainPanel;
     }
 
-//    public JPanel eachWPWPanel(){
-//        JPanel mainPanel = new JPanel();
-//
-//        return mainPanel;
-//    }
+    public JPanel eachWPWPanel(){
+        JPanel mainPanel = new JPanel();
+        mainPanel.setBackground(null);
+        mainPanel.setLayout(new BorderLayout());
+        mainPanel.setBorder(new EmptyBorder(20, 20, 20, 20));
+
+        JPanel engWordPanel = new JPanel();
+        engWordPanel.setLayout(new BorderLayout());
+        engWordPanel.setBorder(new EmptyBorder(0, 0, 20,0));
+        mainPanel.add(engWordPanel, BorderLayout.NORTH);
+
+        engWord = new JLabel();
+        engWord.setFont(assets.getArialBold());
+        engWord.setHorizontalAlignment(JLabel.LEFT);
+        engWord.setForeground(assets.getMainColorBlackTxt());
+        engWordPanel.add(engWord, BorderLayout.CENTER);
+
+        RoundedPanel contentPanel = new RoundedPanel(20, 20, 20, 20);
+        contentPanel.setBackground(assets.getMainColorDarkGreen());
+        contentPanel.setLayout(new BorderLayout());
+        contentPanel.setBorder(new EmptyBorder(20, 20, 20, 20));
+        mainPanel.add(contentPanel);
+
+        JPanel filWordPanel = new JPanel();
+        filWordPanel.setBackground(null);
+        filWordPanel.setLayout(new BorderLayout());
+        contentPanel.add(filWordPanel, BorderLayout.NORTH);
+
+        filWord = new JLabel();
+        filWord.setFont(assets.getArialBoldTitle());
+        filWord.setForeground(assets.getMainColorYellowBG());
+        filWord.setHorizontalAlignment(JLabel.LEFT);
+        filWordPanel.add(filWord, BorderLayout.NORTH);
+
+        JPanel pronunciationPanel = new JPanel();
+        pronunciationPanel.setBackground(null);
+        pronunciationPanel.setLayout(new BorderLayout());
+        filWordPanel.add(pronunciationPanel, BorderLayout.CENTER);
+
+        pronunciation = new JLabel("ak•lat");
+        pronunciation.setForeground(assets.getMainColorWhiteDesc());
+        pronunciation.setFont(assets.getArial());
+        pronunciation.setHorizontalAlignment(JLabel.LEFT);
+        pronunciationPanel.add(pronunciation, BorderLayout.CENTER);
+
+        JPanel typePanel = new JPanel();
+        typePanel.setBackground(null);
+        typePanel.setLayout(new BorderLayout());
+        filWordPanel.add(typePanel, BorderLayout.SOUTH);
+
+        type = new JLabel("Noun");
+        type.setForeground(assets.getMainColorWhiteDesc());
+        type.setFont(assets.getArial());
+        type.setHorizontalAlignment(JLabel.LEFT);
+        typePanel.add(type, BorderLayout.CENTER);
+
+        JPanel descriptionPanel = new JPanel();
+        descriptionPanel.setBackground(null);
+        descriptionPanel.setLayout(new BorderLayout());
+        descriptionPanel.setBorder(new EmptyBorder(10, 20, 0, 0));
+        contentPanel.add(descriptionPanel, BorderLayout.CENTER);
+
+        description = new JLabel();
+        description.setFont(assets.getArial());
+        description.setVerticalAlignment(JLabel.NORTH);
+        description.setForeground(assets.getMainColorWhithy());
+        descriptionPanel.add(description, BorderLayout.CENTER);
+
+        return mainPanel;
+    }
 
     public JPanel commonPhraCategory(){
         JPanel mainPanel = new JPanel();
@@ -551,20 +674,160 @@ public class DictionaryPanel extends JPanel implements ActionListener, MouseList
         mainPanel.setBorder(new EmptyBorder(20, 20, 20, 20));
         mainPanel.setLayout(new BorderLayout());
 
+        // List of Category Names
+        String[] categoryNames = getEachLine(assets.getCategoryNamesFilePath());
+
         JPanel contentPanel = new JPanel();
-        contentPanel.setLayout(new BoxLayout(contentPanel, BoxLayout.Y_AXIS));
-        contentPanel.setBackground(Color.red);
+        contentPanel.setLayout(new GridLayout(categoryNames.length, 1, 20, 20));
+        contentPanel.setBorder(new EmptyBorder(0, 0, 0, 250));
+        contentPanel.setBackground(assets.getMainColorWhiteBG());
 
         JScrollPane scrollPane = new JScrollPane(contentPanel, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         scrollPane.getVerticalScrollBar().setUnitIncrement(16);
+        scrollPane.setBorder(null);
+        scrollPane.setBackground(null);
+        mainPanel.add(scrollPane, BorderLayout.CENTER);
+
+        // Populate the Content Panel
+        for (int i = 0; i < categoryNames.length; i++) {
+            JButton category = new CategoryPanel(categoryNames[i]);
+            String name = categoryNames[i];
+            category.addActionListener(e -> {
+                System.out.println("Category: " + name);
+                titleCommonPhrase.setText(name);
+
+                String filePath = getFilePath(name);
+
+                eachPhrase = getEachLine(filePath);
+
+                PhrasecontentPanel.removeAll();
+
+                for (int j = 0; j < eachPhrase.length; j++) {
+                    String engPhrase = eachPhrase[j].split("\\|")[1];
+                    String filPhrase = eachPhrase[j].split("\\|")[0];
+                    String usagePhrase = eachPhrase[j].split("\\|")[2];
+                    JButton phrase = new EachCommonPhrasePanel(engPhrase);
+                    phrase.addActionListener(e1 -> {
+
+                        engCommonPhrase.setText("<html>" + engPhrase + "</html>");
+                        filCommonPhrase.setText("<html>" + filPhrase + "</html>");
+                        usage.setText("<html>• " + usagePhrase + "</html>");
+
+                        currentCard = mainEachCommonPhrasesPanel.getName();
+                        dictionaryCardLayout.show(this, currentCard);
+                    });
+                    PhrasecontentPanel.add(phrase);
+                }
+
+                // Show the list of common phrases
+                currentCard = mainListCommonPhrasesPanel.getName();
+                dictionaryCardLayout.show(this, currentCard);
+            });
+            contentPanel.add(category);
+        }
+
+        return mainPanel;
+    }
+
+    public JPanel ListCommonPhrasesPanel(){
+        JPanel mainPanel = new JPanel();
+        mainPanel.setBackground(null);
+        mainPanel.setBorder(new EmptyBorder(20, 20, 20, 20));
+        mainPanel.setLayout(new BorderLayout());
+
+        JPanel titlePanel = new JPanel();
+        titlePanel.setBackground(null);
+        titlePanel.setBorder(new EmptyBorder(10, 10, 10, 10));
+        titlePanel.setLayout(new BorderLayout());
+        mainPanel.add(titlePanel, BorderLayout.NORTH);
+
+        titleCommonPhrase = new JLabel();
+        titleCommonPhrase.setFont(assets.getArialBoldTitle());
+        titleCommonPhrase.setForeground(assets.getMainColorBlackTxt());
+        titleCommonPhrase.setHorizontalTextPosition(JLabel.LEFT);
+        titlePanel.add(titleCommonPhrase, BorderLayout.CENTER);
+
+        PhrasecontentPanel = new JPanel();
+        PhrasecontentPanel.setLayout(new GridLayout(eachPhrase.length, 1, 20, 20));
+        PhrasecontentPanel.setBorder(new EmptyBorder(0, 0, 0, 250));
+        PhrasecontentPanel.setBackground(assets.getMainColorWhiteBG());
+
+        JScrollPane scrollPane = new JScrollPane(PhrasecontentPanel, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        scrollPane.getVerticalScrollBar().setUnitIncrement(16);
+        scrollPane.setBorder(null);
+        scrollPane.setBackground(null);
         mainPanel.add(scrollPane, BorderLayout.CENTER);
 
         return mainPanel;
     }
 
+    public JPanel EachCommonPhrasesPanel(){
+        JPanel mainPanel = new JPanel();
+        mainPanel.setBackground(null);
+        mainPanel.setBorder(new EmptyBorder(20, 20, 20, 20));
+        mainPanel.setLayout(new BorderLayout());
 
+        RoundedPanel contentPanel = new RoundedPanel(15, 15, 15, 15);
+        contentPanel.setBackground(assets.getMainColorDarkGreen());
+        contentPanel.setLayout(new BorderLayout());
+        contentPanel.setBorder(new EmptyBorder(15, 15, 15, 15));
+        mainPanel.add(contentPanel, BorderLayout.CENTER);
 
-    public String[] getEveryWord(String filePath){
+        JPanel translationPanel = new JPanel();
+        translationPanel.setLayout(new BorderLayout(0, 5));
+        translationPanel.setBackground(null);
+        contentPanel.add(translationPanel, BorderLayout.NORTH);
+
+        engCommonPhrase = new JLabel();
+        engCommonPhrase.setForeground(assets.getMainColorWhiteBG());
+        engCommonPhrase.setFont(assets.getArial());
+        translationPanel.add(engCommonPhrase, BorderLayout.NORTH);
+
+        filCommonPhrase = new JLabel();
+        filCommonPhrase.setForeground(assets.getMainColorYellowBG());
+        filCommonPhrase.setFont(assets.getArialBold());
+        translationPanel.add(filCommonPhrase, BorderLayout.SOUTH);
+
+        JPanel usagePanel = new JPanel();
+        usagePanel.setBackground(null);
+        usagePanel.setLayout(new BorderLayout());
+        usagePanel.setBorder(new EmptyBorder(25, 0, 10, 10));
+        contentPanel.add(usagePanel, BorderLayout.CENTER);
+
+        JLabel usageTitle = new JLabel("Uses of the Phrase:");
+        usageTitle.setFont(new Font("Arial", Font.BOLD, 16));
+        usageTitle.setForeground(assets.getMainColorWhiteBG());
+        usageTitle.setHorizontalAlignment(JLabel.LEFT);
+        usagePanel.add(usageTitle, BorderLayout.NORTH);
+
+        usage = new JLabel("aigoo aigo");
+        usage.setFont(assets.getArial());
+        usage.setBorder(new EmptyBorder(5, 20, 0, 0));
+        usage.setForeground(assets.getMainColorWhiteBG());
+        usage.setVerticalAlignment(JLabel.NORTH);
+        usage.setHorizontalAlignment(JLabel.LEFT);
+        usagePanel.add(usage, BorderLayout.CENTER);
+
+        return mainPanel;
+    }
+
+    public String getFilePath(String name){
+        return switch (name) {
+            case "Order Food" -> assets.getOrderFoodFilePath();
+            case "Describe People" -> assets.getDescribePeopleFilePath();
+            case "Introduce Yourself" -> assets.getIntroduceYourselfFilePath();
+            case "Ask for Directions" -> assets.getAskForDirectionsFilePath();
+            case "Describe Belongings" -> assets.getDescribeBelongingsFilePath();
+            case "Market Shopping" -> assets.getMarketShoppingFilePath();
+            case "Daily Activities" -> assets.getDailyActivitiesFilePath();
+            case "Transportation" -> assets.getTransportationFilePath();
+            case "Weather and Seasons" -> assets.getWeatherSeasonsFilePath();
+            case "Festivals and Celebrations" -> assets.getFestivalsCelebrationFilePath();
+            default -> null;
+        };
+    }
+
+    public String[] getEachLine(String filePath){
         try{
             FileReader file = new FileReader(filePath);
             BufferedReader reader = new BufferedReader(file);
@@ -577,7 +840,7 @@ public class DictionaryPanel extends JPanel implements ActionListener, MouseList
             return list.toArray(new String[list.size()]);
         }catch (IOException exception){
             JOptionPane.showMessageDialog(this,
-                    "Error Reading Word Per Word File!",
+                    "Error Reading File!",
                     "Reading File",
                     JOptionPane.ERROR_MESSAGE);
             return null;
@@ -594,5 +857,13 @@ public class DictionaryPanel extends JPanel implements ActionListener, MouseList
 
     public static JPanel getMainOptionPanel() {
         return mainOptionPanel;
+    }
+
+    public String[] getEachPhrase() {
+        return eachPhrase;
+    }
+
+    public void setEachPhrase(String[] eachPhrase) {
+        this.eachPhrase = eachPhrase;
     }
 }
