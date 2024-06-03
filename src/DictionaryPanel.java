@@ -562,10 +562,11 @@ public class DictionaryPanel extends JPanel implements ActionListener, MouseList
         JPanel scrollPanel = new JPanel();
         scrollPanel.setLayout(new GridLayout(list.length, 1, 20, 20));
         scrollPanel.setBorder(new EmptyBorder(20, 20, 20, 20));
-        scrollPanel.setBackground(assets.getMainColorWhithy());
+        scrollPanel.setBackground(assets.getMainColorWhiteBG());
 
         JScrollPane scrollPane = new JScrollPane(scrollPanel, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         scrollPane.getVerticalScrollBar().setUnitIncrement(16);
+        scrollPane.setBackground(null);
         scrollPane.setBorder(null);
         mainPanel.add(scrollPane, BorderLayout.CENTER);
 
@@ -849,10 +850,6 @@ public class DictionaryPanel extends JPanel implements ActionListener, MouseList
 
     public static CardLayout getDictionaryCardLayout() {
         return dictionaryCardLayout;
-    }
-
-    public static JPanel getMainAbakadaPanel() {
-        return mainAbakadaPanel;
     }
 
     public static JPanel getMainOptionPanel() {

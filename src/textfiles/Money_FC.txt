@@ -1,0 +1,10 @@
+Pera|Money
+Barya|Coins
+Pautang|Loan
+Piso|Peso (The Philippine currency)
+Isang-Libong Piso|One-Thousand Pesos
+Sukli|Change
+Gastos|Expenses
+Suweldo|Salary
+Badyet|Budget
+Tumutubo|To grow (money) / Increases (This refers to money gaining value through interest or investment)

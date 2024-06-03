@@ -1,0 +1,10 @@
+Maganda|Beautiful
+Pogi|Handsome
+Matangkad|Tall
+Maliit|Short
+Mabait|Kind
+Masipag|Hardworking
+Mataba|Chubby
+Payat|Thin
+Matanda|Old
+Bata|Young

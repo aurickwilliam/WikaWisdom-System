@@ -1,0 +1,10 @@
+Alas-singko|Five o'clock
+Oras|Hour
+Minuto|Minute
+Segundo|Second
+Ala-una|One o'clock
+Alas-dos|Two o'clock
+Apat|Four
+Lima|Five
+Anim|Six
+Pito|Seven

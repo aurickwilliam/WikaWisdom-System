@@ -1,0 +1,10 @@
+Magandang umaga|Good morning
+Magandang tanghali|Good noon
+Magandang hapon|Good afternoon
+Magandang gabi|Good evening
+Kumusta?|How are you?
+Mabuti, salamat|I'm fine, thank you
+Ano ang pangalan mo?|What is your name?
+Ako si [Your Name]|I am [Your Name]
+Paalam|Goodbye
+Ingat ka|Take care

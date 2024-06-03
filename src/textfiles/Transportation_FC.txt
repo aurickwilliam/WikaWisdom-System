@@ -1,0 +1,10 @@
+Kotse|Car
+Tren|Train
+Bisikleta|Bicycle
+Motorsiklo|Motorcycle
+Eroplano|Airplane
+Barko|Ship
+Jeepney|Jeepney (Philippine local transport)
+Bus|Bus
+Taksi|Taxi
+Bangka|Boat

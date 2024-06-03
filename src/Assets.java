@@ -21,6 +21,8 @@ public class Assets {
     private final ImageIcon JeepIcon = new ImageIcon("src/img/JeepIcon.png");
     private final ImageIcon WeatherIcon = new ImageIcon("src/img/WeatherIcon.png");
     private final ImageIcon PartyIcon = new ImageIcon("src/img/PartyIcon.png");
+    private final ImageIcon leftIcon = new ImageIcon("src/img/btn_left.png");
+    private final ImageIcon rightIcon = new ImageIcon("src/img/btn_right.png");
 
     // Colors
     private final Color mainColorDarkGreen = new Color(0x004e64);
@@ -56,6 +58,13 @@ public class Assets {
     private final String TransportationFilePath = "src/textfiles/Transportation.txt";
     private final String WeatherSeasonsFilePath = "src/textfiles/WeatherSeasons.txt";
     private final String FestivalsCelebrationFilePath = "src/textfiles/FestivalsCelebrations.txt";
+    private final String FlashCardCategories = "src/textfiles/FlashCardCategories.txt";
+    private final String Foods_FC = "src/textfiles/Food_FC.txt";
+    private final String Numbers_FC = "src/textfiles/Numbers_FC.txt";
+    private final String Transportation_FC = "src/textfiles/Transportation_FC.txt";
+    private final String Money_FC = "src/textfiles/Money_FC.txt";
+    private final String Greetings_FC = "src/textfiles/Greetings_FC.txt";
+    private final String DescPeople_FC = "src/textfiles/DescribePeople_FC.txt";
 
 
     public ImageIcon getWikaLogo() {
@@ -244,5 +253,41 @@ public class Assets {
 
     public String getFestivalsCelebrationFilePath() {
         return FestivalsCelebrationFilePath;
+    }
+
+    public String getFlashCardCategories() {
+        return FlashCardCategories;
+    }
+
+    public ImageIcon getLeftIcon() {
+        return leftIcon;
+    }
+
+    public ImageIcon getRightIcon() {
+        return rightIcon;
+    }
+
+    public String getFoods_FC() {
+        return Foods_FC;
+    }
+
+    public String getNumbers_FC() {
+        return Numbers_FC;
+    }
+
+    public String getTransportation_FC() {
+        return Transportation_FC;
+    }
+
+    public String getMoney_FC() {
+        return Money_FC;
+    }
+
+    public String getGreetings_FC() {
+        return Greetings_FC;
+    }
+
+    public String getDescPeople_FC() {
+        return DescPeople_FC;
     }
 }

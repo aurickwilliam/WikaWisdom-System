@@ -47,7 +47,7 @@ public class DashboardFrame extends JFrame implements ActionListener {
         level = new LevelPanel();
         mainPanel.add(level, "LEVEL");
 
-        mainPanelCardLayout.show(mainPanel, "DICTIONARY");
+        mainPanelCardLayout.show(mainPanel, "FLASHCARD");
         setVisible(true);
     }
 
@@ -59,6 +59,8 @@ public class DashboardFrame extends JFrame implements ActionListener {
             mainPanelCardLayout.show(mainPanel, "DICTIONARY");
         }else if (actionEvent.getSource() == btn_flashCard){
             System.out.println("Click FlashCard");
+
+            FlashCardPanel.getFlashCardLayout().show(flashCard, FlashCardPanel.getMainCategoryPanel().getName());
             mainPanelCardLayout.show(mainPanel, "FLASHCARD");
         }else if (actionEvent.getSource() == btn_Level){
             System.out.println("Click Level");
