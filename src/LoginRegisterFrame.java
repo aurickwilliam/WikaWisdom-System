@@ -10,6 +10,9 @@ import java.util.regex.Pattern;
 public class LoginRegisterFrame extends JFrame implements ActionListener {
     private Assets assets = new Assets();
 
+    // String vars
+    private int CHAR_NAME_LIMIT = 12;
+
     // Buttons
     private RoundedButton btn_ToLogin, btn_ToRegister, btn_submitSignUp, btn_submitSignIn;
 
@@ -90,12 +93,50 @@ public class LoginRegisterFrame extends JFrame implements ActionListener {
                             JOptionPane.ERROR_MESSAGE);
                     isInfoValid = false;
                 }
+
+                // Check if the email already exist
+                if (checkIfEmailAlreadyExist(reg_emailValue)){
+                    JOptionPane.showMessageDialog(this,
+                            "Email Already Exist!",
+                            "Email Error",
+                            JOptionPane.ERROR_MESSAGE);
+                    isInfoValid = false;
+                }
+
+                // Check if the name is below 12 char
+                if (reg_nameValue.length() > CHAR_NAME_LIMIT){
+                    JOptionPane.showMessageDialog(this,
+                            "Name is Too Long!",
+                            "Name Error",
+                            JOptionPane.ERROR_MESSAGE);
+                    isInfoValid = false;
+                }
             }
 
             if (isInfoValid){
+                int lastIndex = reg_emailValue.indexOf("@");
+                String fileName = reg_emailValue.substring(0, lastIndex) + "-" + reg_nameValue;
+                try {
+                    File individual_file = new File("src/textfiles/UsersFile/" + fileName + ".txt");
+                    if (individual_file.createNewFile()){
+                        System.out.println("File Created: " + individual_file.getName());
+                    }else {
+                        JOptionPane.showMessageDialog(this,
+                                "User File is not created!",
+                                "User File",
+                                JOptionPane.ERROR_MESSAGE);
+                    }
+                } catch (IOException e) {
+                    JOptionPane.showMessageDialog(this,
+                            "Error Creating User File!",
+                            "User File",
+                            JOptionPane.ERROR_MESSAGE);
+                }
+
                 insertUser(reg_emailValue, reg_nameValue, reg_passwordValue);
+
                 this.dispose();
-                DashboardFrame dashboardFrame = new DashboardFrame();
+                DashboardFrame dashboardFrame = new DashboardFrame(reg_nameValue);
             }
 
             System.out.println();
@@ -123,18 +164,43 @@ public class LoginRegisterFrame extends JFrame implements ActionListener {
                 System.out.println(userData[1]);
                 System.out.println(userData[2]);
 
-                if (userData[1].equals(log_passValue)){
-                    this.dispose();
-                    DashboardFrame dashboardFrame = new DashboardFrame();
-                }else {
-                    JOptionPane.showMessageDialog(this,
-                            "Incorrect Password",
-                            "Sign In",
-                            JOptionPane.ERROR_MESSAGE);
+                if (userData[0] != null){
+                    if (userData[1].equals(log_passValue)){
+                        this.dispose();
+                        DashboardFrame dashboardFrame = new DashboardFrame(userData[2]);
+                    }else {
+                        JOptionPane.showMessageDialog(this,
+                                "Incorrect Password",
+                                "Sign In",
+                                JOptionPane.ERROR_MESSAGE);
+                    }
                 }
             }
         }
     }
+
+    public boolean checkIfEmailAlreadyExist(String email){
+        try{
+            FileReader filePath = new FileReader(assets.getUsersFilePath());
+            BufferedReader reader = new BufferedReader(filePath);
+            String line;
+            String[] record;
+            while ((line = reader.readLine()) != null){
+                record = line.split(",");
+                if (record[0].equals(email)){
+                    return true;
+                }
+            }
+        }catch (IOException exception){
+            JOptionPane.showMessageDialog(this,
+                    "Error Reading Data!",
+                    "Reading Records Error",
+                    JOptionPane.ERROR_MESSAGE);
+        }
+
+        return false;
+    }
+
     // Check if the User File is Empty
     public boolean checkIfUserFileIsEmpty(String filePath){
         try{
@@ -186,11 +252,16 @@ public class LoginRegisterFrame extends JFrame implements ActionListener {
     // Method for adding account to the text file
     public void insertUser(String email, String name, String password){
         try{
-            FileWriter path = new FileWriter(assets.getUsersFilePath());
+            FileWriter path = new FileWriter(assets.getUsersFilePath(), true);
             BufferedWriter writer = new BufferedWriter(path);
 
             String combineData = email + "," + password + "," + name;
-            writer.write(combineData);
+
+            if (FileLength(assets.getUsersFilePath()) == 0){
+                writer.write(combineData);
+            }else {
+                writer.append("\n").append(combineData);
+            }
 
             writer.close();
             System.out.println("ADDED!");
@@ -200,6 +271,20 @@ public class LoginRegisterFrame extends JFrame implements ActionListener {
                     "Insert User Error",
                     JOptionPane.ERROR_MESSAGE);
         }
+    }
+
+    public int FileLength(String path){
+        int lines = 0;
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader(path));
+            while (reader.readLine() != null) lines++;
+            reader.close();
+
+        }catch (IOException exception){
+            System.out.println("\nError Reading the Length of the file...\n");
+        }
+
+        return lines;
     }
 
     public boolean checkPasswordValue(String password){

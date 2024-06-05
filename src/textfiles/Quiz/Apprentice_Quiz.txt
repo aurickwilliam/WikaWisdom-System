@@ -1,0 +1,10 @@
+What is the Filipino word for the number "1"?|a. Tatlo|b. Isa|c. Lima|d. Anim|B
+How do you say "5" in Filipino?|a. Walo|b. Pito|c. Lima|d. Apat|C
+What is "10" in Filipino?|a. Siyam|b. Dalawa|c. Sampu|d. Anim|C
+How do you say "20" in Filipino?|a. Sampu|b. Dalawampu|c. Tatlumpu|d. Apatnapu|B
+What is the Filipino word for "15"?|a. Labintatlo|b. Labing-apat|c. Labinlima|d. Labing-anim|C
+How do you say "second" in Filipino?|a. Una|b. Pangalawa|c. Pangatlo|d. Pang-apat|B
+What is "30" in Filipino?|a. Limampu|b. Tatlumpu|c. Apatnapu|d. Siyamnapu|B
+How do you say "7" in Filipino?|a. Anim|b. Siyam|c. Pito|d. Walo|C
+What is the Filipino word for "8"?|a. Pito|b. Anim|c. Walo|d. Siyam|C
+How do you say "first" in Filipino?|a. Pangalawa|b. Pangatlo|c. Una|d. Pang-apat|C

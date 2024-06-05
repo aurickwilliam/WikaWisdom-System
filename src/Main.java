@@ -11,13 +11,11 @@ public class Main {
         Main main = new Main();
         boolean isUserFileEmpty = main.checkIfUserFileIsEmpty(main.usersFilePath);
 
-//        if (isUserFileEmpty){
-//            new LoginRegisterFrame();
-//        }else {
-//            new AccountsFrame();
-//        }
-
-        new DashboardFrame();
+        if (isUserFileEmpty){
+            new LoginRegisterFrame();
+        }else {
+            new AccountsFrame();
+        }
     }
 
     // Check if the User File is Empty

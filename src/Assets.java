@@ -23,6 +23,8 @@ public class Assets {
     private final ImageIcon PartyIcon = new ImageIcon("src/img/PartyIcon.png");
     private final ImageIcon leftIcon = new ImageIcon("src/img/btn_left.png");
     private final ImageIcon rightIcon = new ImageIcon("src/img/btn_right.png");
+    private final ImageIcon checkIconWhite = new ImageIcon("src/img/CheckIconWhite.png");
+    private final ImageIcon checkIconBlack = new ImageIcon("src/img/CheckIconBlack.png");
 
     // Colors
     private final Color mainColorDarkGreen = new Color(0x004e64);
@@ -35,6 +37,8 @@ public class Assets {
     private final Color DarkGreenColorOver = new Color(0x006783);
     private final Color DarkGreenColorClick = new Color(0x2B5D6B);
     private final Color mainColorWhiteDesc = new Color(0xF1F1F1);
+    private final Color WhiteColorOver = new Color(0xEBEBEB);
+    private final Color WhiteColorClick = new Color(0xCECECE);
 
     // Fonts
     private final Font ArialTitle = new Font("Arial Black", Font.PLAIN, 24);
@@ -65,6 +69,7 @@ public class Assets {
     private final String Money_FC = "src/textfiles/Money_FC.txt";
     private final String Greetings_FC = "src/textfiles/Greetings_FC.txt";
     private final String DescPeople_FC = "src/textfiles/DescribePeople_FC.txt";
+    private final String level_names = "src/textfiles/LevelInfo.txt";
 
 
     public ImageIcon getWikaLogo() {
@@ -289,5 +294,25 @@ public class Assets {
 
     public String getDescPeople_FC() {
         return DescPeople_FC;
+    }
+
+    public String getLevel_names() {
+        return level_names;
+    }
+
+    public Color getWhiteColorOver() {
+        return WhiteColorOver;
+    }
+
+    public Color getWhiteColorClick() {
+        return WhiteColorClick;
+    }
+
+    public ImageIcon getCheckIconWhite() {
+        return checkIconWhite;
+    }
+
+    public ImageIcon getCheckIconBlack() {
+        return checkIconBlack;
     }
 }

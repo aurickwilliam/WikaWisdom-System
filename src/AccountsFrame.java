@@ -76,7 +76,7 @@ public class AccountsFrame extends JFrame {
                 public void actionPerformed(ActionEvent e) {
                     System.out.println("Click " + account.getText());
                     dispose();
-                    new DashboardFrame();
+                    new DashboardFrame(account.getText());
                 }
             });
             listAccountsPanel.add(account);

@@ -1,0 +1,10 @@
+What is the Filipino word for "mother"?|a. Ama|b. Tatay|c. Ina|d. Lolo|C
+How do you say "brother" in Filipino?|a. Kapatid na babae|b. Anak na lalaki|c. Kapatid na lalaki|d. Pinsan|C
+What is the Filipino word for "grandfather"?|a. Lolo|b. Lola|c. Tiyo|d. Ama|A
+How do you say "my father" in Filipino?|a. Ang iyong ama|b. Ang kanyang ama|c. Ang aking ama|d. Ang kanilang ama|C
+What is the Filipino term for "daughter"?|a. Anak na lalaki|b. Anak na babae|c. Kapatid na babae|d. Pinsan|B
+How do you say "your mother" in Filipino?|a. Ang aking ina|b. Ang kanyang ina|c. Ang aming ina|d. Ang iyong ina|D
+What is the Filipino word for "uncle"?|a. Tiya|b. Pinsan|c. Tiyo|d. Lolo|C
+How do you say "their grandmother" in Filipino?|a. Ang kanyang lola|b. Ang kanilang lola|c. Ang aming lola|d. Ang iyong lola|B
+What is the Filipino word for "son"?|a. Anak na lalaki|b. Anak na babae|c. Kapatid na lalaki|d. Kapatid na babae|A
+How do you say "our grandfather" (exclusive) in Filipino?|a. Ang ating lolo|b. Ang kanyang lolo|c. Ang aming lolo|d. Ang kanilang lolo|C

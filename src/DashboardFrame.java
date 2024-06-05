@@ -16,7 +16,10 @@ public class DashboardFrame extends JFrame implements ActionListener {
     // Panel
     private JPanel mainPanel, flashCard, level, dictionary;
 
-    public DashboardFrame(){
+    // Label
+    private JLabel accountTitle;
+
+    public DashboardFrame(String user_name){
         setSize(1000, 650);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setTitle("WikaWisdom");
@@ -29,7 +32,7 @@ public class DashboardFrame extends JFrame implements ActionListener {
         mainBackground.setLayout(new BorderLayout());
         this.add(mainBackground);
 
-        RoundedPanel sidePanel = sidePanel();
+        RoundedPanel sidePanel = sidePanel(user_name);
         mainBackground.add(sidePanel, BorderLayout.WEST);
 
         mainPanelCardLayout = new CardLayout();
@@ -47,7 +50,7 @@ public class DashboardFrame extends JFrame implements ActionListener {
         level = new LevelPanel();
         mainPanel.add(level, "LEVEL");
 
-        mainPanelCardLayout.show(mainPanel, "FLASHCARD");
+        mainPanelCardLayout.show(mainPanel, "LEVEL");
         setVisible(true);
     }
 
@@ -59,17 +62,17 @@ public class DashboardFrame extends JFrame implements ActionListener {
             mainPanelCardLayout.show(mainPanel, "DICTIONARY");
         }else if (actionEvent.getSource() == btn_flashCard){
             System.out.println("Click FlashCard");
-
             FlashCardPanel.getFlashCardLayout().show(flashCard, FlashCardPanel.getMainCategoryPanel().getName());
             mainPanelCardLayout.show(mainPanel, "FLASHCARD");
         }else if (actionEvent.getSource() == btn_Level){
             System.out.println("Click Level");
+            LevelPanel.getLevelCardLayout().show(level, LevelPanel.getMainLevelPanel().getName());
             mainPanelCardLayout.show(mainPanel, "LEVEL");
         }
     }
 
 
-    public RoundedPanel sidePanel(){
+    public RoundedPanel sidePanel(String user_name){
         RoundedPanel sidePanel = new RoundedPanel(0, 20, 20, 0);
         sidePanel.setPreferredSize(new Dimension( 250, sidePanel.getHeight()));
         sidePanel.setBackground(assets.getMainColorDarkGreen());
@@ -82,7 +85,7 @@ public class DashboardFrame extends JFrame implements ActionListener {
         accountTitlePanel.setBorder(new EmptyBorder(0, 20, 0, 20));
         sidePanel.add(accountTitlePanel);
 
-        JLabel accountTitle = new JLabel("HELLO");
+        accountTitle = new JLabel(user_name);
         accountTitle.setFont(assets.getArialBold());
         Image iconImage = assets.getWhiteProfileIcon().getImage();
         Image resizeIcon = iconImage.getScaledInstance(50, 50, Image.SCALE_SMOOTH);
