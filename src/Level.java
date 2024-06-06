@@ -5,7 +5,9 @@ import java.awt.*;
 public class Level extends RoundedButton{
     Assets assets = new Assets();
 
-    public Level(String name, int index, int isComplete){
+    public static JLabel score_title;
+
+    public Level(String name, int index, int isComplete, String score){
         setRadius(20);
         setBorder(null);
         setFocusable(false);
@@ -24,7 +26,7 @@ public class Level extends RoundedButton{
         level_title.setFont(assets.getArialBoldTitle());
         textPanel.add(level_title, BorderLayout.NORTH);
 
-        JLabel score_title = new JLabel("Score: None");
+        score_title = new JLabel(score);
         score_title.setFont(assets.getArial());
         score_title.setForeground(assets.getMainColorYellowBG());
         textPanel.add(score_title, BorderLayout.CENTER);

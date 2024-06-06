@@ -3,9 +3,7 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -101,8 +99,9 @@ public class LevelPanel extends JPanel implements ActionListener {
         for (int i = 0; i < levels.length; i++) {
             String name = levels[i].split(",")[0];
             int isComplete = Integer.parseInt(levels[i].split(",")[1]);
+            String score = levels[i].split(",")[2];
 
-            JButton level = new Level(name, i + 1, isComplete);
+            JButton level = new Level(name, i + 1, isComplete, score);
             level.addActionListener(e -> {
                 System.out.println(name);
                 title.setText(name);
@@ -111,6 +110,7 @@ public class LevelPanel extends JPanel implements ActionListener {
                 DashboardFrame.getBtn_dictionary().setEnabled(false);
                 DashboardFrame.getBtn_flashCard().setEnabled(false);
                 DashboardFrame.getBtn_Level().setEnabled(false);
+                DashboardFrame.getAccountTitle().setEnabled(false);
 
                 if (name.equals("Level 0:Novice")){
                     JPanel lessonPanel = new NovicePanel();
@@ -223,6 +223,7 @@ public class LevelPanel extends JPanel implements ActionListener {
                     DashboardFrame.getBtn_dictionary().setEnabled(true);
                     DashboardFrame.getBtn_flashCard().setEnabled(true);
                     DashboardFrame.getBtn_Level().setEnabled(true);
+                    DashboardFrame.getAccountTitle().setEnabled(true);
 
                     currentCard = previousCard;
                     levelCardLayout.show(this, currentCard);
@@ -231,6 +232,31 @@ public class LevelPanel extends JPanel implements ActionListener {
 
         });
         backBtnPanel.add(btn_back, BorderLayout.CENTER);
+    }
+
+    public void insertNewScore(String filePath, String score, int target_line){
+        try{
+            FileReader file = new FileReader(filePath);
+            BufferedReader reader = new BufferedReader(file);
+            ArrayList<String> list = new ArrayList<>();
+            String line;
+            int index = 0;
+            while ((line = reader.readLine()) != null){
+                if (index == target_line){
+                    String[] record = line.split(",");
+                    record[2] = "Score: " + score + "/10";
+                    BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true));
+
+                }
+            }
+            reader.close();
+
+        }catch (IOException exception){
+            JOptionPane.showMessageDialog(this,
+                    "Error Reading File!",
+                    "Reading File",
+                    JOptionPane.ERROR_MESSAGE);
+        }
     }
 
     public String[] getEachLine(String filePath){

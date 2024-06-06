@@ -1,10 +1,10 @@
-Level 0:Novice,0,0
-Level 1:Beginner,0,0
-Level 2:Apprentice,0,0
-Level 3:Intermediate,0,0
-Level 4:Adept,0,0
-Level 5:Skilled,0,0
-Level 6:Advanced,0,0
-Level 7:Expert,0,0
-Level 8:Master,0,0
-Level 9:Natural Filipino,0,0
+Level 0:Novice,0,Introduction to the Filipino Language
+Level 1:Beginner,0,Basic Greetings and Common Phrases
+Level 2:Apprentice,0,Numbers and Counting
+Level 3:Intermediate,0,Basic Grammar and Sentence Structure
+Level 4:Adept,0,Common Adjectives and Descriptions
+Level 5:Skilled,0,Family and Relationships
+Level 6:Advanced,0,Common Phrases and Expressions
+Level 7:Expert,0,Numbers and Time
+Level 8:Master,0,Colors and Shapes
+Level 9:Natural Filipino,0,Food and Dining

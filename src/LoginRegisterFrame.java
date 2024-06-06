@@ -642,6 +642,7 @@ public class LoginRegisterFrame extends JFrame implements ActionListener {
         btn_ToRegister.setColorClick(assets.getYellowColorClick());
         btn_ToRegister.setColorOver(assets.getYellowColorOver());
         btn_ToRegister.setBorder(null);
+        btn_ToRegister.setBorderColor(assets.getMainColorYellowBG());
         btn_ToRegister.setPreferredSize(new Dimension(180, 50));
         btn_ToRegister.addActionListener(this);
         buttonPanel.add(btn_ToRegister);

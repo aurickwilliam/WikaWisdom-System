@@ -36,7 +36,7 @@ public class AccountsFrame extends JFrame {
     public JPanel listOfAccounts(){
         JPanel mainPanel = new JPanel();
         mainPanel.setLayout(new BorderLayout());
-        mainPanel.setBorder(new EmptyBorder(150, 300, 150, 300));
+        mainPanel.setBorder(new EmptyBorder(125, 300, 125, 300));
         mainPanel.setBackground(null);
 
         JPanel listPanel = new JPanel();
@@ -64,10 +64,34 @@ public class AccountsFrame extends JFrame {
         listAccountsPanel.setBorder(new EmptyBorder(20, 20, 20, 20));
         listAccountsPanel.setLayout(new GridLayout(account_names.length, 1, 20, 20));
 
+
         JScrollPane scrollPanel = new JScrollPane(listAccountsPanel, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-        JScrollBar verticalScrollBar = scrollPanel.getVerticalScrollBar();
         scrollPanel.getVerticalScrollBar().setUnitIncrement(16);
         listPanel.add(scrollPanel);
+
+        JPanel signUpPanel = new JPanel();
+        signUpPanel.setLayout(new BorderLayout());
+        signUpPanel.setBackground(null);
+        signUpPanel.setBorder(new EmptyBorder(20, 50, 20, 50));
+        listPanel.add(signUpPanel);
+
+        RoundedButton btn_signUp = new RoundedButton();
+        btn_signUp.setText("Register");
+        btn_signUp.setRadius(15);
+        btn_signUp.setFocusable(false);
+        btn_signUp.setColorOver(assets.getYellowColorOver());
+        btn_signUp.setColorClick(assets.getYellowColorClick());
+        btn_signUp.setBorderColor(assets.getMainColorYellowBG());
+        btn_signUp.setBorder(null);
+        btn_signUp.setFont(assets.getArialBold());
+        btn_signUp.setForeground(assets.getMainColorWhithy());
+        btn_signUp.setColor(assets.getMainColorYellowBG());
+        btn_signUp.setPreferredSize(new Dimension(0, 40));
+        btn_signUp.addActionListener(e -> {
+            dispose();
+            new LoginRegisterFrame();
+        });
+        signUpPanel.add(btn_signUp, BorderLayout.CENTER);
 
         for (String name : account_names){
             JButton account = new AccountPanel(name);

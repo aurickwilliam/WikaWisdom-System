@@ -19,7 +19,7 @@ public class NovicePanel extends JPanel implements ActionListener {
     private String previousCard = "";
     private String[] questions = new String[0];
     private int index = 0;
-    private int score = 0;
+    public static int score = 0;
     private String correct_answer = "";
     private JPanel resultPanel, quizMainPanel;
 
@@ -510,7 +510,6 @@ public class NovicePanel extends JPanel implements ActionListener {
 //                }
 
                 System.out.println("FINAL SCORE: " + score);
-
             }
 
         }else if (actionEvent.getSource() == choice2){

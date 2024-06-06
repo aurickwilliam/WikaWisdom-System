@@ -8,16 +8,13 @@ public class DashboardFrame extends JFrame implements ActionListener {
     Assets assets = new Assets();
 
     // Side Panel Buttons
-    private static RoundedButton btn_dictionary, btn_flashCard, btn_Level;
+    private static RoundedButton btn_dictionary, btn_flashCard, btn_Level, accountTitle;
 
     // Layout
     private CardLayout mainPanelCardLayout;
 
     // Panel
-    private JPanel mainPanel, flashCard, level, dictionary;
-
-    // Label
-    private JLabel accountTitle;
+    private JPanel mainPanel, flashCard, level, dictionary, profile;
 
     public DashboardFrame(String user_name){
         setSize(1000, 650);
@@ -50,8 +47,13 @@ public class DashboardFrame extends JFrame implements ActionListener {
         level = new LevelPanel();
         mainPanel.add(level, "LEVEL");
 
-        mainPanelCardLayout.show(mainPanel, "LEVEL");
+        profile = new Profile(accountTitle.getText());
+        mainPanel.add(profile, "PROFILE");
+
+        mainPanelCardLayout.show(mainPanel, "DICTIONARY");
         setVisible(true);
+
+        Profile.btn_logout.addActionListener(this);
     }
 
     @Override
@@ -68,6 +70,14 @@ public class DashboardFrame extends JFrame implements ActionListener {
             System.out.println("Click Level");
             LevelPanel.getLevelCardLayout().show(level, LevelPanel.getMainLevelPanel().getName());
             mainPanelCardLayout.show(mainPanel, "LEVEL");
+        }else if (actionEvent.getSource() == accountTitle){
+            System.out.println("PROFILE");
+            mainPanelCardLayout.show(mainPanel, "PROFILE");
+        }
+
+        if (actionEvent.getSource() == Profile.btn_logout){
+            dispose();
+            new LoginRegisterFrame();
         }
     }
 
@@ -85,14 +95,24 @@ public class DashboardFrame extends JFrame implements ActionListener {
         accountTitlePanel.setBorder(new EmptyBorder(0, 20, 0, 20));
         sidePanel.add(accountTitlePanel);
 
-        accountTitle = new JLabel(user_name);
+        accountTitle = new RoundedButton();
+        accountTitle.setColor(assets.getMainColorDarkGreen());
+        accountTitle.setRadius(20);
+        accountTitle.setBorder(null);
+        accountTitle.setBorderColor(assets.getMainColorDarkGreen());
+        accountTitle.setColorOver(assets.getDarkGreenColorOver());
+        accountTitle.setColorClick(assets.getDarkGreenColorClick());
+        accountTitle.setText(user_name);
+        accountTitle.setFocusable(false);
+        accountTitle.addActionListener(this);
+        accountTitle.setBorder(new EmptyBorder(0, 10, 0, 0));
+        accountTitle.setHorizontalAlignment(JButton.LEFT);
         accountTitle.setFont(assets.getArialBold());
         Image iconImage = assets.getWhiteProfileIcon().getImage();
         Image resizeIcon = iconImage.getScaledInstance(50, 50, Image.SCALE_SMOOTH);
         ImageIcon ProfileIcon = new ImageIcon(resizeIcon);
         accountTitle.setIcon(ProfileIcon);
         accountTitle.setForeground(assets.getMainColorWhithy());
-        accountTitle.setHorizontalAlignment(JLabel.LEFT);
         accountTitlePanel.add(accountTitle, BorderLayout.CENTER);
 
 
@@ -188,5 +208,9 @@ public class DashboardFrame extends JFrame implements ActionListener {
 
     public static RoundedButton getBtn_Level() {
         return btn_Level;
+    }
+
+    public static RoundedButton getAccountTitle() {
+        return accountTitle;
     }
 }
