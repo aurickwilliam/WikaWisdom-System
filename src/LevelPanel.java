@@ -17,25 +17,26 @@ public class LevelPanel extends JPanel implements ActionListener {
     // Strings
     private String currentCard = "";
     private String previousCard = "";
+    public static boolean isCompleted = false;
 
     // Buttons
     private JButton btn_back;
-    private RoundedButton btn_right, btn_left;
 
     // Label
-    private JLabel title;
+    private static JLabel title, descriptionTitle;
 
     // Panels
     private static JPanel mainLevelPanel;
     private static JPanel mainLevelInProcess;
     private static JPanel lessonPanel;
+    private static JPanel levelContent;
 
     public LevelPanel(){
-        // TODO: Start this shit
         levelCardLayout = new CardLayout();
+
         setBackground(assets.getMainColorWhiteBG());
         setBorder(new EmptyBorder(20, 20, 20, 20));
-        setLayout(levelCardLayout);
+        this.setLayout(levelCardLayout);
 
         //main level page
         mainLevelPanel = new JPanel();
@@ -58,17 +59,22 @@ public class LevelPanel extends JPanel implements ActionListener {
         // In Process of Level
         mainLevelInProcess = new JPanel();
         mainLevelInProcess.setName("IN PROCESS");
+        mainLevelInProcess.setBackground(null);
         add(mainLevelInProcess, mainLevelInProcess.getName());
 
         Header(mainLevelInProcess, "", "");
+
+        levelContent = new JPanel();
+        levelContent.setBackground(null);
+        levelContent.setLayout(new BorderLayout());
+        levelContent.setPreferredSize(new Dimension(700, 470));
+        mainLevelInProcess.add(levelContent);
 
     }
 
     @Override
     public void actionPerformed(ActionEvent actionEvent) {
-        if (actionEvent.getSource() == btn_right){
-            lessonCardLayout.next(lessonPanel);
-        }
+
     }
 
     public JPanel levelPage(){
@@ -101,87 +107,58 @@ public class LevelPanel extends JPanel implements ActionListener {
                 System.out.println(name);
                 title.setText(name);
 
-                JPanel lessonPanel = new MasterPanel();
-                mainLevelInProcess.add(lessonPanel);
+                // Disable the sidebar
+                DashboardFrame.getBtn_dictionary().setEnabled(false);
+                DashboardFrame.getBtn_flashCard().setEnabled(false);
+                DashboardFrame.getBtn_Level().setEnabled(false);
+
+                if (name.equals("Level 0:Novice")){
+                    JPanel lessonPanel = new NovicePanel();
+                    System.out.println("NOVICE");
+                    levelContent.add(lessonPanel);
+                }else if (name.equals("Level 1:Beginner")){
+                    JPanel lessonPanel = new BeginnerPanel();
+                    System.out.println("BEGINNER");
+                    levelContent.add(lessonPanel);
+                }else if (name.equals("Level 2:Apprentice")){
+                    JPanel lessonPanel = new ApprenticePanel();
+                    System.out.println("APPRENTICE");
+                    levelContent.add(lessonPanel);
+                }else if (name.equals("Level 3:Intermediate")){
+                    JPanel lessonPanel = new IntermediatePanel();
+                    System.out.println("INTERMEDIATE");
+                    levelContent.add(lessonPanel);
+                }else if (name.equals("Level 4:Adept")){
+                    JPanel lessonPanel = new AdeptPanel();
+                    System.out.println("ADEPT");
+                    levelContent.add(lessonPanel);
+                }else if (name.equals("Level 5:Skilled")){
+                    JPanel lessonPanel = new SkilledPanel();
+                    System.out.println("SKILLED");
+                    levelContent.add(lessonPanel);
+                }else if (name.equals("Level 6:Advanced")){
+                    JPanel lessonPanel = new AdvancedPanel();
+                    System.out.println("ADVANCED");
+                    levelContent.add(lessonPanel);
+                }else if (name.equals("Level 7:Expert")){
+                    JPanel lessonPanel = new ExpertPanel();
+                    System.out.println("EXPERT");
+                    levelContent.add(lessonPanel);
+                }else if (name.equals("Level 8:Master")){
+                    JPanel lessonPanel = new MasterPanel();
+                    System.out.println("MASTER");
+                    levelContent.add(lessonPanel);
+                }else if (name.equals("Level 9:Natural Filipino")){
+                    JPanel lessonPanel = new Natural_FilipinoPanel();
+                    System.out.println("FILIPINO");
+                    levelContent.add(lessonPanel);
+                }
 
                 currentCard = mainLevelInProcess.getName();
                 levelCardLayout.show(this, currentCard);
             });
             contentPanel.add(level);
         }
-
-        return mainPanel;
-    }
-
-    public JPanel levelContent(){
-        JPanel mainPanel = new JPanel();
-        mainPanel.setBackground(null);
-        mainPanel.setBorder(new EmptyBorder(20, 20, 20, 20));
-        mainPanel.setLayout(new BorderLayout());
-
-        lessonCardLayout = new CardLayout();
-
-        lessonPanel = new JPanel();
-        lessonPanel.setBackground(null);
-        lessonPanel.setLayout(lessonCardLayout);
-        mainPanel.add(lessonPanel, BorderLayout.CENTER);
-
-        // Add panels to the card layout
-//        for (int i = 0; i < 3; i++) {
-//            JPanel lesson = new LessonPanel(String.valueOf(i));
-//            lessonPanel.add(lesson);
-//        }
-
-        JPanel navigationPanel = new JPanel();
-        navigationPanel.setBackground(null);
-        navigationPanel.setLayout(new BorderLayout());
-        navigationPanel.setPreferredSize(new Dimension(0, 100));
-        mainPanel.add(navigationPanel, BorderLayout.SOUTH);
-
-        JPanel leftPanel = new JPanel();
-        leftPanel.setLayout(new BoxLayout(leftPanel, BoxLayout.X_AXIS));
-        leftPanel.setBackground(null);
-        leftPanel.setPreferredSize(new Dimension(70, 0));
-        leftPanel.setBorder(new EmptyBorder(0, 10, 0, 0));
-        navigationPanel.add(leftPanel, BorderLayout.WEST);
-
-        btn_left = new RoundedButton();
-        Image LefticonImage = assets.getLeftIcon().getImage();
-        Image LeftresizeIcon = LefticonImage.getScaledInstance(50, 50, Image.SCALE_SMOOTH);
-        ImageIcon Lefticon = new ImageIcon(LeftresizeIcon);
-        btn_left.setRadius(15);
-        btn_left.setIcon(Lefticon);
-        btn_left.setFocusable(false);;
-        btn_left.setBorder(null);
-        btn_left.setBorder(new EmptyBorder(5, 5, 5, 5));
-        btn_left.setBorderColor(assets.getMainColorYellowBG());
-        btn_left.setColorOver(assets.getYellowColorOver());
-        btn_left.setColorClick(assets.getYellowColorClick());
-        btn_left.setColor(assets.getMainColorYellowBG());
-        leftPanel.add(btn_left);
-
-        JPanel rightPanel = new JPanel();
-        rightPanel.setLayout(new BoxLayout(rightPanel, BoxLayout.X_AXIS));
-        rightPanel.setPreferredSize(new Dimension(70, 0));
-        rightPanel.setBackground(null);
-        navigationPanel.add(rightPanel, BorderLayout.EAST);
-
-        btn_right = new RoundedButton();
-        Image RighticonImage = assets.getRightIcon().getImage();
-        Image RightresizeIcon = RighticonImage.getScaledInstance(50, 50, Image.SCALE_SMOOTH);
-        ImageIcon Righticon = new ImageIcon(RightresizeIcon);
-        btn_right.setRadius(15);
-        btn_right.setIcon(Righticon);
-        btn_right.setFocusable(false);;
-        btn_right.setBorder(null);
-        btn_right.setBorder(new EmptyBorder(5, 5, 5, 5));
-        btn_right.setBorderColor(assets.getMainColorYellowBG());
-        btn_right.setColorOver(assets.getYellowColorOver());
-        btn_right.setColorClick(assets.getYellowColorClick());
-        btn_right.setColor(assets.getMainColorYellowBG());
-        btn_right.addActionListener(this);
-        rightPanel.add(btn_right);
-
 
         return mainPanel;
     }
@@ -205,7 +182,7 @@ public class LevelPanel extends JPanel implements ActionListener {
         title.setForeground(assets.getMainColorWhiteBG());
         titlePanel.add(title);
 
-        JLabel descriptionTitle = new JLabel(descString);
+        descriptionTitle = new JLabel(descString);
         descriptionTitle.setFont(assets.getArial_desc());
         descriptionTitle.setForeground(assets.getMainColorWhiteBG());
         descriptionTitle.setBorder(new EmptyBorder(5, 0, 0, 0));
@@ -227,12 +204,30 @@ public class LevelPanel extends JPanel implements ActionListener {
 
         btn_back.addActionListener(e -> {
             //If-else for back btn
+            int response = 3;
+            String mess = "";
             if (currentCard.equals("IN PROCESS")){
-                previousCard = mainLevelPanel.getName();
-            }
+                if (isCompleted){
+                    mess = "Level Completed";
+                }else {
+                    mess = "Do you want to go back?\nYou will lose your progress in this Level!";
+                }
+                response = JOptionPane.showConfirmDialog(null,
+                        mess,
+                        "Confirm Message", JOptionPane.YES_NO_OPTION);
+                if (response == JOptionPane.YES_OPTION){
+                    previousCard = mainLevelPanel.getName();
+                    levelContent.removeAll();
 
-            currentCard = previousCard;
-            levelCardLayout.show(this, previousCard);
+                    // Enable the sidebar
+                    DashboardFrame.getBtn_dictionary().setEnabled(true);
+                    DashboardFrame.getBtn_flashCard().setEnabled(true);
+                    DashboardFrame.getBtn_Level().setEnabled(true);
+
+                    currentCard = previousCard;
+                    levelCardLayout.show(this, currentCard);
+                }
+            }
 
         });
         backBtnPanel.add(btn_back, BorderLayout.CENTER);
@@ -264,5 +259,17 @@ public class LevelPanel extends JPanel implements ActionListener {
 
     public static JPanel getMainLevelPanel() {
         return mainLevelPanel;
+    }
+
+    public static JPanel getLevelContent() {
+        return levelContent;
+    }
+
+    public static JLabel getDescriptionTitle() {
+        return descriptionTitle;
+    }
+
+    public static JLabel getTitle() {
+        return title;
     }
 }

@@ -126,7 +126,7 @@ public class DictionaryPanel extends JPanel implements ActionListener, MouseList
         Header(mainAbakadaPanel, "AbaKada", "Alphabets and Vocabulary");
 
         JPanel abakadaPanel = abakadaPanel();
-        abakadaPanel.setPreferredSize(new Dimension(700, 500));
+        abakadaPanel.setPreferredSize(new Dimension(700, 470));
         mainAbakadaPanel.add(abakadaPanel);
 
         // Each Alphabet

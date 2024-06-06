@@ -45,6 +45,7 @@ public class Assets {
     private final Font ArialBold = new Font("Arial", Font.BOLD, 20);
     private final Font Arial = new Font("Arial", Font.PLAIN, 16);
     private final Font ArialBoldTitle = new Font("Arial", Font.BOLD, 30);
+    private final Font ArialScore = new Font("Arial", Font.BOLD, 50);
     private final Font Arial_desc = new Font("Arial", Font.PLAIN, 14);
 
     // File Path for Users File
@@ -70,6 +71,16 @@ public class Assets {
     private final String Greetings_FC = "src/textfiles/Greetings_FC.txt";
     private final String DescPeople_FC = "src/textfiles/DescribePeople_FC.txt";
     private final String level_names = "src/textfiles/LevelInfo.txt";
+    private final String Novice_Quiz = "src/textfiles/Quiz/Novice_Quiz.txt";
+    private final String Beginner_Quiz = "src/textfiles/Quiz/Beginner_Quiz.txt";
+    private final String Apprentice_Quiz = "src/textfiles/Quiz/Apprentice_Quiz.txt";
+    private final String Intermediate_Quiz = "src/textfiles/Quiz/Intermediate_Quiz.txt";
+    private final String Adept_Quiz = "src/textfiles/Quiz/Adept_Quiz.txt";
+    private final String Skilled_Quiz = "src/textfiles/Quiz/Skilled_Quiz.txt";
+    private final String Advanced_Quiz = "src/textfiles/Quiz/Advanced_Quiz.txt";
+    private final String Expert_Quiz = "src/textfiles/Quiz/Expert_Quiz.txt";
+    private final String Master_Quiz = "src/textfiles/Quiz/Master_Quiz.txt";
+    private final String Natural_Filpino_Quiz = "src/textfiles/Quiz/Natural_Filipino_Quiz.txt";
 
 
     public ImageIcon getWikaLogo() {
@@ -314,5 +325,49 @@ public class Assets {
 
     public ImageIcon getCheckIconBlack() {
         return checkIconBlack;
+    }
+
+    public String getNovice_Quiz() {
+        return Novice_Quiz;
+    }
+
+    public String getBeginner_Quiz() {
+        return Beginner_Quiz;
+    }
+
+    public String getApprentice_Quiz() {
+        return Apprentice_Quiz;
+    }
+
+    public String getIntermediate_Quiz() {
+        return Intermediate_Quiz;
+    }
+
+    public String getAdept_Quiz() {
+        return Adept_Quiz;
+    }
+
+    public String getSkilled_Quiz() {
+        return Skilled_Quiz;
+    }
+
+    public String getAdvanced_Quiz() {
+        return Advanced_Quiz;
+    }
+
+    public String getExpert_Quiz() {
+        return Expert_Quiz;
+    }
+
+    public String getMaster_Quiz() {
+        return Master_Quiz;
+    }
+
+    public String getNatural_Filpino_Quiz() {
+        return Natural_Filpino_Quiz;
+    }
+
+    public Font getArialScore() {
+        return ArialScore;
     }
 }

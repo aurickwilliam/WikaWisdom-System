@@ -3,18 +3,31 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-// TODO: Put the lessons
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+
 public class MasterPanel extends JPanel implements ActionListener {
     Assets assets = new Assets();
     // Layout
-    private CardLayout lessonCardLayout;
+    private static CardLayout lessonCardLayout, quizCardLayout;
 
     // Strings
     private String currentCard = "";
     private String previousCard = "";
+    private String[] questions = new String[0];
+    private int index = 0;
+    private int score = 0;
+    private String correct_answer = "";
+    private JPanel resultPanel, quizMainPanel;
+
+    // Label
+    private JLabel questionLabel, greetings, scoreLabel;
 
     // Buttons
-    private RoundedButton btn_right, btn_left;
+    private RoundedButton btn_right, btn_left, choice1, choice2, choice3, choice4, btn_goBack;
 
     // Panels
     private static JPanel lessonPanel;
@@ -23,12 +36,18 @@ public class MasterPanel extends JPanel implements ActionListener {
     private static JPanel page3;
     private static JPanel page4;
     private static JPanel page5;
+    private static JPanel page6;
+    private static JPanel page7;
+    private static JPanel page8;
 
     public MasterPanel(){
         setBackground(null);
         setBorder(new EmptyBorder(20, 20, 20, 20));
         setLayout(new BorderLayout());
         setPreferredSize(new Dimension(700, 470));
+
+        LevelPanel.getDescriptionTitle().setText("Colors and Shapes");
+        LevelPanel.isCompleted = false;
 
         lessonCardLayout = new CardLayout();
 
@@ -58,6 +77,18 @@ public class MasterPanel extends JPanel implements ActionListener {
         page5.setName("P5");
         lessonPanel.add(page5, page5.getName());
 
+        page6 = Page6();
+        page6.setName("P6");
+        lessonPanel.add(page6, page6.getName());
+
+        page7 = Page7();
+        page7.setName("P7");
+        lessonPanel.add(page7, page7.getName());
+
+        page8 = Page8();
+        page8.setName("P8");
+        lessonPanel.add(page8, page8.getName());
+
         JPanel navigationPanel = NavigationPanel();
         add(navigationPanel, BorderLayout.SOUTH);
 
@@ -80,7 +111,7 @@ public class MasterPanel extends JPanel implements ActionListener {
         titlePanel.setLayout(new BorderLayout());
         mainPanel.add(titlePanel, BorderLayout.NORTH);
 
-        JLabel title = new JLabel("Common Greetings");
+        JLabel title = new JLabel("Colors in Filipino");
         title.setFont(assets.getArialBold());
         title.setForeground(assets.getMainColorYellowBG());
         title.setHorizontalAlignment(JLabel.LEFT);
@@ -93,7 +124,7 @@ public class MasterPanel extends JPanel implements ActionListener {
         mainPanel.add(textPanel, BorderLayout.CENTER);
 
         JLabel text1 = new JLabel();
-        text1.setText("<html><br>• " + "<b>Hello:</b> Kamusta" + "</html>");
+        text1.setText("<html><br>• " + "<b>Red:</b> Pula" + "</html>");
         text1.setFont(assets.getArial());
         text1.setForeground(assets.getMainColorWhithy());
         textPanel.add(text1);
@@ -105,13 +136,13 @@ public class MasterPanel extends JPanel implements ActionListener {
         textPanel.add(subPanel);
 
         JLabel text2 = new JLabel();
-        text2.setText("<html>• " + "<b>Pronounced:</b> /ka-mu-sta/" + "</html>");
+        text2.setText("<html>• " + "<b>Pronounced:</b> /poo-la/" + "</html>");
         text2.setFont(assets.getArial());
         text2.setForeground(assets.getMainColorWhithy());
         subPanel.add(text2);
 
         JLabel text3 = new JLabel();
-        text3.setText("<html><br>• " + "<b>Good morning:</b> Magandang Umaga" + "</html>");
+        text3.setText("<html><br>• " + "<b>Blue:</b> Asul" + "</html>");
         text3.setFont(assets.getArial());
         text3.setForeground(assets.getMainColorWhithy());
         textPanel.add(text3);
@@ -123,13 +154,13 @@ public class MasterPanel extends JPanel implements ActionListener {
         textPanel.add(sub2Panel);
 
         JLabel text4 = new JLabel();
-        text4.setText("<html>• " + "<b>Pronounced:</b> /ma-gan-dang u-ma-ga/" + "</html>");
+        text4.setText("<html>• " + "<b>Pronounced:</b> /a-sool/" + "</html>");
         text4.setFont(assets.getArial());
         text4.setForeground(assets.getMainColorWhithy());
         sub2Panel.add(text4);
 
         JLabel text5 = new JLabel();
-        text5.setText("<html><br>• " + "<b>Good afternoon:</b> Magandang hapon" + "</html>");
+        text5.setText("<html><br>• " + "<b>Yellow:</b> Dilaw" + "</html>");
         text5.setFont(assets.getArial());
         text5.setForeground(assets.getMainColorWhithy());
         textPanel.add(text5);
@@ -141,13 +172,13 @@ public class MasterPanel extends JPanel implements ActionListener {
         textPanel.add(sub3Panel);
 
         JLabel text6 = new JLabel();
-        text6.setText("<html>• " + "<b>Pronounced:</b> /ma-gan-dang ha-pon/" + "</html>");
+        text6.setText("<html>• " + "<b>Pronounced:</b> /dee-law/" + "</html>");
         text6.setFont(assets.getArial());
         text6.setForeground(assets.getMainColorWhithy());
         sub3Panel.add(text6);
 
         JLabel text7 = new JLabel();
-        text7.setText("<html><br>• " + "<b>Good evening:</b> Magandang gabi" + "</html>");
+        text7.setText("<html><br>• " + "<b>Green:</b> Berde/Lunti" + "</html>");
         text7.setFont(assets.getArial());
         text7.setForeground(assets.getMainColorWhithy());
         textPanel.add(text7);
@@ -159,7 +190,7 @@ public class MasterPanel extends JPanel implements ActionListener {
         textPanel.add(sub4Panel);
 
         JLabel text8 = new JLabel();
-        text8.setText("<html>• " + "<b>Pronounced:</b> /ma-gan-dang ga-bi/" + "</html>");
+        text8.setText("<html>• " + "<b>Pronounced:</b> /ber-de/ /loon-tee/" + "</html>");
         text8.setFont(assets.getArial());
         text8.setForeground(assets.getMainColorWhithy());
         sub4Panel.add(text8);
@@ -178,7 +209,7 @@ public class MasterPanel extends JPanel implements ActionListener {
         titlePanel.setLayout(new BorderLayout());
         mainPanel.add(titlePanel, BorderLayout.NORTH);
 
-        JLabel title = new JLabel("Introduce Yourself");
+        JLabel title = new JLabel("Colors in Filipino");
         title.setFont(assets.getArialBold());
         title.setForeground(assets.getMainColorYellowBG());
         title.setHorizontalAlignment(JLabel.LEFT);
@@ -191,7 +222,7 @@ public class MasterPanel extends JPanel implements ActionListener {
         mainPanel.add(textPanel, BorderLayout.CENTER);
 
         JLabel text1 = new JLabel();
-        text1.setText("<html><br>• " + "<b>My name is...:</b> Ang pangalan ko ay..." + "</html>");
+        text1.setText("<html><br>• " + "<b>White:</b> Puti" + "</html>");
         text1.setFont(assets.getArial());
         text1.setForeground(assets.getMainColorWhithy());
         textPanel.add(text1);
@@ -203,22 +234,16 @@ public class MasterPanel extends JPanel implements ActionListener {
         textPanel.add(subPanel);
 
         JLabel text2 = new JLabel();
-        text2.setText("<html>• " + "<b>Pronounced:</b> /ang pa-nga-lan ko ay/" + "</html>");
+        text2.setText("<html>• " + "<b>Pronounced:</b> /poo-tee/" + "</html>");
         text2.setFont(assets.getArial());
         text2.setForeground(assets.getMainColorWhithy());
         subPanel.add(text2);
 
         JLabel text3 = new JLabel();
-        text3.setText("<html>• " + "Example: Ang pangalan ko ay Maria. (My name is Maria.)" + "</html>");
+        text3.setText("<html><br>• " + "<b>Black:</b> Itim" + "</html>");
         text3.setFont(assets.getArial());
         text3.setForeground(assets.getMainColorWhithy());
-        subPanel.add(text3);
-
-        JLabel text4 = new JLabel();
-        text4.setText("<html><br>• " + "<b>I am...:</b> Ako si..." + "</html>");
-        text4.setFont(assets.getArial());
-        text4.setForeground(assets.getMainColorWhithy());
-        textPanel.add(text4);
+        textPanel.add(text3);
 
         JPanel sub2Panel = new JPanel();
         sub2Panel.setBackground(null);
@@ -226,23 +251,17 @@ public class MasterPanel extends JPanel implements ActionListener {
         sub2Panel.setBorder(new EmptyBorder(0, 20, 0, 0));
         textPanel.add(sub2Panel);
 
+        JLabel text4 = new JLabel();
+        text4.setText("<html>• " + "<b>Pronounced:</b> /ee-teem/" + "</html>");
+        text4.setFont(assets.getArial());
+        text4.setForeground(assets.getMainColorWhithy());
+        sub2Panel.add(text4);
+
         JLabel text5 = new JLabel();
-        text5.setText("<html>• " + "<b>Pronounced:</b> /a-ko si/" + "</html>");
+        text5.setText("<html><br>• " + "<b>Brown:</b> Kayumanggi" + "</html>");
         text5.setFont(assets.getArial());
         text5.setForeground(assets.getMainColorWhithy());
-        sub2Panel.add(text5);
-
-        JLabel text6 = new JLabel();
-        text6.setText("<html>• " + "Example: Ako si Juan. (I am Juan.)" + "</html>");
-        text6.setFont(assets.getArial());
-        text6.setForeground(assets.getMainColorWhithy());
-        sub2Panel.add(text6);
-
-        JLabel text7 = new JLabel();
-        text7.setText("<html><br>• " + "<b>How are you?:</b> Kamusta ka?" + "</html>");
-        text7.setFont(assets.getArial());
-        text7.setForeground(assets.getMainColorWhithy());
-        textPanel.add(text7);
+        textPanel.add(text5);
 
         JPanel sub3Panel = new JPanel();
         sub3Panel.setBackground(null);
@@ -250,17 +269,17 @@ public class MasterPanel extends JPanel implements ActionListener {
         sub3Panel.setBorder(new EmptyBorder(0, 20, 0, 0));
         textPanel.add(sub3Panel);
 
-        JLabel text8 = new JLabel();
-        text8.setText("<html>• " + "<b>Pronounced:</b> /ka-mu-sta ka/" + "</html>");
-        text8.setFont(assets.getArial());
-        text8.setForeground(assets.getMainColorWhithy());
-        sub3Panel.add(text8);
+        JLabel text6 = new JLabel();
+        text6.setText("<html>• " + "<b>Pronounced:</b> /ka-yoo-mang-gee/" + "</html>");
+        text6.setFont(assets.getArial());
+        text6.setForeground(assets.getMainColorWhithy());
+        sub3Panel.add(text6);
 
-        JLabel text9 = new JLabel();
-        text9.setText("<html><br>• " + "<b>I am fine, thank you:</b> Mabuti, salamat" + "</html>");
-        text9.setFont(assets.getArial());
-        text9.setForeground(assets.getMainColorWhithy());
-        textPanel.add(text9);
+        JLabel text7 = new JLabel();
+        text7.setText("<html><br>• " + "<b>Orange:</b> Kahel" + "</html>");
+        text7.setFont(assets.getArial());
+        text7.setForeground(assets.getMainColorWhithy());
+        textPanel.add(text7);
 
         JPanel sub4Panel = new JPanel();
         sub4Panel.setBackground(null);
@@ -268,11 +287,11 @@ public class MasterPanel extends JPanel implements ActionListener {
         sub4Panel.setBorder(new EmptyBorder(0, 20, 0, 0));
         textPanel.add(sub4Panel);
 
-        JLabel text10 = new JLabel();
-        text10.setText("<html>• " + "<b>Pronounced:</b> /ma-bu-ti, sa-la-mat/" + "</html>");
-        text10.setFont(assets.getArial());
-        text10.setForeground(assets.getMainColorWhithy());
-        sub4Panel.add(text10);
+        JLabel text8 = new JLabel();
+        text8.setText("<html>• " + "<b>Pronounced:</b> /ka-hel/" + "</html>");
+        text8.setFont(assets.getArial());
+        text8.setForeground(assets.getMainColorWhithy());
+        sub4Panel.add(text8);
 
         return mainPanel;
     }
@@ -288,7 +307,7 @@ public class MasterPanel extends JPanel implements ActionListener {
         titlePanel.setLayout(new BorderLayout());
         mainPanel.add(titlePanel, BorderLayout.NORTH);
 
-        JLabel title = new JLabel("Polite Expressions");
+        JLabel title = new JLabel("Colors in Filipino");
         title.setFont(assets.getArialBold());
         title.setForeground(assets.getMainColorYellowBG());
         title.setHorizontalAlignment(JLabel.LEFT);
@@ -301,7 +320,7 @@ public class MasterPanel extends JPanel implements ActionListener {
         mainPanel.add(textPanel, BorderLayout.CENTER);
 
         JLabel text1 = new JLabel();
-        text1.setText("<html><br>• " + "<b>Please:</b> Pakiusap" + "</html>");
+        text1.setText("<html><br>• " + "<b>Purple:</b> Lila" + "</html>");
         text1.setFont(assets.getArial());
         text1.setForeground(assets.getMainColorWhithy());
         textPanel.add(text1);
@@ -313,13 +332,13 @@ public class MasterPanel extends JPanel implements ActionListener {
         textPanel.add(subPanel);
 
         JLabel text2 = new JLabel();
-        text2.setText("<html>• " + "<b>Pronounced:</b> /pa-ki-u-sap/" + "</html>");
+        text2.setText("<html>• " + "<b>Pronounced:</b> /lee-la/" + "</html>");
         text2.setFont(assets.getArial());
         text2.setForeground(assets.getMainColorWhithy());
         subPanel.add(text2);
 
         JLabel text3 = new JLabel();
-        text3.setText("<html><br>• " + "<b>Thank you:</b> Salamat" + "</html>");
+        text3.setText("<html><br>• " + "<b>Pink:</b> Rosas" + "</html>");
         text3.setFont(assets.getArial());
         text3.setForeground(assets.getMainColorWhithy());
         textPanel.add(text3);
@@ -331,13 +350,13 @@ public class MasterPanel extends JPanel implements ActionListener {
         textPanel.add(sub2Panel);
 
         JLabel text4 = new JLabel();
-        text4.setText("<html>• " + "<b>Pronounced:</b> /sa-la-mat/" + "</html>");
+        text4.setText("<html>• " + "<b>Pronounced:</b> /ro-sas/" + "</html>");
         text4.setFont(assets.getArial());
         text4.setForeground(assets.getMainColorWhithy());
         sub2Panel.add(text4);
 
         JLabel text5 = new JLabel();
-        text5.setText("<html><br>• " + "<b>You're Welcome:</b> Walang anuman" + "</html>");
+        text5.setText("<html><br>• " + "<b>Gray:</b> Abo" + "</html>");
         text5.setFont(assets.getArial());
         text5.setForeground(assets.getMainColorWhithy());
         textPanel.add(text5);
@@ -349,7 +368,7 @@ public class MasterPanel extends JPanel implements ActionListener {
         textPanel.add(sub3Panel);
 
         JLabel text6 = new JLabel();
-        text6.setText("<html>• " + "<b>Pronounced:</b> /wa-lang a-nu-man/" + "</html>");
+        text6.setText("<html>• " + "<b>Pronounced:</b> /a-bo/" + "</html>");
         text6.setFont(assets.getArial());
         text6.setForeground(assets.getMainColorWhithy());
         sub3Panel.add(text6);
@@ -368,7 +387,7 @@ public class MasterPanel extends JPanel implements ActionListener {
         titlePanel.setLayout(new BorderLayout());
         mainPanel.add(titlePanel, BorderLayout.NORTH);
 
-        JLabel title = new JLabel("Polite Expressions");
+        JLabel title = new JLabel("Shape in Filipino");
         title.setFont(assets.getArialBold());
         title.setForeground(assets.getMainColorYellowBG());
         title.setHorizontalAlignment(JLabel.LEFT);
@@ -380,8 +399,62 @@ public class MasterPanel extends JPanel implements ActionListener {
         textPanel.setBorder(new EmptyBorder(20, 20, 0, 0));
         mainPanel.add(textPanel, BorderLayout.CENTER);
 
+        JLabel text1 = new JLabel();
+        text1.setText("<html>• " + "<b>Circle:</b> Bilog" + "</html>");
+        text1.setFont(assets.getArial());
+        text1.setForeground(assets.getMainColorWhithy());
+        textPanel.add(text1);
+
+        JPanel sub1Panel = new JPanel();
+        sub1Panel.setBackground(null);
+        sub1Panel.setLayout(new BoxLayout(sub1Panel, BoxLayout.Y_AXIS));
+        sub1Panel.setBorder(new EmptyBorder(0, 20, 0, 0));
+        textPanel.add(sub1Panel);
+
+        JLabel text2 = new JLabel();
+        text2.setText("<html>• " + "<b>Pronounced:</b> /bee-log/" + "</html>");
+        text2.setFont(assets.getArial());
+        text2.setForeground(assets.getMainColorWhithy());
+        sub1Panel.add(text2);
+
+        JLabel text3 = new JLabel();
+        text3.setText("<html><br>• " + "<b>Square:</b> Parisukat" + "</html>");
+        text3.setFont(assets.getArial());
+        text3.setForeground(assets.getMainColorWhithy());
+        textPanel.add(text3);
+
+        JPanel sub2Panel = new JPanel();
+        sub2Panel.setBackground(null);
+        sub2Panel.setLayout(new BoxLayout(sub2Panel, BoxLayout.Y_AXIS));
+        sub2Panel.setBorder(new EmptyBorder(0, 20, 0, 0));
+        textPanel.add(sub2Panel);
+
+        JLabel text4 = new JLabel();
+        text4.setText("<html>• " + "<b>Pronounced:</b> /pa-ree-soo-kat/" + "</html>");
+        text4.setFont(assets.getArial());
+        text4.setForeground(assets.getMainColorWhithy());
+        sub2Panel.add(text4);
+
+        JLabel text5 = new JLabel();
+        text5.setText("<html><br>• " + "<b>Triangle:</b> Tatsulok" + "</html>");
+        text5.setFont(assets.getArial());
+        text5.setForeground(assets.getMainColorWhithy());
+        textPanel.add(text5);
+
+        JPanel sub3Panel = new JPanel();
+        sub3Panel.setBackground(null);
+        sub3Panel.setLayout(new BoxLayout(sub3Panel, BoxLayout.Y_AXIS));
+        sub3Panel.setBorder(new EmptyBorder(0, 20, 0, 0));
+        textPanel.add(sub3Panel);
+
+        JLabel text6 = new JLabel();
+        text6.setText("<html>• " + "<b>Pronounced:</b> /tat-soo-lok/" + "</html>");
+        text6.setFont(assets.getArial());
+        text6.setForeground(assets.getMainColorWhithy());
+        sub3Panel.add(text6);
+
         JLabel text7 = new JLabel();
-        text7.setText("<html>• " + "<b>Excuse me:</b> Paumanhin" + "</html>");
+        text7.setText("<html><br>• " + "<b>Rectangle:</b> Parihaba" + "</html>");
         text7.setFont(assets.getArial());
         text7.setForeground(assets.getMainColorWhithy());
         textPanel.add(text7);
@@ -393,28 +466,10 @@ public class MasterPanel extends JPanel implements ActionListener {
         textPanel.add(sub4Panel);
 
         JLabel text8 = new JLabel();
-        text8.setText("<html>• " + "<b>Pronounced:</b> /pa-u-man-hin/" + "</html>");
+        text8.setText("<html>• " + "<b>Pronounced:</b> /pa-ree-ha-ba/" + "</html>");
         text8.setFont(assets.getArial());
         text8.setForeground(assets.getMainColorWhithy());
         sub4Panel.add(text8);
-
-        JLabel text9 = new JLabel();
-        text9.setText("<html><br>• " + "<b>Sorry:</b> Pasensya" + "</html>");
-        text9.setFont(assets.getArial());
-        text9.setForeground(assets.getMainColorWhithy());
-        textPanel.add(text9);
-
-        JPanel sub5Panel = new JPanel();
-        sub5Panel.setBackground(null);
-        sub5Panel.setLayout(new BoxLayout(sub5Panel, BoxLayout.Y_AXIS));
-        sub5Panel.setBorder(new EmptyBorder(0, 20, 0, 0));
-        textPanel.add(sub5Panel);
-
-        JLabel text10 = new JLabel();
-        text10.setText("<html>• " + "<b>Pronounced:</b> /pa-sen-sya na/" + "</html>");
-        text10.setFont(assets.getArial());
-        text10.setForeground(assets.getMainColorWhithy());
-        sub5Panel.add(text10);
 
         return mainPanel;
     }
@@ -430,7 +485,7 @@ public class MasterPanel extends JPanel implements ActionListener {
         titlePanel.setLayout(new BorderLayout());
         mainPanel.add(titlePanel, BorderLayout.NORTH);
 
-        JLabel title = new JLabel("Sample Dialogues");
+        JLabel title = new JLabel("Shapes in Filipino");
         title.setFont(assets.getArialBold());
         title.setForeground(assets.getMainColorYellowBG());
         title.setHorizontalAlignment(JLabel.LEFT);
@@ -443,7 +498,7 @@ public class MasterPanel extends JPanel implements ActionListener {
         mainPanel.add(textPanel, BorderLayout.CENTER);
 
         JLabel text1 = new JLabel();
-        text1.setText("<html>" + "<b>Greeting Someone:</b>" + "</html>");
+        text1.setText("<html>• " + "<b>Oval:</b Biluhaba>" + "</html>");
         text1.setFont(assets.getArial());
         text1.setForeground(assets.getMainColorWhithy());
         textPanel.add(text1);
@@ -455,19 +510,13 @@ public class MasterPanel extends JPanel implements ActionListener {
         textPanel.add(subPanel);
 
         JLabel text2 = new JLabel();
-        text2.setText("<html>• " + "Person A: Kamusta ka? (How are you?)" + "</html>");
+        text2.setText("<html>• " + "<b>Pronounced:</b> /bi-loo-ha-ba/" + "</html>");
         text2.setFont(assets.getArial());
         text2.setForeground(assets.getMainColorWhithy());
         subPanel.add(text2);
 
-        JLabel text3 = new JLabel();
-        text3.setText("<html>• " + "Person B: Mabuti, salamat. (I am fine, thank you.)" + "</html>");
-        text3.setFont(assets.getArial());
-        text3.setForeground(assets.getMainColorWhithy());
-        subPanel.add(text3);
-
         JLabel text4 = new JLabel();
-        text4.setText("<html><br>" + "<b>Introducing Yourself:</b>" + "</html>");
+        text4.setText("<html><br>• " + "<b>Diamond:</b> Diyamante" + "</html>");
         text4.setFont(assets.getArial());
         text4.setForeground(assets.getMainColorWhithy());
         textPanel.add(text4);
@@ -479,19 +528,123 @@ public class MasterPanel extends JPanel implements ActionListener {
         textPanel.add(sub2Panel);
 
         JLabel text5 = new JLabel();
-        text5.setText("<html>• " + "Person A: Ako si Ana. (I am Ana)" + "</html>");
+        text5.setText("<html>• " + "<b>Pronounced:</b> /dya-man-te/" + "</html>");
         text5.setFont(assets.getArial());
         text5.setForeground(assets.getMainColorWhithy());
         sub2Panel.add(text5);
 
         JLabel text6 = new JLabel();
-        text6.setText("<html>• " + "Person B: Ang pangalan ko ay Lito. (My name is Lito.)" + "</html>");
+        text6.setText("<html><br>• " + "<b>Star:</b> Bituin" + "</html>");
+        text6.setFont(assets.getArial());
+        text6.setForeground(assets.getMainColorWhithy());
+        textPanel.add(text6);
+
+        JPanel sub3Panel = new JPanel();
+        sub3Panel.setBackground(null);
+        sub3Panel.setLayout(new BoxLayout(sub3Panel, BoxLayout.Y_AXIS));
+        sub3Panel.setBorder(new EmptyBorder(0, 20, 0, 0));
+        textPanel.add(sub3Panel);
+
+        JLabel text7 = new JLabel();
+        text7.setText("<html>• " + "<b>Pronounced:</b> /bi-too-een/" + "</html>");
+        text7.setFont(assets.getArial());
+        text7.setForeground(assets.getMainColorWhithy());
+        sub3Panel.add(text7);
+
+        JLabel text8 = new JLabel();
+        text8.setText("<html><br>• " + "<b>Heart:</b> Puso" + "</html>");
+        text8.setFont(assets.getArial());
+        text8.setForeground(assets.getMainColorWhithy());
+        textPanel.add(text8);
+
+        JPanel sub4Panel = new JPanel();
+        sub4Panel.setBackground(null);
+        sub4Panel.setLayout(new BoxLayout(sub4Panel, BoxLayout.Y_AXIS));
+        sub4Panel.setBorder(new EmptyBorder(0, 20, 0, 0));
+        textPanel.add(sub4Panel);
+
+        JLabel text9 = new JLabel();
+        text9.setText("<html>• " + "<b>Pronounced:</b> /poo-so/" + "</html>");
+        text9.setFont(assets.getArial());
+        text9.setForeground(assets.getMainColorWhithy());
+        sub4Panel.add(text9);
+
+        return mainPanel;
+    }
+
+    public RoundedPanel Page6(){
+        RoundedPanel mainPanel = new RoundedPanel(15, 15, 15, 15);
+        mainPanel.setBackground(assets.getMainColorDarkGreen());
+        mainPanel.setLayout(new BorderLayout());
+        mainPanel.setBorder(new EmptyBorder(20, 20, 20, 20));
+
+        JPanel titlePanel = new JPanel();
+        titlePanel.setBackground(null);
+        titlePanel.setLayout(new BorderLayout());
+        mainPanel.add(titlePanel, BorderLayout.NORTH);
+
+        JLabel title = new JLabel("Describing Colors and Shapes");
+        title.setFont(assets.getArialBold());
+        title.setForeground(assets.getMainColorYellowBG());
+        title.setHorizontalAlignment(JLabel.LEFT);
+        titlePanel.add(title, BorderLayout.CENTER);
+
+        JPanel textPanel = new JPanel();
+        textPanel.setLayout(new BoxLayout(textPanel, BoxLayout.Y_AXIS));
+        textPanel.setBackground(null);
+        textPanel.setBorder(new EmptyBorder(20, 20, 0, 0));
+        mainPanel.add(textPanel, BorderLayout.CENTER);
+
+        JLabel text1 = new JLabel();
+        text1.setText("<html>• " + "In Filipino, adjectives such as colors and shapes usually follow the nouns they describe." + "</html>");
+        text1.setFont(assets.getArial());
+        text1.setForeground(assets.getMainColorWhithy());
+        textPanel.add(text1);
+
+        JLabel text2 = new JLabel();
+        text2.setText("<html><br>" + "<b>Examples:</b>" + "</html>");
+        text2.setFont(assets.getArial());
+        text2.setForeground(assets.getMainColorWhithy());
+        textPanel.add(text2);
+
+        JLabel text3 = new JLabel();
+        text3.setText("<html><br>• " + "<b>Red car:</b> Sasakyang Pula" + "</html>");
+        text3.setFont(assets.getArial());
+        text3.setForeground(assets.getMainColorWhithy());
+        textPanel.add(text3);
+
+        JPanel subPanel = new JPanel();
+        subPanel.setBackground(null);
+        subPanel.setLayout(new BoxLayout(subPanel, BoxLayout.Y_AXIS));
+        subPanel.setBorder(new EmptyBorder(0, 20, 0, 0));
+        textPanel.add(subPanel);
+
+        JLabel text4 = new JLabel();
+        text4.setText("<html>" + "<b>Breakdown:</b> Sasakyang (car) + pula (red)" + "</html>");
+        text4.setFont(assets.getArial());
+        text4.setForeground(assets.getMainColorWhithy());
+        subPanel.add(text4);
+
+        JLabel text5 = new JLabel();
+        text5.setText("<html><br>• " + "<b>Blue shirt:</b> Barong asul" + "</html>");
+        text5.setFont(assets.getArial());
+        text5.setForeground(assets.getMainColorWhithy());
+        textPanel.add(text5);
+
+        JPanel sub2Panel = new JPanel();
+        sub2Panel.setBackground(null);
+        sub2Panel.setLayout(new BoxLayout(sub2Panel, BoxLayout.Y_AXIS));
+        sub2Panel.setBorder(new EmptyBorder(0, 20, 0, 0));
+        textPanel.add(sub2Panel);
+
+        JLabel text6 = new JLabel();
+        text6.setText("<html>" + "<b>Breakdown:</b> Barong (shirt) + asul (blue)" + "</html>");
         text6.setFont(assets.getArial());
         text6.setForeground(assets.getMainColorWhithy());
         sub2Panel.add(text6);
 
         JLabel text7 = new JLabel();
-        text7.setText("<html><br>" + "<b>Polite Conversation:</b>" + "</html>");
+        text7.setText("<html><br>• " + "<b>Yellow house:</b> Bahay na dilaw" + "</html>");
         text7.setFont(assets.getArial());
         text7.setForeground(assets.getMainColorWhithy());
         textPanel.add(text7);
@@ -503,16 +656,153 @@ public class MasterPanel extends JPanel implements ActionListener {
         textPanel.add(sub3Panel);
 
         JLabel text8 = new JLabel();
-        text8.setText("<html>• " + "Person A: Paumanhin. (Excuse me.)" + "</html>");
+        text8.setText("<html>" + "<b>Breakdown:</b> Bahay (house) + na (linker) + dilaw (yellow)" + "</html>");
         text8.setFont(assets.getArial());
         text8.setForeground(assets.getMainColorWhithy());
         sub3Panel.add(text8);
 
-        JLabel text9 = new JLabel();
-        text9.setText("<html>• " + "Person B: Walang anuman. (You're welcome.)" + "</html>");
-        text9.setFont(assets.getArial());
-        text9.setForeground(assets.getMainColorWhithy());
-        sub3Panel.add(text9);
+
+        return mainPanel;
+    }
+
+    public RoundedPanel Page7(){
+        RoundedPanel mainPanel = new RoundedPanel(15, 15, 15, 15);
+        mainPanel.setBackground(assets.getMainColorDarkGreen());
+        mainPanel.setLayout(new BorderLayout());
+        mainPanel.setBorder(new EmptyBorder(20, 20, 20, 20));
+
+        JPanel titlePanel = new JPanel();
+        titlePanel.setBackground(null);
+        titlePanel.setLayout(new BorderLayout());
+        mainPanel.add(titlePanel, BorderLayout.NORTH);
+
+        JLabel title = new JLabel("Describing Colors and Shapes");
+        title.setFont(assets.getArialBold());
+        title.setForeground(assets.getMainColorYellowBG());
+        title.setHorizontalAlignment(JLabel.LEFT);
+        titlePanel.add(title, BorderLayout.CENTER);
+
+        JPanel textPanel = new JPanel();
+        textPanel.setLayout(new BoxLayout(textPanel, BoxLayout.Y_AXIS));
+        textPanel.setBackground(null);
+        textPanel.setBorder(new EmptyBorder(20, 20, 0, 0));
+        mainPanel.add(textPanel, BorderLayout.CENTER);
+
+        JLabel text2 = new JLabel();
+        text2.setText("<html>" + "<b>Examples:</b>" + "</html>");
+        text2.setFont(assets.getArial());
+        text2.setForeground(assets.getMainColorWhithy());
+        textPanel.add(text2);
+
+        JLabel text3 = new JLabel();
+        text3.setText("<html><br>• " + "<b>Green tree:</b> Puno na berde" + "</html>");
+        text3.setFont(assets.getArial());
+        text3.setForeground(assets.getMainColorWhithy());
+        textPanel.add(text3);
+
+        JPanel subPanel = new JPanel();
+        subPanel.setBackground(null);
+        subPanel.setLayout(new BoxLayout(subPanel, BoxLayout.Y_AXIS));
+        subPanel.setBorder(new EmptyBorder(0, 20, 0, 0));
+        textPanel.add(subPanel);
+
+        JLabel text4 = new JLabel();
+        text4.setText("<html>" + "<b>Breakdown:</b> Puno (tree) + na (linker) + berde (green)" + "</html>");
+        text4.setFont(assets.getArial());
+        text4.setForeground(assets.getMainColorWhithy());
+        subPanel.add(text4);
+
+        JLabel text5 = new JLabel();
+        text5.setText("<html><br>• " + "<b>Circular table:</b> Mesang bilog" + "</html>");
+        text5.setFont(assets.getArial());
+        text5.setForeground(assets.getMainColorWhithy());
+        textPanel.add(text5);
+
+        JPanel sub2Panel = new JPanel();
+        sub2Panel.setBackground(null);
+        sub2Panel.setLayout(new BoxLayout(sub2Panel, BoxLayout.Y_AXIS));
+        sub2Panel.setBorder(new EmptyBorder(0, 20, 0, 0));
+        textPanel.add(sub2Panel);
+
+        JLabel text6 = new JLabel();
+        text6.setText("<html>" + "<b>Breakdown:</b> Mesa (table) + ng (linker) + bilog (circle)" + "</html>");
+        text6.setFont(assets.getArial());
+        text6.setForeground(assets.getMainColorWhithy());
+        sub2Panel.add(text6);
+
+        return mainPanel;
+    }
+
+    public RoundedPanel Page8(){
+        RoundedPanel mainPanel = new RoundedPanel(15, 15, 15, 15);
+        mainPanel.setBackground(assets.getMainColorDarkGreen());
+        mainPanel.setLayout(new BorderLayout());
+        mainPanel.setBorder(new EmptyBorder(20, 20, 20, 20));
+
+        JPanel titlePanel = new JPanel();
+        titlePanel.setBackground(null);
+        titlePanel.setLayout(new BorderLayout());
+        mainPanel.add(titlePanel, BorderLayout.NORTH);
+
+        JLabel title = new JLabel("More Complex Descriptions");
+        title.setFont(assets.getArialBold());
+        title.setForeground(assets.getMainColorYellowBG());
+        title.setHorizontalAlignment(JLabel.LEFT);
+        titlePanel.add(title, BorderLayout.CENTER);
+
+        JPanel textPanel = new JPanel();
+        textPanel.setLayout(new BoxLayout(textPanel, BoxLayout.Y_AXIS));
+        textPanel.setBackground(null);
+        textPanel.setBorder(new EmptyBorder(20, 20, 0, 0));
+        mainPanel.add(textPanel, BorderLayout.CENTER);
+
+        JLabel text1 = new JLabel();
+        text1.setText("<html>• " + "To describe more complex objects with colors and shapes, you can combine the words." + "</html>");
+        text1.setFont(assets.getArial());
+        text1.setForeground(assets.getMainColorWhithy());
+        textPanel.add(text1);
+
+        JLabel text2 = new JLabel();
+        text2.setText("<html><br>" + "<b>Examples:</b>" + "</html>");
+        text2.setFont(assets.getArial());
+        text2.setForeground(assets.getMainColorWhithy());
+        textPanel.add(text2);
+
+        JLabel text3 = new JLabel();
+        text3.setText("<html><br>• " + "<b>Big red circle:</b> Malaking bilog na pula" + "</html>");
+        text3.setFont(assets.getArial());
+        text3.setForeground(assets.getMainColorWhithy());
+        textPanel.add(text3);
+
+        JPanel subPanel = new JPanel();
+        subPanel.setBackground(null);
+        subPanel.setLayout(new BoxLayout(subPanel, BoxLayout.Y_AXIS));
+        subPanel.setBorder(new EmptyBorder(0, 20, 0, 0));
+        textPanel.add(subPanel);
+
+        JLabel text4 = new JLabel();
+        text4.setText("<html>" + "<b>Breakdown:</b> Malaking (big) + bilog (circle) + na (linker) + pula (red)" + "</html>");
+        text4.setFont(assets.getArial());
+        text4.setForeground(assets.getMainColorWhithy());
+        subPanel.add(text4);
+
+        JLabel text5 = new JLabel();
+        text5.setText("<html><br>• " + "<b>Small blue square:</b> Maliit na parisukat na asul" + "</html>");
+        text5.setFont(assets.getArial());
+        text5.setForeground(assets.getMainColorWhithy());
+        textPanel.add(text5);
+
+        JPanel sub2Panel = new JPanel();
+        sub2Panel.setBackground(null);
+        sub2Panel.setLayout(new BoxLayout(sub2Panel, BoxLayout.Y_AXIS));
+        sub2Panel.setBorder(new EmptyBorder(0, 20, 0, 0));
+        textPanel.add(sub2Panel);
+
+        JLabel text6 = new JLabel();
+        text6.setText("<html>" + "<b>Breakdown:</b> Maliit (small) + na (linker) + parisukat (square) + na (linker) + asul (blue)" + "</html>");
+        text6.setFont(assets.getArial());
+        text6.setForeground(assets.getMainColorWhithy());
+        sub2Panel.add(text6);
 
         return mainPanel;
     }
@@ -584,9 +874,22 @@ public class MasterPanel extends JPanel implements ActionListener {
                 currentCard = page4.getName();
             }else if (currentCard.equals("P4")){
                 currentCard = page5.getName();
-                btn_right.setVisible(false);
             }else if (currentCard.equals("P5")){
-                //
+                currentCard = page6.getName();
+            }else if (currentCard.equals("P6")){
+                currentCard = page7.getName();
+            }else if (currentCard.equals("P7")){
+                currentCard = page8.getName();
+                btn_right.setText("Done");
+                btn_right.setHorizontalTextPosition(JButton.LEFT);
+                btn_right.setIcon(null);
+                btn_right.setFont(assets.getArial());
+                btn_right.setForeground(assets.getMainColorWhithy());
+                btn_right.setBorder(new EmptyBorder(10, 20, 10, 20));
+                btn_right.getParent().setPreferredSize(new Dimension(90, 0));
+            }else if (currentCard.equals("P8")){
+                this.setVisible(false);
+                LevelPanel.getLevelContent().add(quizPanel("Level 8:Master"), BorderLayout.CENTER);
             }
 
             lessonCardLayout.show(lessonPanel, currentCard);
@@ -602,10 +905,249 @@ public class MasterPanel extends JPanel implements ActionListener {
                 currentCard = page3.getName();
             }else if (currentCard.equals("P5")){
                 currentCard = page4.getName();
-                btn_right.setVisible(true);
+            }else if (currentCard.equals("P6")){
+                currentCard = page5.getName();
+            }else if (currentCard.equals("P7")){
+                currentCard = page6.getName();
+            }else if (currentCard.equals("P8")){
+                currentCard = page7.getName();
+                Image RighticonImage = assets.getRightIcon().getImage();
+                Image RightresizeIcon = RighticonImage.getScaledInstance(50, 50, Image.SCALE_SMOOTH);
+                ImageIcon Righticon = new ImageIcon(RightresizeIcon);
+                btn_right.setIcon(Righticon);
+                btn_right.setText(null);
+                btn_right.setBorder(new EmptyBorder(5, 5, 5, 5));
+                btn_right.getParent().setPreferredSize(new Dimension(70, 0));
             }
 
             lessonCardLayout.show(lessonPanel, currentCard);
+        }
+
+        //==========
+
+        if (actionEvent.getSource() == choice1){
+            System.out.println("A");
+            if (correct_answer.equals("A")){
+                score++;
+            }
+            index++;
+            System.out.println("SCORE: " + score);
+
+            if (index <= 9){
+                String ques = questions[index].split("\\|")[0];
+                String choice_A = questions[index].split("\\|")[1];
+                String choice_B = questions[index].split("\\|")[2];
+                String choice_C = questions[index].split("\\|")[3];
+                String choice_D = questions[index].split("\\|")[4];
+                String answer = questions[index].split("\\|")[5];
+
+                questionLabel.setText("<html> " + ques + "</html>");
+                choice1.setText("<html> " + choice_A + "</html>");
+                choice2.setText("<html> " + choice_B + "</html>");
+                choice3.setText("<html> " + choice_C + "</html>");
+                choice4.setText("<html> " + choice_D + "</html>");
+
+                correct_answer = answer;
+            }else {
+                currentCard = resultPanel.getName();
+                quizCardLayout.show(quizMainPanel, currentCard);
+
+                String final_score = score + "/10";
+                String greet = "";
+                scoreLabel.setText(final_score);
+
+                if (score < 5){
+                    greetings.setText("Not Bad");
+//                greet = "Not Bad";
+                }else if (score < 8){
+                    greetings.setText("Good Job!");
+//                greet = "Good Job!";
+                }else {
+                    greetings.setText("Excellent!");
+//                greet = "Excellent";
+                }
+
+                LevelPanel.isCompleted = true;
+//
+//            JOptionPane.showMessageDialog(null,
+//                    greet + "\n\nScore: " + final_score,
+//                    "Score", JOptionPane.INFORMATION_MESSAGE);
+//                if (actionEvent.getSource() == btn_goBack){
+//                    System.out.println("DONE");
+//                    JPanel level = new LevelPanel();
+//                    LevelPanel.getLevelCardLayout().show(level, LevelPanel.getMainLevelPanel().getName());
+//                }
+
+                System.out.println("FINAL SCORE: " + score);
+
+            }
+
+        }else if (actionEvent.getSource() == choice2){
+            System.out.println("B");
+            if (correct_answer.equals("B")){
+                score++;
+            }
+            index++;
+            System.out.println("SCORE: " + score);
+
+            if (index <= 9){
+                String ques = questions[index].split("\\|")[0];
+                String choice_A = questions[index].split("\\|")[1];
+                String choice_B = questions[index].split("\\|")[2];
+                String choice_C = questions[index].split("\\|")[3];
+                String choice_D = questions[index].split("\\|")[4];
+                String answer = questions[index].split("\\|")[5];
+
+                questionLabel.setText("<html> " + ques + "</html>");
+                choice1.setText("<html> " + choice_A + "</html>");
+                choice2.setText("<html> " + choice_B + "</html>");
+                choice3.setText("<html> " + choice_C + "</html>");
+                choice4.setText("<html> " + choice_D + "</html>");
+
+                correct_answer = answer;
+            }else {
+                currentCard = resultPanel.getName();
+                quizCardLayout.show(quizMainPanel, currentCard);
+
+                String final_score = score + "/10";
+                String greet = "";
+                scoreLabel.setText(final_score);
+
+                if (score < 5){
+                    greetings.setText("Not Bad");
+//                greet = "Not Bad";
+                }else if (score < 8){
+                    greetings.setText("Good Job!");
+//                greet = "Good Job!";
+                }else {
+                    greetings.setText("Excellent!");
+//                greet = "Excellent";
+                }
+
+                LevelPanel.isCompleted = true;
+//
+//            JOptionPane.showMessageDialog(null,
+//                    greet + "\n\nScore: " + final_score,
+//                    "Score", JOptionPane.INFORMATION_MESSAGE);
+//                if (actionEvent.getSource() == btn_goBack){
+//                    System.out.println("DONE");
+//                    JPanel level = new LevelPanel();
+//                    LevelPanel.getLevelCardLayout().show(level, LevelPanel.getMainLevelPanel().getName());
+//                }
+
+                System.out.println("FINAL SCORE: " + score);
+            }
+        }else if (actionEvent.getSource() == choice3){
+            System.out.println("C");
+            if (correct_answer.equals("C")){
+                score++;
+            }
+            index++;
+            System.out.println("SCORE: " + score);
+
+            if (index <= 9){
+                String ques = questions[index].split("\\|")[0];
+                String choice_A = questions[index].split("\\|")[1];
+                String choice_B = questions[index].split("\\|")[2];
+                String choice_C = questions[index].split("\\|")[3];
+                String choice_D = questions[index].split("\\|")[4];
+                String answer = questions[index].split("\\|")[5];
+
+                questionLabel.setText("<html> " + ques + "</html>");
+                choice1.setText("<html> " + choice_A + "</html>");
+                choice2.setText("<html> " + choice_B + "</html>");
+                choice3.setText("<html> " + choice_C + "</html>");
+                choice4.setText("<html> " + choice_D + "</html>");
+
+                correct_answer = answer;
+            }else {
+                currentCard = resultPanel.getName();
+                quizCardLayout.show(quizMainPanel, currentCard);
+
+                String final_score = score + "/10";
+                String greet = "";
+                scoreLabel.setText(final_score);
+
+                if (score < 5){
+                    greetings.setText("Not Bad");
+//                greet = "Not Bad";
+                }else if (score < 8){
+                    greetings.setText("Good Job!");
+//                greet = "Good Job!";
+                }else {
+                    greetings.setText("Excellent!");
+//                greet = "Excellent";
+                }
+
+                LevelPanel.isCompleted = true;
+//
+//            JOptionPane.showMessageDialog(null,
+//                    greet + "\n\nScore: " + final_score,
+//                    "Score", JOptionPane.INFORMATION_MESSAGE);
+//                if (actionEvent.getSource() == btn_goBack){
+//                    System.out.println("DONE");
+//                    JPanel level = new LevelPanel();
+//                    LevelPanel.getLevelCardLayout().show(level, LevelPanel.getMainLevelPanel().getName());
+//                }
+
+                System.out.println("FINAL SCORE: " + score);
+            }
+        }else if (actionEvent.getSource() == choice4){
+            System.out.println("D");
+            if (correct_answer.equals("D")){
+                score++;
+            }
+            index++;
+            System.out.println("SCORE: " + score);
+
+            if (index <= 9){
+                String ques = questions[index].split("\\|")[0];
+                String choice_A = questions[index].split("\\|")[1];
+                String choice_B = questions[index].split("\\|")[2];
+                String choice_C = questions[index].split("\\|")[3];
+                String choice_D = questions[index].split("\\|")[4];
+                String answer = questions[index].split("\\|")[5];
+
+                questionLabel.setText("<html> " + ques + "</html>");
+                choice1.setText("<html> " + choice_A + "</html>");
+                choice2.setText("<html> " + choice_B + "</html>");
+                choice3.setText("<html> " + choice_C + "</html>");
+                choice4.setText("<html> " + choice_D + "</html>");
+
+                correct_answer = answer;
+            }else {
+                currentCard = resultPanel.getName();
+                quizCardLayout.show(quizMainPanel, currentCard);
+
+                String final_score = score + "/10";
+                String greet = "";
+                scoreLabel.setText(final_score);
+
+                if (score < 5){
+                    greetings.setText("Not Bad");
+//                greet = "Not Bad";
+                }else if (score < 8){
+                    greetings.setText("Good Job!");
+//                greet = "Good Job!";
+                }else {
+                    greetings.setText("Excellent!");
+//                greet = "Excellent";
+                }
+
+                LevelPanel.isCompleted = true;
+//
+//            JOptionPane.showMessageDialog(null,
+//                    greet + "\n\nScore: " + final_score,
+//                    "Score", JOptionPane.INFORMATION_MESSAGE);
+
+//                if (actionEvent.getSource() == btn_goBack){
+//                    System.out.println("DONE");
+//                    JPanel level = new LevelPanel();
+//                    LevelPanel.getLevelCardLayout().show(level, LevelPanel.getMainLevelPanel().getName());
+//                }
+
+                System.out.println("FINAL SCORE: " + score);
+            }
         }
     }
 
@@ -615,5 +1157,235 @@ public class MasterPanel extends JPanel implements ActionListener {
 
     public CardLayout getLessonCardLayout() {
         return lessonCardLayout;
+    }
+
+    public JPanel quizPanel(String level_name){
+        quizMainPanel = new JPanel();
+        quizCardLayout = new CardLayout() ;
+        quizMainPanel.setBackground(null);
+        quizMainPanel.setBorder(new EmptyBorder(20, 20, 20, 20));
+        quizMainPanel.setLayout(quizCardLayout);
+
+        // Set description
+        LevelPanel.getDescriptionTitle().setText("Quiz Time!");
+
+        // Get the questions
+        questions = listOfQuestions(level_name);
+        System.out.println(Arrays.toString(questions));
+
+        JPanel panel_quiz = new JPanel();
+        panel_quiz.setName("QUIZ");
+        currentCard = panel_quiz.getName();
+        panel_quiz.setBackground(null);
+        panel_quiz.setLayout(new BorderLayout());
+        quizMainPanel.add(panel_quiz, panel_quiz.getName());
+
+        JPanel quiz = quiz();
+        quiz.setBackground(null);
+        panel_quiz.add(quiz, BorderLayout.CENTER);
+
+        resultPanel = result();
+        resultPanel.setName("RESULT");
+        resultPanel.setBackground(null);
+        quizMainPanel.add(resultPanel, resultPanel.getName());
+
+        // Get each variable
+        String ques = questions[index].split("\\|")[0];
+        String choice_A = questions[index].split("\\|")[1];
+        String choice_B = questions[index].split("\\|")[2];
+        String choice_C = questions[index].split("\\|")[3];
+        String choice_D = questions[index].split("\\|")[4];
+        String answer = questions[index].split("\\|")[5];
+
+        questionLabel.setText("<html> " + ques + "</html>");
+        choice1.setText("<html> " + choice_A + "</html>");
+        choice2.setText("<html> " + choice_B + "</html>");
+        choice3.setText("<html> " + choice_C + "</html>");
+        choice4.setText("<html> " + choice_D + "</html>");
+        correct_answer = answer;
+
+        quizCardLayout.show(quizMainPanel, currentCard);
+
+        return quizMainPanel;
+    }
+
+    public JPanel quiz(){
+        JPanel mainPanel = new JPanel();
+        mainPanel.setLayout(new BorderLayout());
+
+        RoundedPanel questionPanel = new RoundedPanel(20, 20, 20, 20);
+        questionPanel.setBackground(assets.getMainColorDarkGreen());
+        questionPanel.setLayout(new BorderLayout());
+        mainPanel.add(questionPanel, BorderLayout.CENTER);
+
+        questionLabel = new JLabel();
+        questionLabel.setFont(assets.getArialBold());
+        questionLabel.setHorizontalAlignment(JLabel.CENTER);
+        questionLabel.setForeground(assets.getMainColorWhithy());
+        questionPanel.add(questionLabel, BorderLayout.CENTER);
+
+        JPanel choicesPanel = new JPanel();
+        choicesPanel.setLayout(new GridLayout(2, 2, 10, 10));
+        choicesPanel.setBorder(new EmptyBorder(10, 0, 10, 0));
+        choicesPanel.setBackground(null);
+        mainPanel.add(choicesPanel, BorderLayout.SOUTH);
+
+        choice1 = new RoundedButton();
+        choice1.setBorder(null);
+        choice1.setRadius(15);
+        choice1.setFont(assets.getArial());
+        choice1.setColor(assets.getMainColorYellowBG());
+        choice1.setBorderColor(assets.getMainColorYellowBG());
+        choice1.setColorClick(assets.getYellowColorClick());
+        choice1.setColorOver(assets.getYellowColorOver());
+        choice1.setPreferredSize(new Dimension(0, 50));
+        choice1.setFocusable(false);
+        choice1.addActionListener(this);
+        choicesPanel.add(choice1);
+
+        choice2 = new RoundedButton();
+        choice2.setBorder(null);
+        choice2.setRadius(15);
+        choice2.setFont(assets.getArial());
+        choice2.setColor(assets.getMainColorYellowBG());
+        choice2.setBorderColor(assets.getMainColorYellowBG());
+        choice2.setColorClick(assets.getYellowColorClick());
+        choice2.setColorOver(assets.getYellowColorOver());
+        choice2.setPreferredSize(new Dimension(0, 50));
+        choice2.setFocusable(false);
+        choice2.addActionListener(this);
+        choicesPanel.add(choice2);
+
+        choice3 = new RoundedButton();
+        choice3.setBorder(null);
+        choice3.setRadius(15);
+        choice3.setFont(assets.getArial());
+        choice3.setColor(assets.getMainColorYellowBG());
+        choice3.setBorderColor(assets.getMainColorYellowBG());
+        choice3.setColorClick(assets.getYellowColorClick());
+        choice3.setColorOver(assets.getYellowColorOver());
+        choice3.setPreferredSize(new Dimension(0, 50));
+        choice3.setFocusable(false);
+        choice3.addActionListener(this);
+        choicesPanel.add(choice3);
+
+        choice4 = new RoundedButton();
+        choice4.setBorder(null);
+        choice4.setRadius(15);
+        choice4.setFont(assets.getArial());
+        choice4.setColor(assets.getMainColorYellowBG());
+        choice4.setBorderColor(assets.getMainColorYellowBG());
+        choice4.setColorClick(assets.getYellowColorClick());
+        choice4.setColorOver(assets.getYellowColorOver());
+        choice4.setPreferredSize(new Dimension(0, 50));
+        choice4.setFocusable(false);
+        choice4.addActionListener(this);
+        choicesPanel.add(choice4);
+
+        return mainPanel;
+    }
+
+    public JPanel result(){
+        JPanel mainPanel = new JPanel();
+        mainPanel.setLayout(new BorderLayout());
+        mainPanel.setBackground(Color.yellow);
+        mainPanel.setBorder(new EmptyBorder(50, 100, 50, 100));
+
+        RoundedPanel contentPanel = new RoundedPanel(20, 20, 20, 20);
+        contentPanel.setBackground(assets.getMainColorDarkGreen());
+        contentPanel.setLayout(new BorderLayout());
+        contentPanel.setBorder(new EmptyBorder(20, 20, 20, 20));
+        mainPanel.add(contentPanel, BorderLayout.CENTER);
+
+        JPanel greetingPanel = new JPanel();
+        greetingPanel.setBackground(null);
+        greetingPanel.setLayout(new BorderLayout());
+        contentPanel.add(greetingPanel, BorderLayout.NORTH);
+
+        greetings = new JLabel("GUNGONG");
+        greetings.setFont(assets.getArialBoldTitle());
+        greetings.setForeground(assets.getMainColorYellowBG());
+        greetings.setHorizontalAlignment(JLabel.CENTER);
+        greetingPanel.add(greetings, BorderLayout.CENTER);
+
+        JPanel scorePanel = new JPanel();
+        scorePanel.setBackground(null);
+        scorePanel.setLayout(new BorderLayout());
+        contentPanel.add(scorePanel, BorderLayout.CENTER);
+
+        scoreLabel = new JLabel("10/10");
+        scoreLabel.setFont(assets.getArialScore());
+        scoreLabel.setForeground(assets.getMainColorWhithy());
+        scoreLabel.setHorizontalAlignment(JLabel.CENTER);
+        scorePanel.add(scoreLabel, BorderLayout.CENTER);
+
+//        JPanel backBtnPanel = new JPanel();
+//        backBtnPanel.setBackground(null);
+//        backBtnPanel.setLayout(new BorderLayout());
+//        contentPanel.add(backBtnPanel, BorderLayout.SOUTH);
+//
+//        btn_goBack = new RoundedButton();
+//        btn_goBack.setText("Go Back");
+//        btn_goBack.setFont(assets.getArialBold());
+//        btn_goBack.setRadius(15);
+//        btn_goBack.setColor(assets.getMainColorYellowBG());
+//        btn_goBack.setColorOver(assets.getYellowColorOver());
+//        btn_goBack.setColorClick(assets.getYellowColorClick());
+//        btn_goBack.setBorderColor(assets.getMainColorYellowBG());
+//        btn_goBack.setFocusable(false);
+//        btn_goBack.setBorder(null);
+//        btn_goBack.setPreferredSize(new Dimension(0, 40));
+//        btn_goBack.addActionListener(this);
+//        backBtnPanel.add(btn_goBack, BorderLayout.CENTER);
+
+        return mainPanel;
+    }
+
+    public  String[] listOfQuestions(String name){
+        String[] questions = new String[0];
+
+        if (name.equals("Level 0:Novice")){
+            questions = getEachLine(assets.getNovice_Quiz());
+        }else if (name.equals("Level 1:Beginner")){
+            questions = getEachLine(assets.getBeginner_Quiz());
+        }else if (name.equals("Level 2:Apprentice")){
+            questions = getEachLine(assets.getApprentice_Quiz());
+        }else if (name.equals("Level 3:Intermediate")){
+            questions = getEachLine(assets.getIntermediate_Quiz());
+        }else if (name.equals("Level 4:Adept")){
+            questions = getEachLine(assets.getAdept_Quiz());
+        }else if (name.equals("Level 5:Skilled")){
+            questions = getEachLine(assets.getSkilled_Quiz());
+        }else if (name.equals("Level 6:Advanced")){
+            questions = getEachLine(assets.getAdvanced_Quiz());
+        }else if (name.equals("Level 7:Expert")){
+            questions = getEachLine(assets.getExpert_Quiz());
+        }else if (name.equals("Level 8:Master")){
+            questions = getEachLine(assets.getMaster_Quiz());
+        }else if (name.equals("Level 9:Natural Filipino")){
+            questions = getEachLine(assets.getNatural_Filpino_Quiz());
+        }
+
+        return questions;
+    }
+
+    public String[] getEachLine(String filePath){
+        try{
+            FileReader file = new FileReader(filePath);
+            BufferedReader reader = new BufferedReader(file);
+            ArrayList<String> list = new ArrayList<>();
+            String line;
+            while ((line = reader.readLine()) != null){
+                list.add(line);
+            }
+            reader.close();
+            return list.toArray(new String[list.size()]);
+        }catch (IOException exception){
+            JOptionPane.showMessageDialog(this,
+                    "Error Reading File!",
+                    "Reading File",
+                    JOptionPane.ERROR_MESSAGE);
+            return null;
+        }
     }
 }

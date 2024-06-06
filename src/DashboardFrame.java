@@ -8,7 +8,7 @@ public class DashboardFrame extends JFrame implements ActionListener {
     Assets assets = new Assets();
 
     // Side Panel Buttons
-    private RoundedButton btn_dictionary, btn_flashCard, btn_Level;
+    private static RoundedButton btn_dictionary, btn_flashCard, btn_Level;
 
     // Layout
     private CardLayout mainPanelCardLayout;
@@ -178,4 +178,15 @@ public class DashboardFrame extends JFrame implements ActionListener {
         return sidePanel;
     }
 
+    public static RoundedButton getBtn_dictionary() {
+        return btn_dictionary;
+    }
+
+    public static RoundedButton getBtn_flashCard() {
+        return btn_flashCard;
+    }
+
+    public static RoundedButton getBtn_Level() {
+        return btn_Level;
+    }
 }

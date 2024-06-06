@@ -1,10 +1,10 @@
-Level 0:Novice,0
-Level 1:Beginner,0
-Level 2:Apprentice,0
-Level 3:Intermediate,0
-Level 4:Adept,0
-Level 5:Skilled,0
-Level 6:Advanced,0
-Level 7:Expert,0
-Level 8:Master,0
-Level 9:Natural Filipino,0
+Level 0:Novice,0,0
+Level 1:Beginner,0,0
+Level 2:Apprentice,0,0
+Level 3:Intermediate,0,0
+Level 4:Adept,0,0
+Level 5:Skilled,0,0
+Level 6:Advanced,0,0
+Level 7:Expert,0,0
+Level 8:Master,0,0
+Level 9:Natural Filipino,0,0

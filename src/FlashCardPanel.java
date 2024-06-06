@@ -182,6 +182,11 @@ public class FlashCardPanel extends JPanel implements ActionListener {
                 System.out.println(category.getText());
                 items_fc = getEachLine(filePath);
 
+                // Disable the sidebar buttons
+                DashboardFrame.getBtn_dictionary().setEnabled(false);
+                DashboardFrame.getBtn_flashCard().setEnabled(false);
+                DashboardFrame.getBtn_Level().setEnabled(false);
+
                 // Shuffle the array using Collections Class
                 List<String> shuffled_items = Arrays.asList(items_fc);
                 Collections.shuffle(shuffled_items);
@@ -462,8 +467,13 @@ public class FlashCardPanel extends JPanel implements ActionListener {
                     btn_left.removeActionListener(this);
                     btn_right.removeActionListener(this);
 
+                    // Enabled the sidebar
+                    DashboardFrame.getBtn_dictionary().setEnabled(true);
+                    DashboardFrame.getBtn_flashCard().setEnabled(true);
+                    DashboardFrame.getBtn_Level().setEnabled(true);
+
                     currentCard = previousCard;
-                    flashCardLayout.show(this, previousCard);
+                    flashCardLayout.show(this, currentCard);
                 }
             }
 
